@@ -24,3 +24,4 @@ export default function Layout(): React.JSX.Element {
     </>
   );
 }
+

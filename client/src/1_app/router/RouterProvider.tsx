@@ -4,7 +4,7 @@ import ProtectedRoute from '../../4_features/auth/lib/ProtectedRoute';
 import { useAppSelector } from '../../6_shared/lib/hooks';
 import SignupPage from '../../2_pages/Auth/SignupPage/SignupPage';
 import MainPage from '../../2_pages/Note/MainPage/MainPage';
-import Layout from '../../2_pages/Note/Layout/Layout';
+import Layout from '../../2_pages/Layout/Layout';
 import { AuthStatus } from '../../4_features/auth/model/auth.types';
 import AddNotePage from '../../2_pages/Note/AddNotePage/AddNotePage';
 import LoginPage from '../../2_pages/Auth/LoginPage/LoginPage';
@@ -45,7 +45,7 @@ export default function RouterProvider(): React.JSX.Element {
           element={<ProtectedRoute isAllowed={status === AuthStatus.guest} redirectTo="/start" />}
         >
           <Route path="/auth/signup" element={<SignupPage />} />
-          <Route path="/auth/login" element={<LoginPage />}/>
+          <Route path="/auth/login" element={<LoginPage />} />
         </Route>
       </Route>
     </Routes>

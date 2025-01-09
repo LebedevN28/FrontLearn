@@ -1,0 +1,54 @@
+.sidebar-container {
+  padding: 20px;
+  height: 100%;
+}
+
+.sidebar-row {
+  padding: 30px;
+  border-bottom: 1px solid #fcfdf5;
+  color: #5c5a5a;
+  font-weight: bold;
+  font-size: 1.6rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.sidebar-row__hover-bar {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  background-color: #f2e3b8;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-height: 0;
+  transition:
+    max-height 0.5s ease-in-out,
+    opacity 0.3s ease;
+  opacity: 0;
+}
+
+.sidebar-row__hover-bar.visible {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.sidebar-row__hoverbar-btn {
+  min-width: 105%;
+  background-color: #fcfdf5;
+  text-align: left;
+  color: #5c5a5a;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar-row__hoverbar-btn:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}
+
+.sidebar-row__hoverbar-btn:hover {
+  background-color: #c9c9c6;
+}
