@@ -1,0 +1,105 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+  color:#ffffff
+}
+
+.heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.subheading {
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+button {
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  background-color: #28a745; /* Зеленый фон */
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #218838; /* Темно-зеленый при наведении */
+}
+
+.playerContainer {
+  margin-top: 40px;
+  width: 100%;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px; /* Отступ между карточками */
+}
+
+.cards > * {
+  flex: 0 1 auto;
+  transition: transform 0.3s ease; /* Добавлена плавная анимация для карточки */
+}
+
+.cards > :hover {
+  transform: translateY(-10px) scale(1.05); /* Поднимаем карточку вверх и увеличиваем */
+}
+
+.card {
+  background-color: #ffffff; /* Белый фон для карточек */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень для карточек */
+  overflow: hidden;
+  transition: box-shadow 0.3s ease; /* Плавный переход для тени */
+}
+
+.card:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Увеличенная тень при наведении */
+}
+
+.card img {
+  width: 100%; /* Убедитесь, что изображение заполняет карточку */
+  transition: transform 0.3s ease; /* Плавный переход для масштабирования */
+}
+
+.card:hover img {
+  transform: scale(1.1); /* Увеличение изображения при наведении */
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #555555; /* Темно-серый текст */
+}
+
+.card button {
+  background-color: #007bff; /* Синий цвет кнопки */
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.card button:hover {
+  background-color: #0056b3; /* Темно-синий при наведении */
+}
