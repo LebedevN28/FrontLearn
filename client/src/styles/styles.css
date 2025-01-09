@@ -1,0 +1,174 @@
+/* Общие стили для всего приложения */
+body {
+  background: linear-gradient(to bottom, #FCFDF5, #F2E3B8); /* Градиент фона */
+  color: #000000; /* Основной текст — черный */
+  font-family: 'Arial', sans-serif; /* Базовый шрифт */
+  margin: 0;
+  padding: 0;
+  display: flex; /* Для сайдбара */
+}
+
+/* Стили для сайдбара */
+.sidebar {
+  background-color: #A91AB0; /* Фиолетовый фон */
+  color: #FFFFFF; /* Белый текст */
+  width: 250px;
+  height: 100vh; /* Высота на весь экран */
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar .nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.sidebar .nav-links li {
+  margin: 10px 0;
+}
+
+.sidebar .nav-links a {
+  color: #FFFFFF; /* Белый текст */
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 10px;
+  display: block;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar .nav-links a:hover {
+  background-color: #9409A3; /* Темнее фиолетовый при наведении */
+}
+
+.sidebar .footer {
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: auto;
+  color: #E0BFE9; /* Светлый фиолетовый текст */
+}
+
+/* Основной контент */
+.main-content {
+  margin-left: 250px; /* Отступ для сайдбара */
+  padding: 20px;
+  flex-grow: 1;
+}
+
+/* Стили для заголовков */
+h1, h2, h3, h4, h5, h6 {
+  color: #A91AB0; /* Фиолетовый для заголовков */
+  margin: 0.5em 0;
+}
+
+/* Основной текст */
+p {
+  color: #333333; /* Темно-серый для текста */
+  line-height: 1.6;
+  margin: 1em 0;
+}
+
+/* Стили кнопок */
+button {
+  background-color: #568F6F; /* Зеленый фон кнопки */
+  color: #FFFFFF; /* Белый текст */
+  border: none;
+  border-radius: 5px; /* Сглаженные углы */
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #457A5D; /* Темнее зеленый при наведении */
+}
+
+button:disabled {
+  background-color: #A5CBB3; /* Светлый зеленый для отключенных кнопок */
+  cursor: not-allowed;
+}
+
+/* Стили для ссылок */
+a {
+  color: #568F6F; /* Зеленый для ссылок */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Карточки */
+.card {
+  background-color: #FFFFFF; /* Белый фон карточек */
+  border: 1px solid #568F6F; /* Зеленая рамка */
+  border-radius: 10px; /* Сглаженные углы */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Мягкая тень */
+  padding: 20px;
+  margin: 10px;
+  text-align: center;
+}
+
+/* Навигационная панель */
+.navbar {
+  background-color: #F2E3B8; /* Пастельный бежевый */
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a {
+  color: #A91AB0; /* Фиолетовый текст */
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  color: #9409A3; /* Темнее фиолетовый */
+}
+
+/* Формы */
+input, textarea, select {
+  border: 1px solid #568F6F; /* Зеленая рамка */
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 10px 0;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #A91AB0; /* Фиолетовый при фокусе */
+}
+
+/* Контейнеры */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Стили для футера */
+.footer {
+  background-color: #F2E3B8; /* Пастельный бежевый */
+  color: #333333; /* Темно-серый текст */
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+}

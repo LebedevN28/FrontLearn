@@ -4,13 +4,13 @@ import { Outlet } from 'react-router';
 import Header from '../../../3_widgets/header/Header';
 
 export default function Layout(): React.JSX.Element {
-  const backgroundImage = '/images/layout_images_new1.webp';
+  // const backgroundImage = '/images/layout_images_new1.webp';
 
   return (
     <Container
       fluid
       style={{
-        backgroundImage: `url(${backgroundImage})`, // Добавьте url() вокруг переменной
+        // backgroundImage: `url(${backgroundImage})`, // Добавьте url() вокруг переменной
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         minHeight: '100vh',
