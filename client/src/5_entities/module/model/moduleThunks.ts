@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ModuleType } from './module.types';
+import type { ModuleType } from './module.types';
 import moduleService from '../api/moduleService';
 
 // Получить все модули
