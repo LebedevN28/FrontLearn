@@ -4,12 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAnswersByTask } from '../../../5_entities/answer/model/answerThunks'
 import styles from './QuestionPage.module.css';
 import myImage from '../../../../public/images/questionheg.jpeg';
+import { useAppSelector } from '../../../6_shared/lib/hooks';
 
 const QuestionPage = () => {
   const dispatch = useDispatch();
   const { answers, status, error } = useSelector((state) => state.answers);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean | null>(null);
+  const title = useAppSelector((store) =>store.tasks.selectedTask?.title )
 
   useEffect(() => {
     dispatch(getAnswersByTask(1)); 
@@ -75,7 +77,6 @@ const QuestionPage = () => {
               isAnswerCorrect ? styles.correct : styles.incorrect
             }`}
           >
-            {isAnswerCorrect ? 'Правильно! 🎉' : 'Неправильно 😢'}
           </Typography>
         )}
       </div>
