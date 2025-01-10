@@ -7,7 +7,7 @@ import LoginPage from '../../2_pages/Auth/LoginPage/LoginPage';
 import MainPage from '../../2_pages/Note/MainPage/MainPage';
 import Layout from '../../2_pages/Layout/Layout';
 import { AuthStatus } from '../../4_features/auth/model/auth.types';
-import QuestionPage from '../../2_pages/Note/QuestionPage/QuestionPage'
+import QuestionPage from '../../2_pages/Note/QuestionPage/QuestionPage';
 import ProfilePage from '../../2_pages/ProfilePage/ProfilePage';
 
 export default function RouterProvider(): React.JSX.Element {
@@ -16,18 +16,7 @@ export default function RouterProvider(): React.JSX.Element {
   return (
     <Routes>
       <Route element={<Layout />}>
-
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute
-              isAllowed={status === AuthStatus.authenticated}
-              redirectTo="/auth/login"
-            >
-              <MainPage />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/" element={<MainPage />} />
         <Route
           path="/profile/:id"
           element={
@@ -40,19 +29,16 @@ export default function RouterProvider(): React.JSX.Element {
           }
         />
 
-
         <Route
           path="/modules/:moduleId"
           element={
             <ProtectedRoute
               isAllowed={status === AuthStatus.authenticated}
               redirectTo="/auth/login"
-            >
-
-            </ProtectedRoute>
+            ></ProtectedRoute>
           }
         />
-       <Route
+        <Route
           path="/question"
           element={
             <ProtectedRoute
