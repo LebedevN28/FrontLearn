@@ -64,4 +64,21 @@ module.exports = {
       res.status(500).json({ message: 'Error deleting task' });
     }
   },
+
+  async getTasksByDifficulty(req, res) {
+    try {
+      const { difficulty } = req.params;
+      const tasks = await taskService.getTasksByDifficulty(difficulty);
+
+      if (!tasks || tasks.length === 0) {
+        return res
+          .status(404)
+          .json({ message: `No tasks found with difficulty: ${difficulty}` });
+      }
+      res.status(200).json(tasks);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error fetching tasks by difficulty' });
+    }
+  },
 };

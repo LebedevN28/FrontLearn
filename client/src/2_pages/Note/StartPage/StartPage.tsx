@@ -1,8 +1,5 @@
-import React from 'react'
+import React from 'react';
 
 export default function StartPage(): React.JSX.Element {
-  return (
-    <div>StartPage</div>
-  )
+  return <div></div>;
 }
-
