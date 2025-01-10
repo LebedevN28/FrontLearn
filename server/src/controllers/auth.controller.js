@@ -9,6 +9,7 @@ class AuthController {
   constructor(service) {
     this.#service = service;
   }
+
   // Регистрация нового пользователя
   signup = async (req, res) => {
     const { name, email, password } = req.body;

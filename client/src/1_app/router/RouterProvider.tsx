@@ -6,10 +6,10 @@ import SignupPage from '../../2_pages/Auth/SignupPage/SignupPage';
 import MainPage from '../../2_pages/Note/MainPage/MainPage';
 import Layout from '../../2_pages/Layout/Layout';
 import { AuthStatus } from '../../4_features/auth/model/auth.types';
-import AddNotePage from '../../2_pages/Note/AddNotePage/AddNotePage';
 import LoginPage from '../../2_pages/Auth/LoginPage/LoginPage';
 import RezultPage from '../../2_pages/Note/RezultPage/RezultPage';
 import StartPage from '../../2_pages/Note/StartPage/StartPage';
+import QuestionPage from '../../2_pages/Note/QuestionPage/QuestionPage';
 
 export default function RouterProvider(): React.JSX.Element {
   const status = useAppSelector((store) => store.auth.data.status);
@@ -24,6 +24,18 @@ export default function RouterProvider(): React.JSX.Element {
         <Route path="/start" element={<StartPage />} />
 
         <Route path="/rezult" element={<RezultPage />} />
+        <Route path='/question' element={<QuestionPage />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute
+              isAllowed={status === AuthStatus.authenticated}
+              redirectTo="/auth/login"
+            >
+            </ProtectedRoute>
+          }
+        />
+
 
 
         <Route
@@ -33,12 +45,11 @@ export default function RouterProvider(): React.JSX.Element {
               isAllowed={status === AuthStatus.authenticated}
               redirectTo="/auth/login"
             >
-              <AddNotePage />
             </ProtectedRoute>
           }
         />
 
-        <Route path="/notes/:noteId" element={<h1>Work in progress</h1>} />
+        
 
 
         <Route

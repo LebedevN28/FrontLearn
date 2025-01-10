@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import  React, { use } from 'react';
 import { store } from '../../store/store';
 import { refreshThunk } from '../../../4_features/auth/model/authThunks';
 import { getAllNotesThunk } from '../../../5_entities/note/model/noteThunks';
