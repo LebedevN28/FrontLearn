@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 
 import { AuthStatus } from '../../../4_features/auth/model/auth.types'; 
 import styles from './MainPage.module.css';
-import hegImage from '../../../../public/images/heg2.jpeg';
+// import hegImage from '../../../../public/images/heg2.jpeg';
 import { useAppSelector } from '../../../6_shared/lib/hooks';
 
 export default function MainPage(): React.JSX.Element {
@@ -15,7 +15,7 @@ export default function MainPage(): React.JSX.Element {
     <div className={styles['main-container']}>
       <div className={styles['image-container']}>
         <img
-          src={hegImage}
+          src='/imgs/heg2.jpeg'
           alt="Main Image"
           className={styles['main-image']}
         />

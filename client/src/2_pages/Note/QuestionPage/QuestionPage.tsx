@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Typography, Button } from '@mui/material';
 import styles from './QuestionPage.module.css';
-import myImage from '../../../../public/images/questionheg.jpeg'
+// import myImage from '../../../../public/images/questionheg.jpeg'
 
 const questions = [
   {
@@ -106,7 +106,7 @@ export default function QuestionPage(): React.JSX.Element {
       </div>
       <div className={styles.imageContainer}>
         <img
-          src={myImage} 
+          src='/imgs/questionheg.jpeg' 
           alt="Placeholder"
           className={styles.image}
         />
