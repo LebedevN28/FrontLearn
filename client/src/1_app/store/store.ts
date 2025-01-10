@@ -5,6 +5,7 @@ import achievementReducer from '../../5_entities/achievement/model/achievementSl
 import modulesReducer from '../../5_entities/module/model/moduleSlice';
 import progressReducer from '../../5_entities/progress/model/progressSlice';
 import answerReducer from '../../5_entities/answer/model/answerSlice';
+import userReducer from '../../5_entities/user/model/userSlice';
 
 export const store = configureStore({
   reducer: {
