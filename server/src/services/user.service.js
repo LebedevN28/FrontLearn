@@ -2,27 +2,51 @@ const { User } = require('../../db/models');
 
 module.exports = {
   async getAllUsers() {
-    return await User.findAll();
+    try {
+      return await User.findAll();
+    } catch (error) {
+      console.error('Ошибка при получении всех пользователей:', error);
+      throw error;
+    }
   },
 
   async getUserById(id) {
-    return await User.findByPk(id);
+    try {
+      return User.findByPk(id);
+    } catch (error) {
+      console.error('Ошибка при получении пользователя по ID:', error);
+      throw error;
+    }
   },
 
-  async createUser(userData) {
-    return await User.create(userData);
+  async getUserByEmail(email) {
+    try {
+      return await User.findOne({ where: { email } });
+    } catch (error) {
+      console.error('Ошибка при получении пользователя по email:', error);
+      throw error;
+    }
   },
 
   async updateUser(id, userData) {
-    const user = await User.findByPk(id);
-    if (!user) return null;
-    return await user.update(userData);
+    try {
+      const user = await User.findByPk(id);
+      if (!user) return null;
+      return await user.update(userData);
+    } catch (error) {
+      console.error('Ошибка при обновлении пользователя:', error);
+      throw error;
+    }
   },
 
   async deleteUser(id) {
-    const user = await User.findByPk(id);
-    if (!user) return null;
-    await user.destroy();
-    return user;
+    try {
+      const user = await User.findByPk(id);
+      if (!user) return null;
+      return await user.destroy();
+    } catch (error) {
+      console.error('Ошибка при обновлении пользователя:', error);
+      throw error;
+    }
   },
 };

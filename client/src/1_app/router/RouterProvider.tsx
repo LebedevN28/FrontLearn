@@ -10,6 +10,7 @@ import AddNotePage from '../../2_pages/Note/AddNotePage/AddNotePage';
 import LoginPage from '../../2_pages/Auth/LoginPage/LoginPage';
 import RezultPage from '../../2_pages/Note/RezultPage/RezultPage';
 import StartPage from '../../2_pages/Note/StartPage/StartPage';
+import ProfilePage from '../../2_pages/ProfilePage/ProfilePage';
 
 export default function RouterProvider(): React.JSX.Element {
   const status = useAppSelector((store) => store.auth.data.status);
@@ -17,14 +18,11 @@ export default function RouterProvider(): React.JSX.Element {
   return (
     <Routes>
       <Route element={<Layout />}>
-
         <Route path="/" element={<MainPage />} />
-
 
         <Route path="/start" element={<StartPage />} />
 
         <Route path="/rezult" element={<RezultPage />} />
-
 
         <Route
           path="/notes/add"
@@ -38,8 +36,19 @@ export default function RouterProvider(): React.JSX.Element {
           }
         />
 
-        <Route path="/notes/:noteId" element={<h1>Work in progress</h1>} />
+        <Route
+          path="/profile/:id"
+          element={
+            <ProtectedRoute
+              isAllowed={status === AuthStatus.authenticated}
+              redirectTo="/auth/login"
+            >
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
 
+        <Route path="/notes/:noteId" element={<h1>Work in progress</h1>} />
 
         <Route
           element={<ProtectedRoute isAllowed={status === AuthStatus.guest} redirectTo="/start" />}
