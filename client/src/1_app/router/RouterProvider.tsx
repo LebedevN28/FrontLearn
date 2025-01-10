@@ -4,30 +4,21 @@ import ProtectedRoute from '../../4_features/auth/lib/ProtectedRoute';
 import { useAppSelector } from '../../6_shared/lib/hooks';
 import SignupPage from '../../2_pages/Auth/SignupPage/SignupPage';
 import LoginPage from '../../2_pages/Auth/LoginPage/LoginPage';
-// import StartPage from '../../2_pages/Note/StartPage/StartPage';
 import MainPage from '../../2_pages/Note/MainPage/MainPage';
 import Layout from '../../2_pages/Layout/Layout';
-// import ModulePage from '../../2_pages/Module/ModulePage';
-// import TaskPage from '../../2_pages/Task/TaskPage';
 import { AuthStatus } from '../../4_features/auth/model/auth.types';
-import LoginPage from '../../2_pages/Auth/LoginPage/LoginPage';
-import RezultPage from '../../2_pages/Note/RezultPage/RezultPage';
-import StartPage from '../../2_pages/Note/StartPage/StartPage';
-import QuestionPage from '../../2_pages/Note/QuestionPage/QuestionPage';
+import QuestionPage from '../../2_pages/Note/QuestionPage/QuestionPage'
+import ProfilePage from '../../2_pages/Note/ProfilePage/ProfilePage';
 
 export default function RouterProvider(): React.JSX.Element {
   const status = useAppSelector((store) => store.auth.data.status);
 
   return (
     <Routes>
-      {/* Общий layout для всех страниц */}
       <Route element={<Layout />}>
-        {/* Главная страница */}
-        <Route path="/" element={<MainPage  />} />
 
-        {/* Основная страница после входа */}
         <Route
-          path="/main"
+          path="/"
           element={
             <ProtectedRoute
               isAllowed={status === AuthStatus.authenticated}
@@ -37,8 +28,19 @@ export default function RouterProvider(): React.JSX.Element {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/profile/:id"
+          element={
+            <ProtectedRoute
+              isAllowed={status === AuthStatus.authenticated}
+              redirectTo="/auth/login"
+            >
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
 
-        {/* Страница модуля */}
+
         <Route
           path="/modules/:moduleId"
           element={
@@ -46,12 +48,22 @@ export default function RouterProvider(): React.JSX.Element {
               isAllowed={status === AuthStatus.authenticated}
               redirectTo="/auth/login"
             >
-              {/* <ModulePage /> */}
+
+            </ProtectedRoute>
+          }
+        />
+       <Route
+          path="/question"
+          element={
+            <ProtectedRoute
+              isAllowed={status === AuthStatus.authenticated}
+              redirectTo="/auth/login"
+            >
+              <QuestionPage />
             </ProtectedRoute>
           }
         />
 
-        {/* Страница задания */}
         <Route
           path="/tasks/:taskId"
           element={
