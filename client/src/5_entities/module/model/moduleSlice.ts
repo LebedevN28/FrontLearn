@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ModuleSliceType } from './module.types';
+import type { ModuleSliceType } from './module.types';
 import { getModules, getModuleById } from './moduleThunks';
 
 const initialState: ModuleSliceType = {

@@ -9,6 +9,7 @@ import Layout from '../../2_pages/Layout/Layout';
 import { AuthStatus } from '../../4_features/auth/model/auth.types';
 import QuestionPage from '../../2_pages/Note/QuestionPage/QuestionPage';
 import ProfilePage from '../../2_pages/ProfilePage/ProfilePage';
+import StartPage from '../../2_pages/Note/StartPage/StartPage';
 
 export default function RouterProvider(): React.JSX.Element {
   const status = useAppSelector((store) => store.auth.data.status);
@@ -25,6 +26,17 @@ export default function RouterProvider(): React.JSX.Element {
               redirectTo="/auth/login"
             >
               <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/start"
+          element={
+            <ProtectedRoute
+              isAllowed={status === AuthStatus.authenticated}
+              redirectTo="/auth/login"
+            >
+              <StartPage />
             </ProtectedRoute>
           }
         />

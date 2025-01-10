@@ -1,6 +1,6 @@
 import { AxiosError, type AxiosInstance } from 'axios';
 import axiosInstance from '../../../6_shared/api/axiosInstance';
-import { ModuleType } from '../model/module.types';
+import type { ModuleType } from '../model/module.types';
 import { moduleSchema } from '../model/module.schema';
 import { ZodError } from 'zod';
 
