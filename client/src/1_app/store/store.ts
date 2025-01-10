@@ -3,6 +3,7 @@ import authReducer from '../../4_features/auth/model/authSlice';
 import notesReducer from '../../5_entities/note/model/noteSlice';
 import notebooksReducer from '../../5_entities/notebook/model/notebookSlice'; // Предполагаем, что редьюсер для "ноутбуков" создан
 import playerReducer from '../../4_features/player/playerSlice';
+import tasksReducer from '../../5_entities/task/model/taskSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     auth: authReducer,
     notebooks: notebooksReducer,
     players: playerReducer,
+    tasks: tasksReducer,
   },
 });
 

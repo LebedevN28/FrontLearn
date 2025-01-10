@@ -23,6 +23,16 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: 3,
+        title: 'Explain how React and Redux work together.',
+        description: 'Describe how React and Redux interact in a typical React-Redux application.',
+        type: 'text_input',
+        difficulty: 'hard',
+        moduleId: 3, // Ссылается на существующий id в Modules
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
 

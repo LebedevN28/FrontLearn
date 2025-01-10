@@ -17,6 +17,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: 3,
+        title: 'React-Redux Integration',
+        description: 'Learn how to integrate Redux with React applications.',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
 

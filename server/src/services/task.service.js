@@ -32,4 +32,18 @@ module.exports = {
     await task.destroy();
     return task;
   },
+
+  
+  async getTasksByDifficulty(difficulty) {
+    try {
+      return await Task.findAll({
+        where: {
+          difficulty: difficulty, 
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error('Error fetching tasks by difficulty');
+    }
+  },
 };
