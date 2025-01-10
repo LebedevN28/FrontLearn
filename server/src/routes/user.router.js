@@ -1,11 +1,18 @@
-const express = require('express');
-const router = express.Router();
+const { Router } = require('express');
+const userRouter = Router();
+const upload = require('../middlewares/upload');
 const userController = require('../controllers/user.controller');
+const { verifyAccessToken } = require('../middlewares/verifyTokens');
 
-router.get('/', userController.getAllUsers);
-router.get('/:id', userController.getUserById);
-router.post('/', userController.createUser);
-router.put('/:id', userController.updateUser);
-router.delete('/:id', userController.deleteUser);
+userRouter.get('/', userController.getAllUsers);
+userRouter
+  .route('/:id')
+  .get(verifyAccessToken, userController.getUserById)
+  .patch(verifyAccessToken, userController.updateUserInfo)
+  .delete(verifyAccessToken, userController.deleteUser);
 
-module.exports = router;
+userRouter
+  .route('/:id/image')
+  .patch(verifyAccessToken, upload.single('image'), userController.updateUserPhoto);
+
+module.exports = userRouter;

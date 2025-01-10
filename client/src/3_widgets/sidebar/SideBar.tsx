@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { NavLink as RouterLink } from 'react-router-dom';
+import { NavLink as RouterLink } from 'react-router';
 import './SideBar.css';
 
 export default function SideBar(): React.JSX.Element {
