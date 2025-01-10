@@ -1,15 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from '../../4_features/auth/model/authSlice';
-import notesReducer from '../../5_entities/note/model/noteSlice';
-import notebooksReducer from '../../5_entities/notebook/model/notebookSlice'; // Предполагаем, что редьюсер для "ноутбуков" создан
-import playerReducer from '../../4_features/player/playerSlice';
+import tasksReducer from '../../5_entities/task/model/taskSlice';
+import achievementReducer from '../../5_entities/achievement/model/achievementSlice';
+import modulesReducer from '../../5_entities/module/model/moduleSlice';
+import progressReducer from '../../5_entities/progress/model/progressSlice';
+import answerReducer from '../../5_entities/answer/model/answerSlice';
 
 export const store = configureStore({
   reducer: {
-    notes: notesReducer,
+    tasks: tasksReducer,
     auth: authReducer,
-    notebooks: notebooksReducer,
-    players: playerReducer,
+    modules: modulesReducer,
+    achievements: achievementReducer,
+    progress: progressReducer,
+    answers: answerReducer,
   },
 });
 
