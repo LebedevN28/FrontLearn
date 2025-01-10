@@ -1,66 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Button } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import { getAnswersByTask } from '../../../5_entities/answer/model/answerThunks'
 import styles from './QuestionPage.module.css';
-import myImage from '../../../../public/images/questionheg.jpeg'
+import myImage from '../../../../public/images/questionheg.jpeg';
 
-const questions = [
-  {
-    id: 1,
-    title: 'Что такое React?',
-    answers: [
-      {
-        id: 1,
-        taskId: 1,
-        content: 'JavaScript library for building UIs',
-        isCorrect: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 2,
-        taskId: 1,
-        content: 'A programming language',
-        isCorrect: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 3,
-        taskId: 1,
-        content: 'A database management system',
-        isCorrect: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 4,
-        taskId: 1,
-        content: 'A design framework',
-        isCorrect: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    ],
-  },
-];
-
-export default function QuestionPage(): React.JSX.Element {
+const QuestionPage = () => {
+  const dispatch = useDispatch();
+  const { answers, status, error } = useSelector((state) => state.answers);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    dispatch(getAnswersByTask(1)); 
+  }, [dispatch]);
 
   const handleAnswerClick = (answerId: number, isCorrect: boolean) => {
     setSelectedAnswer(answerId);
     setIsAnswerCorrect(isCorrect);
   };
 
+  if (status === 'loading') {
+    return <Typography>Loading...</Typography>;
+  }
+
+  if (status === 'failed') {
+    return <Typography>Error: {error}</Typography>;
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
         <Typography variant="h3" className={styles.question}>
-          {questions[0].title}
+          
         </Typography>
         <div className={styles.answersGrid}>
-          {questions[0].answers.map((answer) => (
+          {answers.map((answer) => (
             <Button
               key={answer.id}
               variant="contained"
@@ -100,17 +75,15 @@ export default function QuestionPage(): React.JSX.Element {
               isAnswerCorrect ? styles.correct : styles.incorrect
             }`}
           >
-            {/* {isAnswerCorrect ? 'Правильно! 🎉' : 'Неправильно 😢'} */}
+            {isAnswerCorrect ? 'Правильно! 🎉' : 'Неправильно 😢'}
           </Typography>
         )}
       </div>
       <div className={styles.imageContainer}>
-        <img
-          src={myImage} 
-          alt="Placeholder"
-          className={styles.image}
-        />
+        <img src={myImage} alt="Placeholder" className={styles.image} />
       </div>
     </div>
   );
-}
+};
+
+export default QuestionPage;

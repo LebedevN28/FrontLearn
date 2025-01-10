@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router';
-
 import { AuthStatus } from '../../../4_features/auth/model/auth.types'; 
 import styles from './MainPage.module.css';
 import hegImage from '../../../../public/images/heg2.jpeg';

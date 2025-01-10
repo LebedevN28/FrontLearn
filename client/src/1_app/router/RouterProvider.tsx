@@ -16,18 +16,7 @@ export default function RouterProvider(): React.JSX.Element {
   return (
     <Routes>
       <Route element={<Layout />}>
-
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute
-              isAllowed={status === AuthStatus.authenticated}
-              redirectTo="/auth/login"
-            >
-              <MainPage />
-            </ProtectedRoute>
-          }
-        />
+    <Route path='/' element={<MainPage/>}  />
         <Route
           path="/profile/:id"
           element={
@@ -53,7 +42,7 @@ export default function RouterProvider(): React.JSX.Element {
           }
         />
        <Route
-          path="/question"
+          path="/question/:id"
           element={
             <ProtectedRoute
               isAllowed={status === AuthStatus.authenticated}
@@ -78,7 +67,7 @@ export default function RouterProvider(): React.JSX.Element {
 
         {/* Аутентификация */}
         <Route
-          element={<ProtectedRoute isAllowed={status === AuthStatus.guest} redirectTo="/main" />}
+          element={<ProtectedRoute isAllowed={status === AuthStatus.guest} redirectTo="/" />}
         >
           <Route path="/auth/signup" element={<SignupPage />} />
           <Route path="/auth/login" element={<LoginPage />} />

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navbar, Nav, Image } from 'react-bootstrap';
-import { NavLink as RouterLink } from 'react-router';
+import { NavLink as RouterLink, useNavigate } from 'react-router';
 import { useAppDispatch, useAppSelector } from '../../6_shared/lib/hooks';
 import { logoutThunk } from '../../4_features/auth/model/authThunks';
 import { AuthStatus } from '../../4_features/auth/model/auth.types';
@@ -10,10 +10,21 @@ import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import logo from '../../../public/images/logo.jpg';
 import styles from './Header.module.css'; 
+import { getUserByIdThunk } from '../../5_entities/user/model/userThunks';
 
 export default function Header(): React.JSX.Element {
   const data = useAppSelector((store) => store.auth.data);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const user = useAppSelector((store) => store.user.selectedUser);
+
+  useEffect(() => {
+    if (data.status === AuthStatus.authenticated) {
+      dispatch(getUserByIdThunk(data.user.id)).catch(console.error);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data.status, dispatch]);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -25,6 +36,16 @@ export default function Header(): React.JSX.Element {
   const handleMenuClose = (): void => {
     setAnchorEl(null);
   };
+
+  const handleProfileClick = (): void => {
+    handleMenuClose(); 
+    if (data.status === AuthStatus.authenticated ) {
+      void navigate(`/profile/${String(data.user.id)}`);
+    } else {
+      console.error('Пользователь не аутентифицирован или данные отсутствуют');
+    }
+  };
+
 
   const handleLogout = (): void => {
     void dispatch(logoutThunk());
@@ -49,13 +70,13 @@ export default function Header(): React.JSX.Element {
           {data.status === AuthStatus.authenticated ? (
             <div className={styles.userContainer}> 
               <span className={styles.username}>
-                {data.user.name}
+              {user?.name ?? data.user.name}
               </span>
               <IconButton onClick={handleMenuOpen} className={styles.avatarButton}>
-                <Avatar
+              <Avatar
                   alt={data.user.name}
-                  // src={data.user.avatar} // для юзера потом докрутим аватарку
-                  className={styles.avatar} 
+                  src={user?.image ? `/images/${user.image}` : '/public/images/hog.png'}
+                  className={styles.avatar}
                 />
               </IconButton>
               <Menu
@@ -71,7 +92,7 @@ export default function Header(): React.JSX.Element {
                   horizontal: 'right',
                 }}
               >
-                <MenuItem onClick={handleMenuClose}>Профиль</MenuItem>
+                <MenuItem onClick={handleProfileClick}>Профиль</MenuItem> 
                 <MenuItem onClick={handleLogout}>Выход</MenuItem>
               </Menu>
             </div>

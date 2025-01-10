@@ -39,3 +39,15 @@ function handleAxiosError(error: unknown): string {
   }
   return 'Unexpected error occurred';
 }
+
+export const getTaskByTitle = createAsyncThunk<TaskType, string>(
+  'tasks/getTaskByTitle',
+  async (title, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get<TaskType>(`/tasks?title=${title}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(handleAxiosError(error));
+    }
+  },
+);

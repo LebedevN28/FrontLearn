@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AnswerSliceType } from '../model/answer.types'; // Путь к типам
-import { getAnswersByTask } from '../model/answerThunks'; // Путь к thunk
+import { AnswerSliceType } from '../model/answer.types'; 
+import { getAnswersByTask } from '../model/answerThunks'; 
 
 const initialState: AnswerSliceType = {
   answers: [],
