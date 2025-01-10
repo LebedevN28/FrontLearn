@@ -1,29 +1,29 @@
 'use strict';
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Achievements', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false,
       },
-      name: {
+      title: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: true,
       },
-      password: {
-        type: Sequelize.STRING,
+      type: {
+        type: Sequelize.ENUM('level', 'questions', 'module', 'custom'),
         allowNull: false,
       },
-      level: {
-        type: Sequelize.INTEGER,
-        defaultValue: 1,
+      criteria: {
+        type: Sequelize.JSON,
+        allowNull: true,
       },
       points: {
         type: Sequelize.INTEGER,
@@ -31,17 +31,18 @@ module.exports = {
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false,
         defaultValue: Sequelize.literal('NOW()'),
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false,
         defaultValue: Sequelize.literal('NOW()'),
+        allowNull: false,
       },
     });
   },
+
   async down(queryInterface) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Achievements');
   },
 };

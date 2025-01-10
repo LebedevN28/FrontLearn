@@ -1,33 +1,29 @@
 'use strict';
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Answers', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false,
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      level: {
+      taskId: {
         type: Sequelize.INTEGER,
-        defaultValue: 1,
+        references: {
+          model: 'Tasks',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
       },
-      points: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
+      content: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      isCorrect: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -42,6 +38,6 @@ module.exports = {
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Answers');
   },
 };

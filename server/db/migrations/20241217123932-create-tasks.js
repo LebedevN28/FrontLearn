@@ -1,47 +1,53 @@
 'use strict';
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Tasks', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false,
       },
-      name: {
+      title: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      password: {
-        type: Sequelize.STRING,
+      description: {
+        type: Sequelize.TEXT,
         allowNull: false,
       },
-      level: {
+      type: {
+        type: Sequelize.ENUM('multiple_choice', 'text_input'),
+        allowNull: false,
+      },
+      difficulty: {
+        type: Sequelize.ENUM('easy', 'medium', 'hard'),
+        defaultValue: 'easy',
+      },
+      moduleId: {
         type: Sequelize.INTEGER,
-        defaultValue: 1,
-      },
-      points: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
+        allowNull: false,
+        references: {
+          model: 'Modules',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false,
         defaultValue: Sequelize.literal('NOW()'),
+        allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false,
         defaultValue: Sequelize.literal('NOW()'),
+        allowNull: false,
       },
     });
   },
+
   async down(queryInterface) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Tasks');
   },
 };
