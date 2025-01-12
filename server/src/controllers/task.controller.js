@@ -65,20 +65,36 @@ module.exports = {
     }
   },
 
-  async getTasksByDifficulty(req, res) {
-    try {
-      const { difficulty } = req.params;
-      const tasks = await taskService.getTasksByDifficulty(difficulty);
+  // async getTasksByDifficulty(req, res) {
+  //   try {
+  //     const { difficulty } = req.params;
+  //     const tasks = await taskService.getTasksByDifficulty(difficulty);
 
-      if (!tasks || tasks.length === 0) {
-        return res
-          .status(404)
-          .json({ message: `No tasks found with difficulty: ${difficulty}` });
+  //     if (!tasks || tasks.length === 0) {
+  //       return res
+  //         .status(404)
+  //         .json({ message: `No tasks found with difficulty: ${difficulty}` });
+  //     }
+  //     res.status(200).json(tasks);
+  //   } catch (error) {
+  //     console.error(error);
+  //     res.status(500).json({ message: 'Error fetching tasks by difficulty' });
+  //   }
+  // },
+
+  async getTaskByModuleId(req, res) {
+    try {
+      const { moduleId } = req.params;
+      const task = await taskService.getTaskByModuleId(moduleId);
+
+      if (!task || task.length === 0) {
+        return res.status(404).json({ message: 'Вопросы не найдены для этого модуля' });
       }
-      res.status(200).json(tasks);
+
+      res.status(200).json(task);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Error fetching tasks by difficulty' });
+      res.status(500).json({ message: 'Ошибка при получении вопросов' });
     }
   },
 };

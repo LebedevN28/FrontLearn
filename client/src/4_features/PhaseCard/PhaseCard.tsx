@@ -1,14 +1,18 @@
 import React from 'react';
 import type { ModuleType } from '../../5_entities/module/model/module.types';
 import styles from './PhaseCard.module.css';
+import { useNavigate } from 'react-router-dom'; 
 
 type PhaseCardProps = {
   module: ModuleType;
 };
 
 export default function PhaseCard({ module }: PhaseCardProps): React.JSX.Element {
+  const navigate = useNavigate();
+
   const handleModuleClick = () => {
-    console.log(`Module ${module.id} clicked`);
+    navigate(`/tasks/${module.id}`);
+    // console.log(`Module ${module.id} clicked`);
   };
 
   return (

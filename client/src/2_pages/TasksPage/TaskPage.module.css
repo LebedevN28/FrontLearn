@@ -1,0 +1,13 @@
+/* TaskPage.module.css */
+
+.taskList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Расстояние между карточками */
+  justify-content: center; /* Центрируем карточки */
+}
+
+.taskList .taskCard {
+  width: 200px; /* Ширина каждой карточки */
+  text-align: center; /* Центрируем содержимое карточки */
+}
