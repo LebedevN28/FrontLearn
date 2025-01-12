@@ -1,6 +1,6 @@
 import React from 'react';
-import { Col, Button } from 'react-bootstrap';
 import type { ModuleType } from '../../5_entities/module/model/module.types';
+import styles from './PhaseCard.module.css';
 
 type PhaseCardProps = {
   module: ModuleType;
@@ -12,19 +12,17 @@ export default function PhaseCard({ module }: PhaseCardProps): React.JSX.Element
   };
 
   return (
-    <Col xs={12} sm={6} md={4} lg={3} className="text-center my-3">
-      <Button
-        variant="outline-primary"
-        className="d-flex flex-column align-items-center justify-content-center"
-        onClick={handleModuleClick}
-      >
-        <img
-          src="."
-          alt={module.title}
-          style={{ width: '80px', height: '80px', marginBottom: '10px' }}
-        />
-        {module.title}
-      </Button>
-    </Col>
+    <div
+      className={`${styles['phase-card']} d-flex flex-column align-items-center`}
+      onClick={handleModuleClick}
+      title={module.title}
+    >
+      <img
+        src="/imgs/apple.jpg" /* Общая картинка для всех */
+        alt={module.title}
+        className={styles['phase-card-image']}
+      />
+      <div className={styles['phase-card-title']}>{module.title}</div>
+    </div>
   );
 }

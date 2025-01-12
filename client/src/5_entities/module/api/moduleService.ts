@@ -21,7 +21,8 @@ class ModuleService {
   async getModules(): Promise<ModuleType[]> {
     try {
       const response = await this.client.get<ModuleType[]>('/modules');
-      return moduleSchema.array().parse(response.data);
+      const data = moduleSchema.array().parse(response.data);
+      return data;
     } catch (error) {
       this.handleError(error);
     }

@@ -3,15 +3,8 @@ import type { ModuleType } from './module.types';
 import moduleService from '../api/moduleService';
 
 // Получить все модули
-export const getModules = createAsyncThunk<ModuleType[]>(
-  'modules/getModules',
-  async (_, { rejectWithValue }) => {
-    try {
-      return await moduleService.getModules();
-    } catch (error) {
-      return rejectWithValue(error instanceof Error ? error.message : 'Unknown error');
-    }
-  },
+export const getModulesThunk = createAsyncThunk('modules/getModulesThunk', () =>
+  moduleService.getModules(),
 );
 
 // Получить модуль по ID

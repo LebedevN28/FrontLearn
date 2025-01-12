@@ -1,0 +1,27 @@
+.phase-card-container {
+    display: flex; /* Используем flex для горизонтального размещения */
+    flex-wrap: nowrap; /* Не переносим карточки на следующую строку */
+    gap: 16px; /* Расстояние между карточками */
+    justify-content: center; /* Центрируем карточки по горизонтали */
+    align-items: center; /* Выравниваем карточки по вертикали */
+    overflow-x: auto; /* Добавляем горизонтальную прокрутку, если карточки не помещаются */
+    padding: 16px; /* Отступы для контейнера */
+  }
+  
+  .phase-card-container::-webkit-scrollbar {
+    height: 8px; /* Высота горизонтального скроллбара */
+  }
+  
+  .phase-card-container::-webkit-scrollbar-thumb {
+    background-color: #888; /* Цвет ползунка */
+    border-radius: 4px;
+  }
+  
+  .phase-card-container::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Цвет ползунка при наведении */
+  }
+  
+  .phase-card-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Фон трека скроллбара */
+  }
+  
