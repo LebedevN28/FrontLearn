@@ -5,15 +5,12 @@ import {
   selectAnswers,
   selectStatus,
   selectError,
-} from '../../../5_entities/answer/model/answerSlice';
-import { useAppDispatch, useAppSelector } from '../../../6_shared/lib/hooks';
-import { getAnswersByTask } from '../../../5_entities/answer/model/answerThunks';
-import {
-  getTaskByIdThunk,
-  getTasksByModuleIdThunk,
-} from '../../../5_entities/task/model/taskThunk';
-import type { AnswerType } from '../../../5_entities/answer/model/answer.types';
-import { updateUserPointsThunk } from '../../../5_entities/user/model/userThunks';
+} from '../../5_entities/answer/model/answerSlice';
+import { useAppDispatch, useAppSelector } from '../../6_shared/lib/hooks';
+import { getAnswersByTask } from '../../5_entities/answer/model/answerThunks';
+import { getTaskByIdThunk, getTasksByModuleIdThunk } from '../../5_entities/task/model/taskThunk';
+import type { AnswerType } from '../../5_entities/answer/model/answer.types';
+import { updateUserPointsThunk } from '../../5_entities/user/model/userThunks';
 
 const QuestionPage: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
