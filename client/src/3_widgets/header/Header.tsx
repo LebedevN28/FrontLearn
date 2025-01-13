@@ -75,8 +75,6 @@ export default function Header(): React.JSX.Element {
               <IconButton onClick={handleMenuOpen} className={styles.avatarButton}>
               <Avatar
                   alt={data.user.name}
-                  src={user?.image ? `/images/${user.image}` : '/public/images/hog.png'}
-                  className={styles.avatar}
                   src={user?.image ? `/images/${user.image}` : '/imgs/hog.png'}
                   className={styles.avatar}
                 />
