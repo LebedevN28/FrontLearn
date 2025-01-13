@@ -68,7 +68,7 @@ export default function RouterProvider(): React.JSX.Element {
 
         {/* Аутентификация */}
         <Route
-          element={<ProtectedRoute isAllowed={status === AuthStatus.guest} redirectTo="/main" />}
+          element={<ProtectedRoute isAllowed={status === AuthStatus.guest} redirectTo="/" />}
         >
           <Route path="/auth/signup" element={<SignupPage />} />
           <Route path="/auth/login" element={<LoginPage />} />

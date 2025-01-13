@@ -71,7 +71,7 @@ export default function ProfilePage(): React.JSX.Element {
         <div className="profile_page__photo-container">
           <>
             <img
-              src={user?.image ? `/images/${user.image}` : '/public/images/hog.png'}
+              src={user?.image ? `/images/${user.image}` : '/hog.png'}
               alt="User"
               className="profile_page__photo"
               style={{ width: '150px' }}
