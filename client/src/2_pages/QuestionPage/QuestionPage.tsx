@@ -15,21 +15,16 @@ import { updateUserPointsThunk } from '../../5_entities/user/model/userThunks';
 const QuestionPage: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const answers = useAppSelector(selectAnswers);
   const status = useAppSelector(selectStatus);
   const error = useAppSelector(selectError);
   const task = useAppSelector((state) => state.tasks.selectedTask);
   const thisModuleTasks = useAppSelector((state) => state.tasks.tasks);
   const thisUser = useAppSelector((state) => state.user.selectedUser);
-  const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
-  const navigate = useNavigate();
 
-  const getBackgroundColor = (answer: AnswerType): string => {
-    if (selectedAnswerId === answer.id) {
-      return answer.isCorrect ? 'green' : 'red';
-    }
-    return '#3f51b5';
-  };
+  const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
 
   useEffect(() => {
     if (task?.moduleId) {
@@ -46,24 +41,35 @@ const QuestionPage: React.FC = () => {
 
   const filteredAnswers = answers.filter((answer) => answer.taskId === Number(taskId));
 
+  const calculatePoints = (difficulty: string): number => {
+    switch (difficulty) {
+      case 'easy':
+        return 10;
+      case 'medium':
+        return 20;
+      default:
+        return 30;
+    }
+  };
+
   const handleAnswerClick = (answer: AnswerType): void => {
     setSelectedAnswerId(answer.id);
+
     if (answer.isCorrect && thisUser) {
-      let points;
-      if (task?.difficulty === 'easy') points = 10;
-      else if (task?.difficulty === 'medium') points = 20;
-      else points = 30;
+      const points = task ? calculatePoints(task.difficulty) : 0;
       const { id } = thisUser;
       dispatch(updateUserPointsThunk({ id, points })).catch(console.log);
     }
   };
 
   const handleNextTask = (): void => {
-    const nextTask = task ? thisModuleTasks.find((t) => t.id === task.id + 1) : null;
+    const currentIndex = thisModuleTasks.findIndex((t) => t.id === task?.id);
+    const nextTask = thisModuleTasks[currentIndex + 1];
+
     if (nextTask) {
-      void navigate(`/task/${String(nextTask.id)}`);
+      navigate(`/task/${String(nextTask.id)}`);
     } else {
-      void navigate(`/tasks/${String(task?.moduleId)}`);
+      navigate(`/tasks/${String(task?.moduleId)}`);
     }
   };
 
@@ -75,10 +81,14 @@ const QuestionPage: React.FC = () => {
     return <Typography>Error: {error}</Typography>;
   }
 
+  if (!task) {
+    return <Typography>Task not found</Typography>;
+  }
+
   return (
     <Box sx={{ padding: 3 }}>
       <Typography variant="h4" gutterBottom>
-        {task?.title}
+        {task.title}
       </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
         {filteredAnswers.map((answer) => (
@@ -88,7 +98,12 @@ const QuestionPage: React.FC = () => {
             onClick={() => handleAnswerClick(answer)}
             sx={{
               textTransform: 'none',
-              backgroundColor: getBackgroundColor(answer),
+              backgroundColor:
+                selectedAnswerId === answer.id
+                  ? answer.isCorrect
+                    ? 'green'
+                    : 'red'
+                  : 'primary.main',
               color: 'white',
             }}
           >
@@ -102,7 +117,7 @@ const QuestionPage: React.FC = () => {
             onClick={handleNextTask}
             sx={{
               textTransform: 'none',
-              backgroundColor: '#844caf',
+              backgroundColor: 'secondary.main',
               color: 'white',
               marginTop: 2,
             }}
