@@ -1,5 +1,5 @@
 import type { z } from 'zod';
-import type { taskFormSchema, taskSchema } from './task.schema';
+import type { taskFormSchema, taskSchema } from './disabled_task.schema';
 
 // Тип для одной задачи, на основе Zod-схемы
 export type TaskType = z.infer<typeof taskSchema>;

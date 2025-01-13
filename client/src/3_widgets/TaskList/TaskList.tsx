@@ -1,10 +1,10 @@
 import Card from 'react-bootstrap/Card';
 // import { useAppDispatch } from '../../6_shared/lib/hooks';
-import { TaskType } from '../../5_entities/task/model/task.types';
+import type { TaskType } from '../../5_entities/task/model/disabled_task.types';
 // import { selectedTask } from '../../5_entities/task/model/taskSlice';
 
 type TaskCardProps = {
-  task: TaskType; 
+  task: TaskType;
 };
 
 export default function TaskCard({ task }: TaskCardProps): React.JSX.Element {

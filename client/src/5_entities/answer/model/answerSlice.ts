@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AnswerSliceType } from '../model/answer.types'; // Путь к типам
-import { getAnswersByTask } from '../model/answerThunks'; // Путь к thunk
+import type { AnswerSliceType } from '../model/answer.types'; 
+import { getAnswersByTask } from '../model/answerThunks'; 
 
 const initialState: AnswerSliceType = {
   answers: [],
@@ -28,6 +28,10 @@ const answerSlice = createSlice({
       });
   },
 });
+
+export const selectAnswers = (state: { answers: AnswerSliceType }) => state.answers.answers;
+export const selectStatus = (state: { answers: AnswerSliceType }) => state.answers.status;
+export const selectError = (state: { answers: AnswerSliceType }) => state.answers.error;
 
 export const answerReducer = answerSlice.reducer;
 export default answerReducer;
