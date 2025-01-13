@@ -16,13 +16,13 @@ export default function SideBar(): React.JSX.Element {
         <Col>Обучение</Col>
 
         <div className={`sidebar-row__hover-bar ${isHovered ? 'visible' : ''}`}>
-          <RouterLink to={`/phase/1`} className="sidebar-row__hoverbar-btn">
+          <RouterLink to={`/tasks/1`} className="sidebar-row__hoverbar-btn">
             Фаза 1
           </RouterLink>
-          <RouterLink to={`/phase/2`} className="sidebar-row__hoverbar-btn">
+          <RouterLink to={`/tasks/2`} className="sidebar-row__hoverbar-btn">
             Фаза 2
           </RouterLink>
-          <RouterLink to={`/phase/3`} className="sidebar-row__hoverbar-btn">
+          <RouterLink to={`/tasks/3`} className="sidebar-row__hoverbar-btn">
             Фаза 3
           </RouterLink>
         </div>
