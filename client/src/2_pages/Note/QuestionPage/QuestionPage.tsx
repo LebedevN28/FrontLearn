@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Typography, Box } from '@mui/material';
 import {
   selectAnswers,
@@ -8,8 +8,12 @@ import {
 } from '../../../5_entities/answer/model/answerSlice';
 import { useAppDispatch, useAppSelector } from '../../../6_shared/lib/hooks';
 import { getAnswersByTask } from '../../../5_entities/answer/model/answerThunks';
-import { getTaskByIdThunk } from '../../../5_entities/task/model/taskThunk';
+import {
+  getTaskByIdThunk,
+  getTasksByModuleIdThunk,
+} from '../../../5_entities/task/model/taskThunk';
 import type { AnswerType } from '../../../5_entities/answer/model/answer.types';
+import { updateUserPointsThunk } from '../../../5_entities/user/model/userThunks';
 
 const QuestionPage: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
@@ -17,11 +21,12 @@ const QuestionPage: React.FC = () => {
   const answers = useAppSelector(selectAnswers);
   const status = useAppSelector(selectStatus);
   const error = useAppSelector(selectError);
-  const taskTitle = useAppSelector((state ) => state.tasks.selectedTask?.title)
-
-  
+  const task = useAppSelector((state) => state.tasks.selectedTask);
+  const thisModuleTasks = useAppSelector((state) => state.tasks.tasks);
+  const thisUser = useAppSelector((state) => state.user.selectedUser);
   const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
-  
+  const navigate = useNavigate();
+
   const getBackgroundColor = (answer: AnswerType): string => {
     if (selectedAnswerId === answer.id) {
       return answer.isCorrect ? 'green' : 'red';
@@ -29,6 +34,11 @@ const QuestionPage: React.FC = () => {
     return '#3f51b5';
   };
 
+  useEffect(() => {
+    if (task?.moduleId) {
+      dispatch(getTasksByModuleIdThunk(Number(task.moduleId))).catch(console.log);
+    }
+  }, [task, dispatch]);
 
   useEffect(() => {
     if (taskId) {
@@ -39,10 +49,25 @@ const QuestionPage: React.FC = () => {
 
   const filteredAnswers = answers.filter((answer) => answer.taskId === Number(taskId));
 
-  const handleAnswerClick = (answerId: number, isCorrect: boolean): void => {
-    setSelectedAnswerId(answerId);
+  const handleAnswerClick = (answer: AnswerType): void => {
+    setSelectedAnswerId(answer.id);
+    if (answer.isCorrect && thisUser) {
+      let points;
+      if (task?.difficulty === 'easy') points = 10;
+      else if (task?.difficulty === 'medium') points = 20;
+      else points = 30;
+      const { id } = thisUser;
+      dispatch(updateUserPointsThunk({ id, points })).catch(console.log);
+    }
+  };
 
-    console.log(`Выбран ответ: ${String(answerId)}, правильный: ${String(isCorrect)}`);
+  const handleNextTask = (): void => {
+    const nextTask = task ? thisModuleTasks.find((t) => t.id === task.id + 1) : null;
+    if (nextTask) {
+      void navigate(`/task/${String(nextTask.id)}`);
+    } else {
+      void navigate(`/tasks/${String(task?.moduleId)}`);
+    }
   };
 
   if (status === 'loading') {
@@ -56,14 +81,14 @@ const QuestionPage: React.FC = () => {
   return (
     <Box sx={{ padding: 3 }}>
       <Typography variant="h4" gutterBottom>
-        {taskTitle}
+        {task?.title}
       </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
         {filteredAnswers.map((answer) => (
           <Button
             key={answer.id}
             variant="contained"
-            onClick={() => handleAnswerClick(answer.id, answer.isCorrect)}
+            onClick={() => handleAnswerClick(answer)}
             sx={{
               textTransform: 'none',
               backgroundColor: getBackgroundColor(answer),
@@ -73,6 +98,21 @@ const QuestionPage: React.FC = () => {
             {answer.content}
           </Button>
         ))}
+
+        {selectedAnswerId && (
+          <Button
+            variant="contained"
+            onClick={handleNextTask}
+            sx={{
+              textTransform: 'none',
+              backgroundColor: '#844caf',
+              color: 'white',
+              marginTop: 2,
+            }}
+          >
+            Следующий вопрос
+          </Button>
+        )}
       </Box>
     </Box>
   );

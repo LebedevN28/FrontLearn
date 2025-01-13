@@ -76,6 +76,22 @@ class UserService {
     }
   }
 
+  async updateUserPoints(id: UserType['id'], points: number): Promise<UserType> {
+    try {
+      const response = await this.client.patch(`/users/${String(id)}/points`, { points });
+      if (response.status !== 200) throw new Error('Неверный статус, ожидалось 200');
+      const data = userSchema.parse(response.data);
+      return data;
+    } catch (error) {
+      if (error instanceof ZodError) {
+        console.log('Zod error:', error.issues);
+      } else if (error instanceof AxiosError) {
+        console.log('Axios error:', error.response?.data);
+      }
+      throw error;
+    }
+  }
+
   async deleteUser(id: UserType['id']): Promise<void> {
     try {
       const response = await this.client.delete(`/users/${String(id)}`);
