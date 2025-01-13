@@ -18,7 +18,15 @@ module.exports = {
         allowNull: true,
       },
       type: {
-        type: Sequelize.ENUM('level', 'questions', 'module', 'custom'),
+        type: Sequelize.ENUM(
+          'level',
+          'answers',
+          'modules',
+          'daily',
+          'progress',
+          'streak',
+          'speed',
+        ),
         allowNull: false,
       },
       criteria: {

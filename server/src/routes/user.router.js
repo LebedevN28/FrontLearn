@@ -8,8 +8,12 @@ userRouter.get('/', userController.getAllUsers);
 userRouter
   .route('/:id')
   .get(verifyAccessToken, userController.getUserById)
-  .patch(verifyAccessToken, userController.updateUserInfo)
+  .patch(verifyAccessToken, userController.updateUserAccount)
   .delete(verifyAccessToken, userController.deleteUser);
+
+userRouter
+.route('/:id/points')
+.patch(verifyAccessToken, userController.updateUserPoints)
 
 userRouter
   .route('/:id/image')

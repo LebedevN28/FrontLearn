@@ -14,7 +14,7 @@ module.exports = {
 
   async getUserById(req, res) {
     try {
-      const {id} = req.params;
+      const { id } = req.params;
       const user = await userService.getUserById(id);
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
@@ -26,7 +26,7 @@ module.exports = {
     }
   },
 
-  async updateUserInfo(req, res) {
+  async updateUserAccount(req, res) {
     try {
       const userData = req.body;
       const { id } = req.params;
@@ -78,6 +78,23 @@ module.exports = {
         text: 'Ошибка изменения фотографии пользователя',
         message: error.message,
       });
+    }
+  },
+
+  async updateUserPoints(req, res) {
+    try {
+      const { id } = req.params;
+      const { points } = req.body;
+      const user = await userService.getUserById(id);
+      if (!user) {
+        return res.status(404).json({ text: 'Пользователь не найден' });
+      }
+      const newPoints = user.points + points;
+      const updUser = await userService.updateUser(id, { points: newPoints });
+      res.status(200).json(updUser);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error updating user points' });
     }
   },
 

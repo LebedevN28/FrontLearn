@@ -37,6 +37,15 @@ export const uploadPhotoThunk = createAsyncThunk(
     userService.uploadPhoto(id, formData),
 );
 
+export const updateUserPointsThunk = createAsyncThunk(
+  'users/updateUserPointsThunk',
+  async ({ id, points }: { id: UserType['id']; points: number }) => {
+
+    const response = userService.updateUserPoints(id, points);
+    return response
+  }
+);
+
 export const deleteUserThunk = createAsyncThunk(
   'users/deleteUserThunk',
   async (id: UserType['id']) => {
