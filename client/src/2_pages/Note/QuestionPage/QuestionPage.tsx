@@ -1,116 +1,81 @@
-import React, { useState } from 'react';
-import { Typography, Button } from '@mui/material';
-import styles from './QuestionPage.module.css';
-// import myImage from '../../../../public/images/questionheg.jpeg'
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { Button, Typography, Box } from '@mui/material';
+import {
+  selectAnswers,
+  selectStatus,
+  selectError,
+} from '../../../5_entities/answer/model/answerSlice';
+import { useAppDispatch, useAppSelector } from '../../../6_shared/lib/hooks';
+import { getAnswersByTask } from '../../../5_entities/answer/model/answerThunks';
+import { getTaskByIdThunk } from '../../../5_entities/task/model/taskThunk';
+import type { AnswerType } from '../../../5_entities/answer/model/answer.types';
 
-const questions = [
-  {
-    id: 1,
-    title: 'Что такое React?',
-    answers: [
-      {
-        id: 1,
-        taskId: 1,
-        content: 'JavaScript library for building UIs',
-        isCorrect: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 2,
-        taskId: 1,
-        content: 'A programming language',
-        isCorrect: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 3,
-        taskId: 1,
-        content: 'A database management system',
-        isCorrect: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 4,
-        taskId: 1,
-        content: 'A design framework',
-        isCorrect: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    ],
-  },
-];
+const QuestionPage: React.FC = () => {
+  const { taskId } = useParams<{ taskId: string }>();
+  const dispatch = useAppDispatch();
+  const answers = useAppSelector(selectAnswers);
+  const status = useAppSelector(selectStatus);
+  const error = useAppSelector(selectError);
+  const taskTitle = useAppSelector((state ) => state.tasks.selectedTask?.title)
 
-export default function QuestionPage(): React.JSX.Element {
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-  const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean | null>(null);
-
-  const handleAnswerClick = (answerId: number, isCorrect: boolean) => {
-    setSelectedAnswer(answerId);
-    setIsAnswerCorrect(isCorrect);
+  
+  const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
+  
+  const getBackgroundColor = (answer: AnswerType): string => {
+    if (selectedAnswerId === answer.id) {
+      return answer.isCorrect ? 'green' : 'red';
+    }
+    return '#3f51b5';
   };
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <Typography variant="h3" className={styles.question}>
-          {questions[0].title}
-        </Typography>
-        <div className={styles.answersGrid}>
-          {questions[0].answers.map((answer) => (
-            <Button
-              key={answer.id}
-              variant="contained"
-              onClick={() => handleAnswerClick(answer.id, answer.isCorrect)}
-              sx={{
-                padding: '30px',
-                fontSize: '16px',
-                backgroundColor: '#3f51b5',
-                color: '#fff',
-                textTransform: 'none',
-                borderRadius: '10px',
-                transition: 'background-color 0.3s ease',
-                '&.correct': {
-                  backgroundColor: '#4caf50',
-                },
-                '&.incorrect': {
-                  backgroundColor: '#f44336',
-                },
-              }}
-              className={
-                selectedAnswer === answer.id
-                  ? isAnswerCorrect
-                    ? 'correct'
-                    : 'incorrect'
-                  : ''
-              }
-            >
-              {answer.content}
-            </Button>
-          ))}
-        </div>
 
-        {selectedAnswer !== null && (
-          <Typography
-            variant="h5"
-            className={`${styles.result} ${
-              isAnswerCorrect ? styles.correct : styles.incorrect
-            }`}
+  useEffect(() => {
+    if (taskId) {
+      dispatch(getTaskByIdThunk(Number(taskId))).catch(console.log);
+      dispatch(getAnswersByTask(Number(taskId))).catch(console.log);
+    }
+  }, [dispatch, taskId]);
+
+  const filteredAnswers = answers.filter((answer) => answer.taskId === Number(taskId));
+
+  const handleAnswerClick = (answerId: number, isCorrect: boolean): void => {
+    setSelectedAnswerId(answerId);
+
+    console.log(`Выбран ответ: ${String(answerId)}, правильный: ${String(isCorrect)}`);
+  };
+
+  if (status === 'loading') {
+    return <Typography>Loading...</Typography>;
+  }
+
+  if (status === 'failed') {
+    return <Typography>Error: {error}</Typography>;
+  }
+
+  return (
+    <Box sx={{ padding: 3 }}>
+      <Typography variant="h4" gutterBottom>
+        {taskTitle}
+      </Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        {filteredAnswers.map((answer) => (
+          <Button
+            key={answer.id}
+            variant="contained"
+            onClick={() => handleAnswerClick(answer.id, answer.isCorrect)}
+            sx={{
+              textTransform: 'none',
+              backgroundColor: getBackgroundColor(answer),
+              color: 'white',
+            }}
           >
-            {/* {isAnswerCorrect ? 'Правильно! 🎉' : 'Неправильно 😢'} */}
-          </Typography>
-        )}
-      </div>
-      <div className={styles.imageContainer}>
-        <img
-          src='/imgs/questionheg.jpeg' 
-          alt="Placeholder"
-          className={styles.image}
-        />
-      </div>
-    </div>
+            {answer.content}
+          </Button>
+        ))}
+      </Box>
+    </Box>
   );
-}
+};
+
+export default QuestionPage;

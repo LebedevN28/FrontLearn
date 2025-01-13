@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AnswerType } from '../model/answer.types'; // Путь к типам
-import answerService from '../api/answerService'; // Путь к сервису
+import type { AnswerType } from '../model/answer.types';
+import answerService from '../api/answerService'; 
 
-// Получить ответы по ID задачи
+
 export const getAnswersByTask = createAsyncThunk<AnswerType[], number>(
   'answers/getAnswersByTask',
   async (taskId, { rejectWithValue }) => {

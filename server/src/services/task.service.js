@@ -9,29 +9,29 @@ module.exports = {
 
   /** ****  7c864eb7-e22d-4493-bfc4-8f53851c54a6  ****** */
   async getAllTasks() {
-    return await Task.findAll();
+    return  Task.findAll();
   },
 
   async getTaskById(id) {
-    return await Task.findByPk(id);
+    return  Task.findByPk(id);
   },
 
-  async createTask(taskData) {
-    return await Task.create(taskData);
-  },
+  // async createTask(taskData) {
+  //   return  Task.create(taskData);
+  // },
 
-  async updateTask(id, taskData) {
-    const task = await Task.findByPk(id);
-    if (!task) return null;
-    return await task.update(taskData);
-  },
+  // async updateTask(id, taskData) {
+  //   const task = await Task.findByPk(id);
+  //   if (!task) return null;
+  //   return  task.update(taskData);
+  // },
 
-  async deleteTask(id) {
-    const task = await Task.findByPk(id);
-    if (!task) return null;
-    await task.destroy();
-    return task;
-  },
+  // async deleteTask(id) {
+  //   const task = await Task.findByPk(id);
+  //   if (!task) return null;
+  //   await task.destroy();
+  //   return task;
+  // },
 
   async getTaskByModuleId(moduleId) {
     const task = await Task.findAll({
