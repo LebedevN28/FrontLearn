@@ -42,10 +42,7 @@ export default function RouterProvider(): React.JSX.Element {
           }
         />
        <Route
-          path="/question/:id"
-
-        <Route
-          path="/question"
+          path="/task/:taskId"
           element={
             <ProtectedRoute
               isAllowed={status === AuthStatus.authenticated}

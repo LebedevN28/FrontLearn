@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AnswerType } from '../model/answer.types';
+import type { AnswerType } from '../model/answer.types';
 import answerService from '../api/answerService'; 
 
 

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { TaskType } from './task.types';
+import type { TaskType } from './task.types';
 import axiosInstance from '../../../6_shared/api/axiosInstance'; // Ваш кастомный Axios инстанс
 import axios from 'axios';
 
@@ -28,6 +28,8 @@ export const getTaskById = createAsyncThunk<TaskType, number>(
     }
   },
 );
+
+
 
 // Обработчик ошибок Axios
 function handleAxiosError(error: unknown): string {

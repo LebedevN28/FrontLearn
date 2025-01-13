@@ -1,25 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Button } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
-import { getAnswersByTask } from '../../../5_entities/answer/model/answerThunks'
-import styles from './QuestionPage.module.css';
-import myImage from '../../../../public/images/questionheg.jpeg';
-import { useAppSelector } from '../../../6_shared/lib/hooks';
+import { useParams } from 'react-router-dom';
+import { Button, Typography, Box } from '@mui/material';
+import {
+  selectAnswers,
+  selectStatus,
+  selectError,
+} from '../../../5_entities/answer/model/answerSlice';
+import { useAppDispatch, useAppSelector } from '../../../6_shared/lib/hooks';
+import { getAnswersByTask } from '../../../5_entities/answer/model/answerThunks';
 
-const QuestionPage = () => {
-  const dispatch = useDispatch();
-  const { answers, status, error } = useSelector((state) => state.answers);
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-  const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean | null>(null);
-  const title = useAppSelector((store) =>store.tasks.selectedTask?.title )
+const QuestionPage: React.FC = () => {
+  const { taskId } = useParams<{ taskId: string }>();
+  const dispatch = useAppDispatch();
+  const answers = useAppSelector(selectAnswers);
+  const status = useAppSelector(selectStatus);
+  const error = useAppSelector(selectError);
+
+  const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
 
   useEffect(() => {
-    dispatch(getAnswersByTask(1)); 
-  }, [dispatch]);
+    if (taskId) {
+      dispatch(getAnswersByTask(Number(taskId)));
+    }
+  }, [dispatch, taskId]);
+
+  const filteredAnswers = answers.filter((answer) => answer.taskId === Number(taskId));
 
   const handleAnswerClick = (answerId: number, isCorrect: boolean) => {
-    setSelectedAnswer(answerId);
-    setIsAnswerCorrect(isCorrect);
+    setSelectedAnswerId(answerId);
+
+    console.log(`Выбран ответ: ${answerId}, правильный: ${isCorrect}`);
   };
 
   if (status === 'loading') {
@@ -31,64 +41,34 @@ const QuestionPage = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <Typography variant="h3" className={styles.question}>
-          
-        </Typography>
-        <div className={styles.answersGrid}>
-          {answers.map((answer) => (
-            <Button
-              key={answer.id}
-              variant="contained"
-              onClick={() => handleAnswerClick(answer.id, answer.isCorrect)}
-              sx={{
-                padding: '30px',
-                fontSize: '16px',
-                backgroundColor: '#3f51b5',
-                color: '#fff',
-                textTransform: 'none',
-                borderRadius: '10px',
-                transition: 'background-color 0.3s ease',
-                '&.correct': {
-                  backgroundColor: '#4caf50',
-                },
-                '&.incorrect': {
-                  backgroundColor: '#f44336',
-                },
-              }}
-              className={
-                selectedAnswer === answer.id
-                  ? isAnswerCorrect
-                    ? 'correct'
-                    : 'incorrect'
-                  : ''
-              }
-            >
-              {answer.content}
-            </Button>
-          ))}
-        </div>
-
-        {selectedAnswer !== null && (
-          <Typography
-            variant="h5"
-            className={`${styles.result} ${
-              isAnswerCorrect ? styles.correct : styles.incorrect
-            }`}
+    <Box sx={{ padding: 3 }}>
+      <Typography variant="h4" gutterBottom></Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        {filteredAnswers.map((answer) => (
+          <Button
+            key={answer.id}
+            variant="contained"
+            onClick={() => handleAnswerClick(answer.id, answer.isCorrect)}
+            sx={{
+              textTransform: 'none',
+              backgroundColor:
+                selectedAnswerId === answer.id ? (answer.isCorrect ? 'green' : 'red') : '#3f51b5',
+              color: 'white',
+              '&:hover': {
+                backgroundColor:
+                  selectedAnswerId === answer.id
+                    ? answer.isCorrect
+                      ? 'darkgreen'
+                      : 'darkred'
+                    : '#303f9f',
+              },
+            }}
           >
-          </Typography>
-        )}
-      </div>
-      <div className={styles.imageContainer}>
-        <img
-          src='/imgs/questionheg.jpeg' 
-          alt="Placeholder"
-          className={styles.image}
-        />
-        <img src={myImage} alt="Placeholder" className={styles.image} />
-      </div>
-    </div>
+            {answer.content}
+          </Button>
+        ))}
+      </Box>
+    </Box>
   );
 };
 
