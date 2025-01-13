@@ -1,0 +1,58 @@
+/* Основной контейнер карточки */
+.card {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  border-radius: 12px;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
+}
+
+/* Стили для карточки при наведении */
+.card:hover {
+  background-color: rgba(229, 231, 235, 0.5); /* Светло-серый */
+}
+
+/* Индекс карточки (порядковый номер) */
+.index {
+  margin-right: 16px;
+  font-weight: bold;
+  color: #65a30d; /* Лаймовый цвет */
+}
+
+/* Контейнер для аватара */
+.avatar {
+  margin-left: 12px;
+  margin-right: 24px;
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  border: 2px solid #22c55e; /* Зеленый */
+  background-color: #22c55e;
+}
+
+/* Заглушка, если изображение отсутствует */
+.avatar .fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  font-size: 1.25rem; /* Увеличенный размер для первой буквы */
+  font-weight: bold;
+  color: white;
+  background-color: #6b7280; /* Серый фон */
+  border-radius: 50%;
+}
+
+/* Имя пользователя */
+.name {
+  flex: 1;
+  font-weight: bold;
+  color: #1f2937; /* Темный текст */
+}
+
+/* Очки пользователя */
+.points {
+  color: #6b7280; /* Цвет текста (заглушка) */
+}

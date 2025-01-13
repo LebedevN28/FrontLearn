@@ -11,6 +11,7 @@ import QuestionPage from '../../2_pages/Note/QuestionPage/QuestionPage';
 import ProfilePage from '../../2_pages/ProfilePage/ProfilePage';
 import StartPage from '../../2_pages/StartPage/StartPage';
 import TasksPage from '../../2_pages/TasksPage/TasksPage';
+import LeaderboardPage from '../../2_pages/LeaderboardPage/LeaderboardPage';
 
 export default function RouterProvider(): React.JSX.Element {
   const status = useAppSelector((store) => store.auth.data.status);
@@ -65,11 +66,20 @@ export default function RouterProvider(): React.JSX.Element {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/leaderboard"
+          element={
+            <ProtectedRoute
+              isAllowed={status === AuthStatus.authenticated}
+              redirectTo="/auth/login"
+            >
+              <LeaderboardPage />
+            </ProtectedRoute>
+          }
+        />
 
         {/* Аутентификация */}
-        <Route
-          element={<ProtectedRoute isAllowed={status === AuthStatus.guest} redirectTo="/" />}
-        >
+        <Route element={<ProtectedRoute isAllowed={status === AuthStatus.guest} redirectTo="/" />}>
           <Route path="/auth/signup" element={<SignupPage />} />
           <Route path="/auth/login" element={<LoginPage />} />
         </Route>

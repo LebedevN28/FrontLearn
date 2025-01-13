@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppSelector } from '../../6_shared/lib/hooks';
-import styles from './StartPage.module.css'; // Стили для контейнера
+import styles from './StartPage.module.css'; 
 import PhaseCard from '../../4_features/PhaseCard/PhaseCard';
 
 export default function StartPage(): React.JSX.Element {
