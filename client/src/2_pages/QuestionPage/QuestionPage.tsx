@@ -111,6 +111,12 @@ const QuestionPage: React.FC = () => {
           </Button>
         )}
       </Box>
+      <img 
+          src="/imgs/questionheg.jpeg" 
+          alt="Main Image" 
+          height='500px'
+          width='500px'
+        />
     </Box>
   );
 };
