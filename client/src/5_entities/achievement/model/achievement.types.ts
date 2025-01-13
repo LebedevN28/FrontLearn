@@ -1,5 +1,5 @@
 import type { z } from 'zod';
-import type { achievementSchema } from '../model/achievement.schema';
+import type { achievementSchema } from './achievement.schema';
 
 // Тип для одного достижения
 export type AchievementType = z.infer<typeof achievementSchema>;

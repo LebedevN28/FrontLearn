@@ -1,28 +1,22 @@
-const { UserAchievement } = require('../../db/models');
+const { UserAchievement, Achievement } = require('../../db/models');
 
 module.exports = {
-  async getAllUserAchievements() {
-    return await UserAchievement.findAll();
+  // Получить все достижения пользователя
+  async getUserAchievements(userId) {
+    return await UserAchievement.findAll({
+      where: { userId },
+      include: [{ model: Achievement }],
+    });
   },
 
-  async getUserAchievementById(id) {
-    return await UserAchievement.findByPk(id);
-  },
+  // Добавить достижения для пользователя
+  async createUserAchievements(userId, achievementIds) {
+    const records = achievementIds.map((achievementId) => ({
+      userId,
+      achievementId,
+    }));
 
-  async createUserAchievement(userAchievementData) {
-    return await UserAchievement.create(userAchievementData);
-  },
-
-  async updateUserAchievement(id, userAchievementData) {
-    const userAchievement = await UserAchievement.findByPk(id);
-    if (!userAchievement) return null;
-    return await userAchievement.update(userAchievementData);
-  },
-
-  async deleteUserAchievement(id) {
-    const userAchievement = await UserAchievement.findByPk(id);
-    if (!userAchievement) return null;
-    await userAchievement.destroy();
-    return userAchievement;
+    // bulkCreate игнорирует дубликаты
+    return await UserAchievement.bulkCreate(records, { ignoreDuplicates: true });
   },
 };
