@@ -1,8 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { TaskType } from './task.types';
+import type { TaskType } from './disabled_task.types';
 import axiosInstance from '../../../6_shared/api/axiosInstance'; // Ваш кастомный Axios инстанс
 import axios from 'axios';
+import taskService from '../api/taskService';
 
+// Обработчик ошибок Axios
+function handleAxiosError(error: unknown): string {
+  if (axios.isAxiosError(error)) {
+    if (error.response) {
+      return error.response.data?.message || `Error: ${error.response.status}`;
+    }
+    return 'Network error occurred';
+  }
+  return 'Unexpected error occurred';
+}
 // Асинхронная санка для получения всех задач
 export const getTasks = createAsyncThunk<TaskType[]>(
   'tasks/getTasks',
@@ -16,31 +27,9 @@ export const getTasks = createAsyncThunk<TaskType[]>(
   },
 );
 
-// Асинхронная санка для получения задачи по ID
-export const getTaskById = createAsyncThunk<TaskType, number>(
-  'tasks/getTaskById',
-  async (taskId, { rejectWithValue }) => {
-    try {
-      const response = await axiosInstance.get<TaskType>(`/tasks/${taskId}`);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(handleAxiosError(error));
-    }
-  },
+export const getTaskById = createAsyncThunk('tasks/getTaskById', async (taskId: number) =>
+  taskService.getTaskById(taskId),
 );
-
-
-
-// Обработчик ошибок Axios
-function handleAxiosError(error: unknown): string {
-  if (axios.isAxiosError(error)) {
-    if (error.response) {
-      return error.response.data?.message || `Error: ${error.response.status}`;
-    }
-    return 'Network error occurred';
-  }
-  return 'Unexpected error occurred';
-}
 
 export const getTaskByTitle = createAsyncThunk<TaskType, string>(
   'tasks/getTaskByTitle',

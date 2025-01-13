@@ -1,11 +1,12 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { TaskT, TaskSliceT } from './types';
-import { getTasksByDifficultyThunk, getTasksByModuleIdThunk } from './taskThunk';
+import { getTaskByIdThunk, getTasksByDifficultyThunk, getTasksByModuleIdThunk } from './taskThunk';
 
 const initialState: TaskSliceT = {
   tasks: [],
   selectedModuleId: null,
+  selectedTask: null,
   selectedDifficulty: null,
   status: 'idle',
 };
@@ -47,7 +48,10 @@ const tasksSlice = createSlice({
       .addCase(getTasksByModuleIdThunk.rejected, (state, action) => {
         state.status = 'failed';
         console.error('Error fetching tasks by module:', action.error.message);
-      });
+      })
+      .addCase(getTaskByIdThunk.fulfilled, (state , action) => {
+        state.selectedTask = action.payload;
+      })
   },
 });
 
