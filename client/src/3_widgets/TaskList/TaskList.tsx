@@ -4,7 +4,7 @@ import { TaskType } from '../../5_entities/task/model/task.types';
 // import { selectedTask } from '../../5_entities/task/model/taskSlice';
 
 type TaskCardProps = {
-  task: TaskType; // Исправлено название пропса (note -> task)
+  task: TaskType; 
 };
 
 export default function TaskCard({ task }: TaskCardProps): React.JSX.Element {

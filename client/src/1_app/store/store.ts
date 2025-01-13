@@ -16,6 +16,7 @@ export const store = configureStore({
     progress: progressReducer,
     answers: answerReducer,
     user: userReducer,
+    
   },
 });
 

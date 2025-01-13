@@ -81,6 +81,11 @@ const QuestionPage = () => {
         )}
       </div>
       <div className={styles.imageContainer}>
+        <img
+          src='/imgs/questionheg.jpeg' 
+          alt="Placeholder"
+          className={styles.image}
+        />
         <img src={myImage} alt="Placeholder" className={styles.image} />
       </div>
     </div>

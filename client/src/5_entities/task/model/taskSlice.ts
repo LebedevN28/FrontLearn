@@ -1,51 +1,55 @@
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { TaskSliceType } from './task.types';
-import { getTasks, getTaskById } from './taskThunks';
+import type { TaskT, TaskSliceT } from './types';
+import { getTasksByDifficultyThunk, getTasksByModuleIdThunk } from './taskThunk';
 
-const initialState: TaskSliceType = {
+const initialState: TaskSliceT = {
   tasks: [],
-  selectedTask: null,
+  selectedModuleId: null,
+  selectedDifficulty: null,
   status: 'idle',
-  error: null,
-  completedTasks: [],
 };
 
-const taskSlice = createSlice({
-  name: 'tasks',
+const tasksSlice = createSlice({
+  name: 'task',
   initialState,
   reducers: {
-    setCompletedTask(state, action) {
-      state.completedTasks.push(action.payload);
+    setTasks(state, action: PayloadAction<TaskT[]>) {
+      state.tasks = action.payload;
+    },
+    setSelectedModuleId(state, action: PayloadAction<number | null>) {
+      state.selectedModuleId = action.payload;
+    },
+    setSelectedDifficulty(state, action: PayloadAction<'easy' | 'medium' | 'hard' | null>) {
+      state.selectedDifficulty = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getTasks.pending, (state) => {
+      .addCase(getTasksByDifficultyThunk.pending, (state) => {
         state.status = 'loading';
-        state.error = null;
       })
-      .addCase(getTasks.fulfilled, (state, action) => {
+      .addCase(getTasksByDifficultyThunk.fulfilled, (state, action: PayloadAction<TaskT[]>) => {
         state.status = 'succeeded';
         state.tasks = action.payload;
       })
-      .addCase(getTasks.rejected, (state, action) => {
+      .addCase(getTasksByDifficultyThunk.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload as string;
+        console.error('Error fetching tasks by difficulty:', action.error.message);
       })
-      .addCase(getTaskById.pending, (state) => {
+      .addCase(getTasksByModuleIdThunk.pending, (state) => {
         state.status = 'loading';
-        state.error = null;
       })
-      .addCase(getTaskById.fulfilled, (state, action) => {
+      .addCase(getTasksByModuleIdThunk.fulfilled, (state, action: PayloadAction<TaskT[]>) => {
         state.status = 'succeeded';
-        state.selectedTask = action.payload;
+        state.tasks = action.payload;
       })
-      .addCase(getTaskById.rejected, (state, action) => {
+      .addCase(getTasksByModuleIdThunk.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload as string;
+        console.error('Error fetching tasks by module:', action.error.message);
       });
   },
 });
 
-export const { setCompletedTask } = taskSlice.actions;
-export default taskSlice.reducer;
+export const { setTasks, setSelectedModuleId, setSelectedDifficulty } = tasksSlice.actions;
+export default tasksSlice.reducer;

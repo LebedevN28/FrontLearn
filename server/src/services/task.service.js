@@ -1,13 +1,13 @@
 const { Task } = require('../../db/models');
 
 module.exports = {
-/*************  ✨ Codeium Command ⭐  *************/
-/**
- * Retrieves all tasks from the database.
- * @returns {Promise<Array>} A promise that resolves to an array of task objects.
- */
+  /** ***********  ✨ Codeium Command ⭐  ************ */
+  /**
+   * Retrieves all tasks from the database.
+   * @returns {Promise<Array>} A promise that resolves to an array of task objects.
+   */
 
-/******  7c864eb7-e22d-4493-bfc4-8f53851c54a6  *******/
+  /** ****  7c864eb7-e22d-4493-bfc4-8f53851c54a6  ****** */
   async getAllTasks() {
     return await Task.findAll();
   },
@@ -30,6 +30,15 @@ module.exports = {
     const task = await Task.findByPk(id);
     if (!task) return null;
     await task.destroy();
+    return task;
+  },
+
+  async getTaskByModuleId(moduleId) {
+    const task = await Task.findAll({
+      where: {
+        moduleId,
+      },
+    });
     return task;
   },
 };

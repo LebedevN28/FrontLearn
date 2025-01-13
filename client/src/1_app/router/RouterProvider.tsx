@@ -7,8 +7,10 @@ import LoginPage from '../../2_pages/Auth/LoginPage/LoginPage';
 import MainPage from '../../2_pages/Note/MainPage/MainPage';
 import Layout from '../../2_pages/Layout/Layout';
 import { AuthStatus } from '../../4_features/auth/model/auth.types';
-import QuestionPage from '../../2_pages/Note/QuestionPage/QuestionPage'
+import QuestionPage from '../../2_pages/Note/QuestionPage/QuestionPage';
 import ProfilePage from '../../2_pages/ProfilePage/ProfilePage';
+import StartPage from '../../2_pages/StartPage/StartPage';
+import TasksPage from '../../2_pages/TasksPage/TasksPage';
 
 export default function RouterProvider(): React.JSX.Element {
   const status = useAppSelector((store) => store.auth.data.status);
@@ -16,7 +18,7 @@ export default function RouterProvider(): React.JSX.Element {
   return (
     <Routes>
       <Route element={<Layout />}>
-    <Route path='/' element={<MainPage/>}  />
+        <Route path="/" element={<MainPage />} />
         <Route
           path="/profile/:id"
           element={
@@ -28,21 +30,22 @@ export default function RouterProvider(): React.JSX.Element {
             </ProtectedRoute>
           }
         />
-
-
         <Route
-          path="/modules/:moduleId"
+          path="/start"
           element={
             <ProtectedRoute
               isAllowed={status === AuthStatus.authenticated}
               redirectTo="/auth/login"
             >
-
+              <StartPage />
             </ProtectedRoute>
           }
         />
        <Route
           path="/question/:id"
+
+        <Route
+          path="/question"
           element={
             <ProtectedRoute
               isAllowed={status === AuthStatus.authenticated}
@@ -54,13 +57,13 @@ export default function RouterProvider(): React.JSX.Element {
         />
 
         <Route
-          path="/tasks/:taskId"
+          path="/tasks/:moduleId"
           element={
             <ProtectedRoute
               isAllowed={status === AuthStatus.authenticated}
               redirectTo="/auth/login"
             >
-              {/* <TaskPage /> */}
+              <TasksPage />
             </ProtectedRoute>
           }
         />

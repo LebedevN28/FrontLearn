@@ -8,7 +8,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
-import logo from '../../../public/images/logo.jpg';
+// import logo from '../../../public/images/logo.jpg';
 import styles from './Header.module.css'; 
 import { getUserByIdThunk } from '../../5_entities/user/model/userThunks';
 
@@ -61,7 +61,7 @@ export default function Header(): React.JSX.Element {
 
         <Navbar.Brand as={RouterLink} to="/" className={styles.navbarBrand}>
           <Image
-            src={logo}
+            src='/imgs/logo.jpg'
             alt="Logo"
             className={styles.logo} 
           />
@@ -76,6 +76,8 @@ export default function Header(): React.JSX.Element {
               <Avatar
                   alt={data.user.name}
                   src={user?.image ? `/images/${user.image}` : '/public/images/hog.png'}
+                  className={styles.avatar}
+                  src={user?.image ? `/images/${user.image}` : '/imgs/hog.png'}
                   className={styles.avatar}
                 />
               </IconButton>

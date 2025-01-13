@@ -1,7 +1,8 @@
-import  React, { use } from 'react';
+import type React from 'react';
+import { use } from 'react';
 import { store } from '../../store/store';
 import { refreshThunk } from '../../../4_features/auth/model/authThunks';
-import { getModules } from '../../../5_entities/module/model/moduleThunks';
+import { getModulesThunk } from '../../../5_entities/module/model/moduleThunks';
 import { getProgressByUser } from '../../../5_entities/progress/model/progressThunks';
 import { getAchievements } from '../../../5_entities/achievement/model/achievementThunks';
 import { getTasks } from '../../../5_entities/task/model/taskThunks';
@@ -12,7 +13,7 @@ type InitProviderProps = {
 
 // Асинхронная инициализация
 const initAuth = store.dispatch(refreshThunk());
-const initModules = store.dispatch(getModules());
+const initModules = store.dispatch(getModulesThunk());
 const initAchievements = store.dispatch(getAchievements());
 const initTasks = store.dispatch(getTasks());
 const initProgress = store.dispatch(getProgressByUser(1));

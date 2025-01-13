@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ModuleSliceType } from './module.types';
-import { getModules, getModuleById } from './moduleThunks';
+import type { ModuleSliceType } from './module.types';
+import { getModulesThunk, getModuleById } from './moduleThunks';
 
 const initialState: ModuleSliceType = {
   modules: [],
@@ -15,15 +15,15 @@ const moduleSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getModules.pending, (state) => {
+      .addCase(getModulesThunk.pending, (state) => {
         state.status = 'loading';
         state.error = null;
       })
-      .addCase(getModules.fulfilled, (state, action) => {
+      .addCase(getModulesThunk.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.modules = action.payload;
       })
-      .addCase(getModules.rejected, (state, action) => {
+      .addCase(getModulesThunk.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload as string;
       })

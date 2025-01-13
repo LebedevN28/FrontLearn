@@ -1,6 +1,6 @@
 import { AxiosError, type AxiosInstance } from 'axios';
 import axiosInstance from '../../../6_shared/api/axiosInstance';
-import { ModuleType } from '../model/module.types';
+import type { ModuleType } from '../model/module.types';
 import { moduleSchema } from '../model/module.schema';
 import { ZodError } from 'zod';
 
@@ -21,7 +21,8 @@ class ModuleService {
   async getModules(): Promise<ModuleType[]> {
     try {
       const response = await this.client.get<ModuleType[]>('/modules');
-      return moduleSchema.array().parse(response.data);
+      const data = moduleSchema.array().parse(response.data);
+      return data;
     } catch (error) {
       this.handleError(error);
     }
