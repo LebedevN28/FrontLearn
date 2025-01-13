@@ -41,7 +41,7 @@ export default function RouterProvider(): React.JSX.Element {
             </ProtectedRoute>
           }
         />
-       <Route
+        <Route
           path="/task/:taskId"
           element={
             <ProtectedRoute
