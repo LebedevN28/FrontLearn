@@ -8,9 +8,9 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
-// import logo from '../../../public/images/logo.jpg';
 import styles from './Header.module.css'; 
 import { getUserByIdThunk } from '../../5_entities/user/model/userThunks';
+import ProgressBar from '../../4_features/ProgressBar/ProgressBar';
 
 export default function Header(): React.JSX.Element {
   const data = useAppSelector((store) => store.auth.data);
@@ -38,14 +38,13 @@ export default function Header(): React.JSX.Element {
   };
 
   const handleProfileClick = (): void => {
-    handleMenuClose(); 
-    if (data.status === AuthStatus.authenticated ) {
+    handleMenuClose();
+    if (data.status === AuthStatus.authenticated) {
       void navigate(`/profile/${String(data.user.id)}`);
     } else {
       console.error('Пользователь не аутентифицирован или данные отсутствуют');
     }
   };
-
 
   const handleLogout = (): void => {
     void dispatch(logoutThunk());
@@ -53,30 +52,24 @@ export default function Header(): React.JSX.Element {
   };
 
   return (
-    <header className={styles.header}> 
-      <Navbar
-        expand="lg"
-        className={`py-3 ${styles.navbar}`} 
-      >
-
+    <header className={styles.header}>
+      <Navbar expand="lg" className={`py-3 ${styles.navbar}`}>
         <Navbar.Brand as={RouterLink} to="/" className={styles.navbarBrand}>
-          <Image
-            src='/imgs/logo.jpg'
-            alt="Logo"
-            className={styles.logo} 
-          />
+          <Image src="/imgs/logo.jpg" alt="Logo" className={styles.logo} />
         </Navbar.Brand>
+        <div className={styles.progressBarContainer}>
+          <ProgressBar />
+        </div>
+
         <Nav className="ms-auto">
           {data.status === AuthStatus.authenticated ? (
-            <div className={styles.userContainer}> 
+            <div className={styles.userContainer}>
               <span className={styles.username}>
-              {user?.name ?? data.user.name}
+                {user?.name ?? data.user.name}
               </span>
               <IconButton onClick={handleMenuOpen} className={styles.avatarButton}>
-              <Avatar
+                <Avatar
                   alt={data.user.name}
-                  src={user?.image ? `/images/${user.image}` : '/public/images/hog.png'}
-                  className={styles.avatar}
                   src={user?.image ? `/images/${user.image}` : '/imgs/hog.png'}
                   className={styles.avatar}
                 />
@@ -94,7 +87,7 @@ export default function Header(): React.JSX.Element {
                   horizontal: 'right',
                 }}
               >
-                <MenuItem onClick={handleProfileClick}>Профиль</MenuItem> 
+                <MenuItem onClick={handleProfileClick}>Профиль</MenuItem>
                 <MenuItem onClick={handleLogout}>Выход</MenuItem>
               </Menu>
             </div>

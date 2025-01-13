@@ -1,6 +1,6 @@
 import { AxiosError, type AxiosInstance } from 'axios';
 import axiosInstance from '../../../6_shared/api/axiosInstance'; // Путь к axiosInstance
-import { ProgressType } from '../model/progress.types'; // Путь к типам
+import type { ProgressType } from '../model/progress.types'; // Путь к типам
 import { progressSchema } from '../model/progress.schema'; // Путь к схеме
 import { ZodError } from 'zod';
 

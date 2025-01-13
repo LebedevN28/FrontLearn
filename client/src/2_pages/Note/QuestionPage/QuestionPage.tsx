@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../../6_shared/lib/hooks';
 import { getAnswersByTask } from '../../../5_entities/answer/model/answerThunks';
 import { getTaskByIdThunk } from '../../../5_entities/task/model/taskThunk';
 import type { AnswerType } from '../../../5_entities/answer/model/answer.types';
+import styles from './QuestionPage.module.css'; 
 
 const QuestionPage: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
@@ -17,18 +18,16 @@ const QuestionPage: React.FC = () => {
   const answers = useAppSelector(selectAnswers);
   const status = useAppSelector(selectStatus);
   const error = useAppSelector(selectError);
-  const taskTitle = useAppSelector((state ) => state.tasks.selectedTask?.title)
+  const task = useAppSelector((state) => state.tasks.selectedTask);
 
-  
   const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
-  
+
   const getBackgroundColor = (answer: AnswerType): string => {
     if (selectedAnswerId === answer.id) {
       return answer.isCorrect ? 'green' : 'red';
     }
     return '#3f51b5';
   };
-
 
   useEffect(() => {
     if (taskId) {
@@ -41,7 +40,6 @@ const QuestionPage: React.FC = () => {
 
   const handleAnswerClick = (answerId: number, isCorrect: boolean): void => {
     setSelectedAnswerId(answerId);
-
     console.log(`Выбран ответ: ${String(answerId)}, правильный: ${String(isCorrect)}`);
   };
 
@@ -54,25 +52,30 @@ const QuestionPage: React.FC = () => {
   }
 
   return (
-    <Box sx={{ padding: 3 }}>
-      <Typography variant="h4" gutterBottom>
-        {taskTitle}
-      </Typography>
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+    <Box className={styles.container}>
+      <Box className={styles.questionsContainer}>
+        <Typography variant="h4" gutterBottom>
+          {task?.title}
+        </Typography>
         {filteredAnswers.map((answer) => (
           <Button
             key={answer.id}
             variant="contained"
             onClick={() => handleAnswerClick(answer.id, answer.isCorrect)}
+            className={styles.answerButton}
             sx={{
-              textTransform: 'none',
               backgroundColor: getBackgroundColor(answer),
-              color: 'white',
             }}
           >
             {answer.content}
           </Button>
         ))}
+      </Box>
+      <Box className={styles.imageContainer}>
+        <img 
+          src="/imgs/questionheg.jpeg" 
+          alt="Main Image" 
+        />
       </Box>
     </Box>
   );
