@@ -1,4 +1,4 @@
-// hooks/useHandleAnswer.ts
+import { useState } from 'react';
 import { useAppDispatch } from '../../6_shared/lib/hooks';
 import { updateUserPointsThunk } from '../../5_entities/user/model/userThunks';
 import { checkAchievements } from '../../5_entities/userAchievement/lib/checkAchievements';
@@ -21,6 +21,9 @@ export const useHandleAnswer = ({
 }) => {
   const dispatch = useAppDispatch();
 
+  // Хранилище для уже разблокированных достижений
+  const [unlockedAchievementIds, setUnlockedAchievementIds] = useState<number[]>([]);
+
   const handleAnswerClick = (answer: AnswerType) => {
     if (answer.isCorrect && thisUser && userStats) {
       const points = task ? calculatePoints(task.difficulty) : 0;
@@ -37,7 +40,9 @@ export const useHandleAnswer = ({
       dispatch(updateStats(updatedStats));
 
       // Проверяем достижения
-      const unlockedAchievements = checkAchievements(achievements, updatedStats);
+      const unlockedAchievements = checkAchievements(achievements, updatedStats).filter(
+        (achievement) => !unlockedAchievementIds.includes(achievement.id), // Исключаем уже разблокированные
+      );
 
       // Показываем уведомления и сохраняем достижения
       if (unlockedAchievements.length > 0) {
@@ -45,6 +50,10 @@ export const useHandleAnswer = ({
           toast.success(`🎉 New Achievement Unlocked: ${achievement.title}`);
         });
 
+        // Обновляем список разблокированных достижений
+        setUnlockedAchievementIds((prev) => [...prev, ...unlockedAchievements.map((a) => a.id)]);
+
+        // Сохраняем достижения
         dispatch(
           saveUserAchievements({
             userId: id,
