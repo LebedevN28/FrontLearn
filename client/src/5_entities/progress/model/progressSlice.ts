@@ -1,10 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ProgressSliceType } from '../model/progress.types'; // Путь к типам
-import { getProgressByUser } from '../model/progressThunks'; // Путь к thunk
+import type { ProgressSliceType } from '../model/progress.types'; // Путь к типам
+import {
+  getTotalUserProgressThunk,
+  getUserProgressByModuleThunk,
+  getUserProgressByTaskThunk,
+  createProgressThunk,
+} from '../model/progressThunks'; // Путь к thunk
 
 const initialState: ProgressSliceType = {
-  progress: [],
-  status: 'idle',
+  progressTotal: [],
+  progressModule: [],
+  progressTask: null,
   error: null,
 };
 
@@ -14,16 +20,48 @@ const progressSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getProgressByUser.pending, (state) => {
-        state.status = 'loading';
+      // Обработка getTotalUserProgress
+      .addCase(getTotalUserProgressThunk.pending, (state) => {
         state.error = null;
       })
-      .addCase(getProgressByUser.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.progress = action.payload;
+      .addCase(getTotalUserProgressThunk.fulfilled, (state, action) => {
+        state.progressTotal = action.payload;
       })
-      .addCase(getProgressByUser.rejected, (state, action) => {
-        state.status = 'failed';
+      .addCase(getTotalUserProgressThunk.rejected, (state, action) => {
+        state.error = action.payload as string;
+      })
+
+      // Обработка getUserProgressByModule
+      .addCase(getUserProgressByModuleThunk.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(getUserProgressByModuleThunk.fulfilled, (state, action) => {
+        state.progressModule = action.payload;
+      })
+      .addCase(getUserProgressByModuleThunk.rejected, (state, action) => {
+        state.error = action.payload as string;
+      })
+
+      // Обработка getUserProgressByTask
+      .addCase(getUserProgressByTaskThunk.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(getUserProgressByTaskThunk.fulfilled, (state, action) => {
+        state.progressTask = action.payload;
+      })
+      .addCase(getUserProgressByTaskThunk.rejected, (state, action) => {
+        state.error = action.payload as string;
+      })
+
+      // Обработка createProgress
+      .addCase(createProgressThunk.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(createProgressThunk.fulfilled, (state, action) => {
+        // Добавляем новый прогресс в общий прогресс
+        state.progressTotal.push(action.payload);
+      })
+      .addCase(createProgressThunk.rejected, (state, action) => {
         state.error = action.payload as string;
       });
   },

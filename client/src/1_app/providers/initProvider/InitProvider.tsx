@@ -3,7 +3,6 @@ import { use } from 'react';
 import { store } from '../../store/store';
 import { refreshThunk } from '../../../4_features/auth/model/authThunks';
 import { getModulesThunk } from '../../../5_entities/module/model/moduleThunks';
-import { getProgressByUser } from '../../../5_entities/progress/model/progressThunks';
 import { getAchievements } from '../../../5_entities/achievement/model/achievementThunks';
 import { getAllTasksThunk } from '../../../5_entities/task/model/taskThunk';
 
@@ -16,7 +15,6 @@ const initAuth = store.dispatch(refreshThunk());
 const initModules = store.dispatch(getModulesThunk());
 const initAchievements = store.dispatch(getAchievements());
 const initTasks = store.dispatch(getAllTasksThunk());
-const initProgress = store.dispatch(getProgressByUser(1));
 
 // Ожидаем завершения всех асинхронных операций
 const initPromise = Promise.allSettled([
@@ -24,7 +22,6 @@ const initPromise = Promise.allSettled([
   initModules,
   initAchievements,
   initTasks,
-  initProgress,
 ]);
 
 export default function InitProvider({ children }: InitProviderProps): React.JSX.Element {
