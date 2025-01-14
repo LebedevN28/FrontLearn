@@ -1,69 +1,49 @@
 .container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 60vh;
-    padding: 20px;
-    color: #fff;
-    gap: 60px;
-  }
-  
-  .content {
-    flex: 1;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .imageContainer {
-    flex: 1;
-    max-width: 400px;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-  
-  .question {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 2rem;
-    color: #3f51b5;
-  }
-  
-  .answersGrid {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-  }
-  
-  .button {
-    padding: 30px;
-    font-size: 15px;
-    background-color: #3f51b5;
-    color: #fff;
-    text-transform: none;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .correct {
-    background-color: #4caf50;
-  }
-  
-  .incorrect {
-    background-color: #f44336;
-  }
-  
-  .result {
-    margin-top: 40px;
-    font-size: 1.5rem;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 110px; /* Отступ вниз для всего контейнера */
+}
 
+.questionsContainer {
+  flex: 1;
+  max-width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 30px;
+  border: 2px solid #3f51b5;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Отступ вниз для контейнера с вопросами */
+}
+
+.imageContainer {
+  flex: 1;
+  max-width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto; /* Сдвигаем картинку вправо */
+  margin-bottom: 20px; /* Отступ вниз для картинки */
+}
+
+.imageContainer img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.nextButton {
+  text-transform: none;
+  background-color: #58009b !important;
+  color: white;
+  margin-top: 16px;
+  margin-bottom: 20px; /* Отступ вниз для кнопки */
+}

@@ -11,7 +11,9 @@ export const userSchema = z.object({
 });
 
 // для форм
-export const signupFormSchema = userSchema.omit({ id: true, level: true, points: true, image: true }).extend({
-  password: z.string(),
-});
+export const signupFormSchema = userSchema
+  .omit({ id: true, level: true, points: true, image: true })
+  .extend({
+    password: z.string(),
+  });
 export const loginFormSchema = signupFormSchema.omit({ name: true });

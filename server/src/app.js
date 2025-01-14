@@ -24,6 +24,7 @@ app.use('/api/answers', answerRouter);
 app.use('/api/modules', moduleRouter);
 app.use('/api/progress', progressRouter);
 app.use('/api/achievements', achievementRouter);
+// app.use('/api/users/:userId/achievements', userAchievementRouter);
 app.use('/api/user-achievements', userAchievementRouter);
 
 
