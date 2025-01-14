@@ -9,7 +9,7 @@ module.exports = {
         title: 'Level 1 Achiever',
         description: 'Reach level 1.',
         type: 'level',
-        criteria: JSON.stringify({ requiredLevel: 1 }),
+        criteria: '1', // Упрощенный критерий
         points: 10,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -19,7 +19,7 @@ module.exports = {
         title: 'Level 5 Achiever',
         description: 'Reach level 5.',
         type: 'level',
-        criteria: JSON.stringify({ requiredLevel: 5 }),
+        criteria: '5', // Упрощенный критерий
         points: 20,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -29,7 +29,7 @@ module.exports = {
         title: 'Level 10 Master',
         description: 'Reach level 10.',
         type: 'level',
-        criteria: JSON.stringify({ requiredLevel: 10 }),
+        criteria: '10', // Упрощенный критерий
         points: 30,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -41,7 +41,7 @@ module.exports = {
         title: 'First Answer',
         description: 'Answer your first question.',
         type: 'answers',
-        criteria: JSON.stringify({ requiredAnswers: 1 }),
+        criteria: '1', // Упрощенный критерий
         points: 5,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -51,7 +51,7 @@ module.exports = {
         title: '10 Answers Pro',
         description: 'Answer 10 questions.',
         type: 'answers',
-        criteria: JSON.stringify({ requiredAnswers: 10 }),
+        criteria: '10', // Упрощенный критерий
         points: 15,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -61,155 +61,18 @@ module.exports = {
         title: '100 Answers Guru',
         description: 'Answer 100 questions.',
         type: 'answers',
-        criteria: JSON.stringify({ requiredAnswers: 100 }),
+        criteria: '100', // Упрощенный критерий
         points: 50,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-
-      // Закрытие модулей
-      {
-        id: 7,
-        title: 'First Module Completed',
-        description: 'Complete your first module.',
-        type: 'modules',
-        criteria: JSON.stringify({ requiredModules: 1 }),
-        points: 10,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 8,
-        title: '3 Modules Expert',
-        description: 'Complete 3 modules.',
-        type: 'modules',
-        criteria: JSON.stringify({ requiredModules: 3 }),
-        points: 20,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 9,
-        title: 'All Modules Master',
-        description: 'Complete all available modules.',
-        type: 'modules',
-        criteria: JSON.stringify({ requiredModules: 'all' }),
-        points: 50,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-
-      // Прогресс за день
-      {
-        id: 10,
-        title: 'Daily Starter',
-        description: 'Answer 1 question in a day.',
-        type: 'daily',
-        criteria: JSON.stringify({ dailyAnswers: 1 }),
-        points: 5,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 11,
-        title: 'Daily Challenger',
-        description: 'Answer 10 questions in a day.',
-        type: 'daily',
-        criteria: JSON.stringify({ dailyAnswers: 10 }),
-        points: 15,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 12,
-        title: 'Daily Champion',
-        description: 'Answer 20 questions in a day.',
-        type: 'daily',
-        criteria: JSON.stringify({ dailyAnswers: 20 }),
-        points: 30,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-
       // Общий прогресс
       {
-        id: 13,
-        title: '50% Completion',
-        description: 'Complete 50% of all questions.',
-        type: 'progress',
-        criteria: JSON.stringify({ progressPercentage: 50 }),
-        points: 25,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 14,
-        title: '75% Completion',
-        description: 'Complete 75% of all questions.',
-        type: 'progress',
-        criteria: JSON.stringify({ progressPercentage: 75 }),
-        points: 40,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 15,
-        title: '100% Completion',
-        description: 'Complete all questions.',
-        type: 'progress',
-        criteria: JSON.stringify({ progressPercentage: 100 }),
-        points: 60,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-
-      // Разное
-      {
-        id: 16,
-        title: 'Perfect Streak',
-        description: 'Answer 10 questions correctly in a row.',
-        type: 'streak',
-        criteria: JSON.stringify({ correctStreak: 10 }),
-        points: 25,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 17,
-        title: 'Persistence',
-        description: 'Visit the app 7 days in a row.',
-        type: 'streak',
-        criteria: JSON.stringify({ dailyVisits: 7 }),
-        points: 20,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 18,
-        title: 'Quick Learner',
-        description: 'Complete a module in one day.',
-        type: 'speed',
-        criteria: JSON.stringify({ completedInOneDay: true }),
-        points: 30,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 19,
-        title: 'First Win',
-        description: 'Complete your first module with all questions correct.',
-        type: 'modules',
-        criteria: JSON.stringify({ firstPerfectModule: true }),
-        points: 30,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 20,
+        id: 10,
         title: 'Dedication',
         description: 'Answer 500 questions.',
         type: 'answers',
-        criteria: JSON.stringify({ requiredAnswers: 500 }),
+        criteria: '500', // Упрощенный критерий
         points: 100,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -217,7 +80,7 @@ module.exports = {
     ]);
   },
 
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.bulkDelete('Achievements', null, {});
   },
 };

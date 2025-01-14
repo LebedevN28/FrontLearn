@@ -12,7 +12,7 @@ module.exports = {
       res.status(500).json({ message: 'Error fetching user achievements' });
     }
   },
-
+ 
   // Добавить достижения для пользователя
   async createUserAchievements(req, res) {
     try {

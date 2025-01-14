@@ -4,6 +4,8 @@ module.exports = {
   async getAllAchievements(req, res) {
     try {
       const achievements = await achievementService.getAllAchievements();
+      console.log(achievements, 'achievements');
+      
       res.status(200).json(achievements);
     } catch (error) {
       console.error(error);

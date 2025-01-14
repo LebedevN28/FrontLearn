@@ -26,7 +26,7 @@ const userAchievementsSlice = createSlice({
       })
       .addCase(saveUserAchievements.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload as string;
+        state.error = action.error?.message || 'An unknown error occurred';
       });
   },
 });

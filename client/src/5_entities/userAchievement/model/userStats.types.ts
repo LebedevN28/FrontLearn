@@ -3,7 +3,7 @@ import { z } from 'zod';
 // Схема для статистики пользователя
 export const userStatsSchema = z.object({
   level: z.number().nonnegative(), // Уровень пользователя
-  totalAnswers: z.number().nonnegative(), // Общее количество ответов
+  totalAnswers: z.number().nonnegative(),
 });
 
 // Тип для статистики пользователя
