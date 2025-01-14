@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AchievementType } from '../model/achievement.types'; // Путь к типам
-import achievementService from '../api//achievementService'; // Путь к сервису
+import achievementService from '../api/achievementService'; // Путь к сервису
 
 // Получить все достижения
 export const getAchievements = createAsyncThunk<AchievementType[]>(

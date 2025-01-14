@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import ProfileEditForm from '../../3_widgets/EditForms/ProfileEditForm';
 import { AuthStatus } from '../../4_features/auth/model/auth.types';
 import { logoutThunk } from '../../4_features/auth/model/authThunks';
@@ -30,6 +30,8 @@ export default function ProfilePage(): React.JSX.Element {
       formData.append('image', file);
       try {
         await dispatch(uploadPhotoThunk({ id: Number(id), formData }));
+        // После успешной загрузки обновляем данные пользователя
+        await dispatch(getUserByIdThunk(Number(id)));
       } catch (error) {
         console.error(error);
         setErrorMessage('Ошибка загрузки фотографии');
@@ -71,7 +73,7 @@ export default function ProfilePage(): React.JSX.Element {
         <div className="profile_page__photo-container">
           <>
             <img
-              src={user?.image ? `/images/${user.image}` : '/hog.png'}
+              src={user?.image ? `/images/${user.image}` : '/imgs/hog.png'}
               alt="User"
               className="profile_page__photo"
               style={{ width: '150px' }}

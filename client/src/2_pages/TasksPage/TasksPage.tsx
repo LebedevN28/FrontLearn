@@ -1,26 +1,26 @@
 import React, { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../6_shared/lib/hooks';
 import { getTasksByModuleIdThunk } from '../../5_entities/task/model/taskThunk';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import TaskCard from '../../4_features/taskCard/TaskCard';
-import styles from './TaskPage.module.css'; // Импортируем стили
+import styles from './TaskPage.module.css'; 
 
 function TaskPage(): React.JSX.Element {
-  const { moduleId } = useParams<{ moduleId: string }>(); 
+  const { moduleId } = useParams<{ moduleId: string }>();
   const dispatch = useAppDispatch();
   const tasks = useAppSelector((state) => state.tasks.tasks);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (moduleId) {
-      dispatch(getTasksByModuleIdThunk(Number(moduleId))).catch((error) => {
+      dispatch(getTasksByModuleIdThunk(Number(moduleId))).catch((error: unknown) => {
         console.error('Error loading tasks:', error);
       });
     }
   }, [moduleId, dispatch]);
 
-  const handleClick = (taskId: number) => {
-    console.log(`Task with ID ${taskId} clicked!`);
-    // Здесь можно добавить дополнительную логику при клике на задачу
+  const handleClick = (taskId: number): void => {
+    void navigate(`/task/${String(taskId)}`);
   };
 
   if (!tasks.length) {

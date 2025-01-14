@@ -4,10 +4,10 @@ import ProtectedRoute from '../../4_features/auth/lib/ProtectedRoute';
 import { useAppSelector } from '../../6_shared/lib/hooks';
 import SignupPage from '../../2_pages/Auth/SignupPage/SignupPage';
 import LoginPage from '../../2_pages/Auth/LoginPage/LoginPage';
-import MainPage from '../../2_pages/Note/MainPage/MainPage';
+import MainPage from '../../2_pages/MainPage/MainPage';
 import Layout from '../../2_pages/Layout/Layout';
 import { AuthStatus } from '../../4_features/auth/model/auth.types';
-import QuestionPage from '../../2_pages/Note/QuestionPage/QuestionPage';
+import QuestionPage from '../../2_pages/QuestionPage/QuestionPage';
 import ProfilePage from '../../2_pages/ProfilePage/ProfilePage';
 import StartPage from '../../2_pages/StartPage/StartPage';
 import TasksPage from '../../2_pages/TasksPage/TasksPage';
@@ -42,9 +42,8 @@ export default function RouterProvider(): React.JSX.Element {
             </ProtectedRoute>
           }
         />
-
         <Route
-          path="/question"
+          path="/task/:taskId"
           element={
             <ProtectedRoute
               isAllowed={status === AuthStatus.authenticated}
