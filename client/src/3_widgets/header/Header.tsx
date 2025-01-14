@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import styles from './Header.module.css'; 
 import { getUserByIdThunk } from '../../5_entities/user/model/userThunks';
-import ProgressBar from '../../4_features/ProgressBar/ProgressBar';
+
 
 export default function Header(): React.JSX.Element {
   const data = useAppSelector((store) => store.auth.data);
@@ -58,7 +58,6 @@ export default function Header(): React.JSX.Element {
           <Image src="/imgs/logo.jpg" alt="Logo" className={styles.logo} />
         </Navbar.Brand>
         <div className={styles.progressBarContainer}>
-          <ProgressBar />
         </div>
 
         <Nav className="ms-auto">

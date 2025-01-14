@@ -11,6 +11,8 @@ import { getAnswersByTask } from '../../5_entities/answer/model/answerThunks';
 import { getTaskByIdThunk, getTasksByModuleIdThunk } from '../../5_entities/task/model/taskThunk';
 import type { AnswerType } from '../../5_entities/answer/model/answer.types';
 import { updateUserPointsThunk } from '../../5_entities/user/model/userThunks';
+import styles from './QuestionPage.module.css'; 
+// import ProgressBar from '../../4_features/ProgressBar/ProgressBar'; 
 
 const QuestionPage: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
@@ -22,6 +24,7 @@ const QuestionPage: React.FC = () => {
   const thisModuleTasks = useAppSelector((state) => state.tasks.tasks);
   const thisUser = useAppSelector((state) => state.user.selectedUser);
   const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
+  // const [progress, setProgress] = useState<number>(0); 
   const navigate = useNavigate();
 
   const getBackgroundColor = (answer: AnswerType): string => {
@@ -55,6 +58,11 @@ const QuestionPage: React.FC = () => {
       else points = 30;
       const { id } = thisUser;
       dispatch(updateUserPointsThunk({ id, points })).catch(console.log);
+
+      // const totalTasks = thisModuleTasks.length;
+      // const completedTasks = thisModuleTasks.filter((t) => t.id <= Number(taskId)).length;
+      // const newProgress = (completedTasks / totalTasks) * 100;
+      // setProgress(newProgress); - движение прогресс бара
     }
   };
 
@@ -76,47 +84,45 @@ const QuestionPage: React.FC = () => {
   }
 
   return (
-    <Box sx={{ padding: 3 }}>
-      <Typography variant="h4" gutterBottom>
-        {task?.title}
-      </Typography>
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        {filteredAnswers.map((answer) => (
-          <Button
-            key={answer.id}
-            variant="contained"
-            onClick={() => handleAnswerClick(answer)}
-            sx={{
-              textTransform: 'none',
-              backgroundColor: getBackgroundColor(answer),
-              color: 'white',
-            }}
-          >
-            {answer.content}
-          </Button>
-        ))}
+    <Box className={styles.container}>
+      {/* <ProgressBar progress={progress} />  */}
+      <Box className={styles.questionsContainer}>
+        <Typography variant="h4" gutterBottom>
+          {task?.title}
+        </Typography>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          {filteredAnswers.map((answer) => (
+            <Button
+              key={answer.id}
+              variant="contained"
+              onClick={() => handleAnswerClick(answer)}
+              sx={{
+                textTransform: 'none',
+                backgroundColor: getBackgroundColor(answer),
+                color: 'white',
+              }}
+            >
+              {answer.content}
+            </Button>
+          ))}
 
-        {selectedAnswerId && (
-          <Button
-            variant="contained"
-            onClick={handleNextTask}
-            sx={{
-              textTransform: 'none',
-              backgroundColor: '#844caf',
-              color: 'white',
-              marginTop: 2,
-            }}
-          >
-            Следующий вопрос
-          </Button>
-        )}
+          {selectedAnswerId && (
+            <Button
+              variant="contained"
+              onClick={handleNextTask}
+              className={styles.nextButton}
+            >
+              Следующий вопрос
+            </Button>
+          )}
+        </Box>
       </Box>
-      <img 
+      <Box className={styles.imageContainer}>
+        <img 
           src="/imgs/questionheg.jpeg" 
           alt="Main Image" 
-          height='500px'
-          width='500px'
         />
+      </Box>
     </Box>
   );
 };
