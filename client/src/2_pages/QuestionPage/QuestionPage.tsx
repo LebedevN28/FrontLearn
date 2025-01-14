@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Box, Button } from '@mui/material';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../6_shared/lib/hooks';
 import { getAnswersByTask } from '../../5_entities/answer/model/answerThunks';
 import { getTaskByIdThunk, getTasksByModuleIdThunk } from '../../5_entities/task/model/taskThunk';
 import { useHandleAnswer } from '../../4_features/hooks/useHandleAnswer';
 import { useHandleNavigation } from '../../4_features/hooks/useHandleNavigation';
 import { AnswerButtons } from '../../4_features/components/AnswerButtons';
-import styles from './QuestionPage.module.css';
+import styles from './QuestionPage.module.css'; // Импортируем стили как объект
 
 const QuestionPage: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const answers = useAppSelector((state) => state.answers.answers);
   const task = useAppSelector((state) => state.tasks.selectedTask);
@@ -58,7 +57,7 @@ const QuestionPage: React.FC = () => {
             <Button
               variant="contained"
               onClick={handleNextTask}
-              className={styles.nextButton}
+              sx={{ marginTop: 2, textTransform: 'none', backgroundColor: 'secondary.main' }}
             >
               Следующий вопрос
             </Button>
@@ -69,6 +68,7 @@ const QuestionPage: React.FC = () => {
         <img
           src="/imgs/questionheg.jpeg"
           alt="Main Image"
+          className={styles.image}
         />
       </Box>
     </Box>
