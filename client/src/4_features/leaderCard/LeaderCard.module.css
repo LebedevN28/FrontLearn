@@ -1,0 +1,84 @@
+/* Основной контейнер карточки */
+.card {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  border-radius: 12px;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Стили для карточки при наведении */
+.card:hover {
+  background-color: rgba(229, 231, 235, 0.5); /* Светло-серый */
+}
+
+/* Индекс карточки (порядковый номер) */
+.index {
+  margin-right: 16px;
+  font-weight: bold;
+  color: #65a30d; /* Лаймовый цвет */
+  cursor: pointer;
+}
+
+/* Контейнер для аватара */
+.avatarContainer {
+  display: flex;
+  align-items: center;
+  margin-right: 24px;
+}
+
+/* Аватар */
+.avatar {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  border: 2px solid;
+  background-color: #22c55e;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Заглушка, если изображение отсутствует */
+.fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  font-size: 1.25rem; /* Увеличенный размер для первой буквы */
+  font-weight: bold;
+  color: white;
+  background-color: #6b7280; /* Серый фон */
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Имя пользователя */
+.name {
+  flex: 1;
+  font-weight: bold;
+  color: #1f2937; /* Темный текст */
+  cursor: pointer;
+  display: flex;
+  align-items: center; /* Выравнивание имени и маркера "в сети" */
+}
+
+/* Очки пользователя */
+.points {
+  color: #6b7280; /* Цвет текста (заглушка) */
+}
+
+/* Текстовый маркер "в сети" */
+.onlineMarker {
+  margin-left: 8px; /* Отступ слева от имени */
+  padding: 2px 6px;
+  font-size: 0.875rem; /* Чуть меньше основного текста */
+  color: white;
+  background-color: #22c55e; /* Зеленый */
+  border-radius: 4px;
+  font-weight: bold;
+  display: inline-block;
+  vertical-align: middle; /* Выравнивание по середине строки */
+}

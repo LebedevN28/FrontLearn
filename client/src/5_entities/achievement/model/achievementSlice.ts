@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AchievementSliceType } from '../model/achievement.types'; // Путь к типам
-import { getAchievements } from '../model/achievementThunks'; // Путь к thunk
+import type { AchievementSliceType } from './achievement.types';
+import { getAchievements } from './achievementThunks';
 
 const initialState: AchievementSliceType = {
   achievements: [],
@@ -24,7 +24,7 @@ const achievementSlice = createSlice({
       })
       .addCase(getAchievements.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload as string;
+        state.error = action.error.message || 'Failed to fetch achievements';
       });
   },
 });

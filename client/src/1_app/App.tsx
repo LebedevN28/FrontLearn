@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { ErrorBoundary } from 'react-error-boundary';
 import InitProvider from './providers/initProvider/InitProvider';
+import WebSocketProvider from './webSocketProvider/WebSocketProvider';
 
 function App(): React.JSX.Element {
   return (
@@ -13,9 +14,11 @@ function App(): React.JSX.Element {
       <ErrorBoundary fallback={<h1>Возникла ошибка</h1>}>
         <Suspense fallback={<LoadingSpinner />}>
           <Provider store={store}>
-            <InitProvider>
-              <RouterProvider />
-            </InitProvider>
+            <WebSocketProvider>
+              <InitProvider>
+                <RouterProvider />
+              </InitProvider>
+            </WebSocketProvider>
           </Provider>
         </Suspense>
       </ErrorBoundary>

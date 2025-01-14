@@ -1,111 +1,61 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Typography, Box } from '@mui/material';
-import {
-  selectAnswers,
-  selectStatus,
-  selectError,
-} from '../../5_entities/answer/model/answerSlice';
+import { Typography, Box, Button } from '@mui/material';
+import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../6_shared/lib/hooks';
 import { getAnswersByTask } from '../../5_entities/answer/model/answerThunks';
 import { getTaskByIdThunk, getTasksByModuleIdThunk } from '../../5_entities/task/model/taskThunk';
-import type { AnswerType } from '../../5_entities/answer/model/answer.types';
-import { updateUserPointsThunk } from '../../5_entities/user/model/userThunks';
+import { useHandleAnswer } from '../../4_features/hooks/useHandleAnswer';
+import { useHandleNavigation } from '../../4_features/hooks/useHandleNavigation';
+import { AnswerButtons } from '../../4_features/components/AnswerButtons';
 
 const QuestionPage: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
   const dispatch = useAppDispatch();
-  const answers = useAppSelector(selectAnswers);
-  const status = useAppSelector(selectStatus);
-  const error = useAppSelector(selectError);
+
+  const answers = useAppSelector((state) => state.answers.answers);
   const task = useAppSelector((state) => state.tasks.selectedTask);
   const thisModuleTasks = useAppSelector((state) => state.tasks.tasks);
   const thisUser = useAppSelector((state) => state.user.selectedUser);
-  const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
-  const navigate = useNavigate();
+  const achievements = useAppSelector((state) => state.achievements.achievements);
+  const userStats = useAppSelector((state) => state.user.stats);
 
-  const getBackgroundColor = (answer: AnswerType): string => {
-    if (selectedAnswerId === answer.id) {
-      return answer.isCorrect ? 'green' : 'red';
-    }
-    return '#3f51b5';
-  };
+  const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
 
   useEffect(() => {
     if (task?.moduleId) {
-      dispatch(getTasksByModuleIdThunk(Number(task.moduleId))).catch(console.log);
+      dispatch(getTasksByModuleIdThunk(Number(task.moduleId)));
     }
   }, [task, dispatch]);
 
   useEffect(() => {
     if (taskId) {
-      dispatch(getTaskByIdThunk(Number(taskId))).catch(console.log);
-      dispatch(getAnswersByTask(Number(taskId))).catch(console.log);
+      dispatch(getTaskByIdThunk(Number(taskId)));
+      dispatch(getAnswersByTask(Number(taskId)));
     }
   }, [dispatch, taskId]);
 
-  const filteredAnswers = answers.filter((answer) => answer.taskId === Number(taskId));
-
-  const handleAnswerClick = (answer: AnswerType): void => {
-    setSelectedAnswerId(answer.id);
-    if (answer.isCorrect && thisUser) {
-      let points;
-      if (task?.difficulty === 'easy') points = 10;
-      else if (task?.difficulty === 'medium') points = 20;
-      else points = 30;
-      const { id } = thisUser;
-      dispatch(updateUserPointsThunk({ id, points })).catch(console.log);
-    }
-  };
-
-  const handleNextTask = (): void => {
-    const nextTask = task ? thisModuleTasks.find((t) => t.id === task.id + 1) : null;
-    if (nextTask) {
-      void navigate(`/task/${String(nextTask.id)}`);
-    } else {
-      void navigate(`/tasks/${String(task?.moduleId)}`);
-    }
-  };
-
-  if (status === 'loading') {
-    return <Typography>Loading...</Typography>;
-  }
-
-  if (status === 'failed') {
-    return <Typography>Error: {error}</Typography>;
-  }
+  const handleAnswerClick = useHandleAnswer({ task, userStats, thisUser, achievements });
+  const handleNextTask = useHandleNavigation(thisModuleTasks, task);
 
   return (
     <Box sx={{ padding: 3 }}>
       <Typography variant="h4" gutterBottom>
-        {task?.title}
+        {task?.title || 'Loading Task...'}
       </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        {filteredAnswers.map((answer) => (
-          <Button
-            key={answer.id}
-            variant="contained"
-            onClick={() => handleAnswerClick(answer)}
-            sx={{
-              textTransform: 'none',
-              backgroundColor: getBackgroundColor(answer),
-              color: 'white',
-            }}
-          >
-            {answer.content}
-          </Button>
-        ))}
-
+        <AnswerButtons
+          answers={answers.filter((answer) => answer.taskId === Number(taskId))}
+          selectedAnswerId={selectedAnswerId}
+          handleAnswerClick={(answer) => {
+            setSelectedAnswerId(answer.id);
+            handleAnswerClick(answer);
+          }}
+        />
         {selectedAnswerId && (
           <Button
             variant="contained"
             onClick={handleNextTask}
-            sx={{
-              textTransform: 'none',
-              backgroundColor: '#844caf',
-              color: 'white',
-              marginTop: 2,
-            }}
+            sx={{ marginTop: 2, textTransform: 'none', backgroundColor: 'secondary.main' }}
           >
             Следующий вопрос
           </Button>
