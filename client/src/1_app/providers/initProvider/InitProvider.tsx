@@ -3,7 +3,6 @@ import { use } from 'react';
 import { store } from '../../store/store';
 import { refreshThunk } from '../../../4_features/auth/model/authThunks';
 import { getModulesThunk } from '../../../5_entities/module/model/moduleThunks';
-import { getProgressByUser } from '../../../5_entities/progress/model/progressThunks';
 import { getAchievements } from '../../../5_entities/achievement/model/achievementThunks';
 import { getAllTasksThunk } from '../../../5_entities/task/model/taskThunk';
 import { getAllUsersThunk } from '../../../5_entities/user/model/userThunks';

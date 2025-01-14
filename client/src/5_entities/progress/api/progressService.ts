@@ -1,7 +1,7 @@
 import { AxiosError, type AxiosInstance } from 'axios';
-import axiosInstance from '../../../6_shared/api/axiosInstance'; // Путь к axiosInstance
-import type { ProgressType } from '../model/progress.types'; // Путь к типам
-import { progressSchema } from '../model/progress.schema'; // Путь к схеме
+import type { ProgressType } from '../model/progress.types';
+import { progressSchema } from '../model/progress.schema';
+import axiosInstance from '../../../6_shared/api/axiosInstance';
 import { ZodError } from 'zod';
 
 class ProgressService {
@@ -18,10 +18,45 @@ class ProgressService {
     throw error;
   }
 
-  async getProgressByUser(userId: number): Promise<ProgressType[]> {
+  async getTotalUserProgress(userId: number): Promise<ProgressType[]> {
     try {
-      const response = await this.client.get<ProgressType[]>(`/progress?userId=${userId}`);
+      const response = await this.client.get<ProgressType[]>(`/progress/total/${String(userId)}`);
       return progressSchema.array().parse(response.data);
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
+  async getUserProgressByModule(userId: number, moduleId: number): Promise<ProgressType[]> {
+    try {
+      const response = await this.client.get<ProgressType[]>(
+        `/progress/module/${String(userId)}/${String(moduleId)}`,
+      );
+      return progressSchema.array().parse(response.data);
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
+  async getUserProgressByTask(userId: number, taskId: number): Promise<ProgressType> {
+    try {
+      const response = await this.client.get<ProgressType>(
+        `/progress/task/${String(userId)}/${String(taskId)}`,
+      );
+      return progressSchema.parse(response.data);
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
+  async createProgress(userId: number, taskId: number, gotCorrect: boolean): Promise<ProgressType> {
+    try {
+      const response = await this.client.post<ProgressType>(`/progress/total/${String(userId)}`, {
+        userId,
+        taskId,
+        gotCorrect,
+      });
+      return progressSchema.parse(response.data);
     } catch (error) {
       this.handleError(error);
     }
