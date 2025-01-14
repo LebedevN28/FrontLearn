@@ -7,7 +7,7 @@ export const saveUserAchievements = createAsyncThunk(
   async ({ userId, achievements }: { userId: number; achievements: number[] }) => {
     try {
       await UserAchievementsService.saveUserAchievements(userId, achievements);
-      console.log(achievements, 'achievements');
+ 
 
       return achievements; // Возвращаем список сохраненных достижений
     } catch (error) {
