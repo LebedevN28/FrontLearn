@@ -6,6 +6,7 @@
   border-radius: 12px;
   padding: 8px 16px;
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
 /* Стили для карточки при наведении */
@@ -18,21 +19,29 @@
   margin-right: 16px;
   font-weight: bold;
   color: #65a30d; /* Лаймовый цвет */
+  cursor: pointer;
 }
 
 /* Контейнер для аватара */
-.avatar {
-  margin-left: 12px;
+.avatarContainer {
+  display: flex;
+  align-items: center;
   margin-right: 24px;
+}
+
+/* Аватар */
+.avatar {
   height: 48px;
   width: 48px;
   border-radius: 50%;
-  border: 2px solid #22c55e; /* Зеленый */
+  border: 2px solid;
   background-color: #22c55e;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 /* Заглушка, если изображение отсутствует */
-.avatar .fallback {
+.fallback {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,6 +52,7 @@
   color: white;
   background-color: #6b7280; /* Серый фон */
   border-radius: 50%;
+  cursor: pointer;
 }
 
 /* Имя пользователя */
@@ -50,9 +60,25 @@
   flex: 1;
   font-weight: bold;
   color: #1f2937; /* Темный текст */
+  cursor: pointer;
+  display: flex;
+  align-items: center; /* Выравнивание имени и маркера "в сети" */
 }
 
 /* Очки пользователя */
 .points {
   color: #6b7280; /* Цвет текста (заглушка) */
+}
+
+/* Текстовый маркер "в сети" */
+.onlineMarker {
+  margin-left: 8px; /* Отступ слева от имени */
+  padding: 2px 6px;
+  font-size: 0.875rem; /* Чуть меньше основного текста */
+  color: white;
+  background-color: #22c55e; /* Зеленый */
+  border-radius: 4px;
+  font-weight: bold;
+  display: inline-block;
+  vertical-align: middle; /* Выравнивание по середине строки */
 }

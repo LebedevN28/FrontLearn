@@ -6,6 +6,7 @@ import modulesReducer from '../../5_entities/module/model/moduleSlice';
 import progressReducer from '../../5_entities/progress/model/progressSlice';
 import answerReducer from '../../5_entities/answer/model/answerSlice';
 import userReducer from '../../5_entities/user/model/userSlice';
+import userStateReducer from '../../4_features/userState/model/userStateSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     progress: progressReducer,
     answers: answerReducer,
     user: userReducer,
+    userState: userStateReducer
     
   },
 });

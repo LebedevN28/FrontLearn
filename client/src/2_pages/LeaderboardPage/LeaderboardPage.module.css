@@ -38,11 +38,13 @@
   transition: background-color 0.3s ease;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень для карточки */
+  cursor: pointer;
 }
 
 /* Карточка при наведении */
 .card:hover {
   background-color: #f3f4f6; /* Светло-серый цвет */
+  cursor: pointer;
 }
 
 /* Индекс пользователя (порядковый номер) */
@@ -50,6 +52,7 @@
   margin-right: 16px;
   font-weight: bold;
   color: #65a30d; /* Лаймовый цвет */
+  cursor: pointer;
 }
 
 /* Контейнер для аватара */
@@ -61,6 +64,7 @@
   border-radius: 50%;
   border: 2px solid #22c55e; /* Зеленая рамка */
   background-color: #22c55e;
+  cursor: pointer;
 }
 
 /* Заглу
