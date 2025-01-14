@@ -19,7 +19,7 @@ export const store = configureStore({
     progress: progressReducer,
     answers: answerReducer,
     user: userReducer,
-    userState: userStateReducer
+    userState: userStateReducer,
     userAchievements: userAchievementsReducer,
   },
 });
