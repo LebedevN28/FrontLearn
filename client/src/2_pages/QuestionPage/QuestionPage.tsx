@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Box, Button } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../6_shared/lib/hooks';
 import { getAnswersByTask } from '../../5_entities/answer/model/answerThunks';
 import { getTaskByIdThunk, getTasksByModuleIdThunk } from '../../5_entities/task/model/taskThunk';
 import { useHandleAnswer } from '../../4_features/hooks/useHandleAnswer';
 import { useHandleNavigation } from '../../4_features/hooks/useHandleNavigation';
 import { AnswerButtons } from '../../4_features/components/AnswerButtons';
-import styles from './QuestionPage.module.css'; 
-// import ProgressBar from '../../4_features/ProgressBar/ProgressBar'; 
+import styles from './QuestionPage.module.css';
 
 const QuestionPage: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const answers = useAppSelector((state) => state.answers.answers);
   const task = useAppSelector((state) => state.tasks.selectedTask);
@@ -22,15 +22,6 @@ const QuestionPage: React.FC = () => {
   const userStats = useAppSelector((state) => state.user.stats);
 
   const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
-  // const [progress, setProgress] = useState<number>(0); 
-  const navigate = useNavigate();
-
-  const getBackgroundColor = (answer: AnswerType): string => {
-    if (selectedAnswerId === answer.id) {
-      return answer.isCorrect ? 'green' : 'red';
-    }
-    return '#3f51b5';
-  };
 
   useEffect(() => {
     if (task?.moduleId) {
@@ -49,32 +40,35 @@ const QuestionPage: React.FC = () => {
   const handleNextTask = useHandleNavigation(thisModuleTasks, task);
 
   return (
-    <Box sx={{ padding: 3 }}>
-      <Typography variant="h4" gutterBottom>
-        {task?.title || 'Loading Task...'}
-      </Typography>
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <AnswerButtons
-          answers={answers.filter((answer) => answer.taskId === Number(taskId))}
-          selectedAnswerId={selectedAnswerId}
-          handleAnswerClick={(answer) => {
-            setSelectedAnswerId(answer.id);
-            handleAnswerClick(answer);
-          }}
-        />
-        {selectedAnswerId && (
-          <Button
-            variant="contained"
-            onClick={handleNextTask}
-            sx={{ marginTop: 2, textTransform: 'none', backgroundColor: 'secondary.main' }}
-          >
-            Следующий вопрос
-          </Button>
-        )}
+    <Box className={styles.container}>
+      <Box className={styles.questionsContainer}>
+        <Typography variant="h4" gutterBottom>
+          {task?.title || 'Loading Task...'}
+        </Typography>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <AnswerButtons
+            answers={answers.filter((answer) => answer.taskId === Number(taskId))}
+            selectedAnswerId={selectedAnswerId}
+            handleAnswerClick={(answer) => {
+              setSelectedAnswerId(answer.id);
+              handleAnswerClick(answer);
+            }}
+          />
+          {selectedAnswerId && (
+            <Button
+              variant="contained"
+              onClick={handleNextTask}
+              className={styles.nextButton}
+            >
+              Следующий вопрос
+            </Button>
+          )}
+        </Box>
       </Box>
-      <img 
-          src="/imgs/questionheg.jpeg" 
-          alt="Main Image" 
+      <Box className={styles.imageContainer}>
+        <img
+          src="/imgs/questionheg.jpeg"
+          alt="Main Image"
         />
       </Box>
     </Box>
