@@ -8,21 +8,35 @@ import {
   uploadPhotoThunk,
   deleteUserThunk,
 } from './userThunks';
+import { UserStatsType } from '../../userAchievement/model/userStats.types';
 
 type UserState = {
-  users: UserType[];
+  stats: UserStatsType; // Добавляем статистику
   selectedUser: UserType | null;
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  error: string | null;
+  users: UserType[];
 };
 
 const initialState: UserState = {
+  stats: { level: 1, totalAnswers: 0 },
   users: [],
   selectedUser: null,
+  status: 'idle',
+  error: null,
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    updateStats: (state, action: PayloadAction<Partial<UserStatsType>>) => {
+      state.stats = {
+        ...state.stats,
+        ...action.payload,
+      };
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(getAllUsersThunk.fulfilled, (state, action) => {
@@ -49,4 +63,5 @@ export const userSlice = createSlice({
   },
 });
 
+export const { updateStats } = userSlice.actions;
 export default userSlice.reducer;

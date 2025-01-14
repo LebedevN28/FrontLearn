@@ -1,0 +1,70 @@
+/* Контейнер для страницы с лидерами */
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+/* Заголовок страницы */
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1f2937; /* Темный текст */
+  margin-bottom: 16px;
+}
+
+/* Подзаголовок */
+.subtitle {
+  text-align: center;
+  color: #4b5563; /* Серый текст */
+  margin-bottom: 20px;
+}
+
+/* Основной контейнер карточек */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 4px;
+}
+
+/* Стили для карточки пользователя */
+.card {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 12px;
+  transition: background-color 0.3s ease;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень для карточки */
+  cursor: pointer;
+}
+
+/* Карточка при наведении */
+.card:hover {
+  background-color: #f3f4f6; /* Светло-серый цвет */
+  cursor: pointer;
+}
+
+/* Индекс пользователя (порядковый номер) */
+.index {
+  margin-right: 16px;
+  font-weight: bold;
+  color: #65a30d; /* Лаймовый цвет */
+  cursor: pointer;
+}
+
+/* Контейнер для аватара */
+.avatar {
+  margin-left: 12px;
+  margin-right: 24px;
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  border: 2px solid #22c55e; /* Зеленая рамка */
+  background-color: #22c55e;
+  cursor: pointer;
+}
+
+/* Заглу

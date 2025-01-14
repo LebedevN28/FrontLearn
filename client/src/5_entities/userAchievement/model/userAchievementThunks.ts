@@ -1,25 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import UserAchievementsService from '../api/userAchievementsService';
 
+// Сохранить достижения пользователя
 export const saveUserAchievements = createAsyncThunk(
   'user/saveAchievements',
-  async (
-    { userId, achievements }: { userId: number; achievements: number[] },
-    { rejectWithValue },
-  ) => {
+  async ({ userId, achievements }: { userId: number; achievements: number[] }) => {
     try {
-      const response = await fetch(`/api/users/${userId}/achievements`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ achievements }),
-      });
+      await UserAchievementsService.saveUserAchievements(userId, achievements);
+      console.log(achievements, 'achievements');
 
-      if (!response.ok) {
-        throw new Error('Failed to save achievements');
-      }
-
-      return await response.json();
+      return achievements; // Возвращаем список сохраненных достижений
     } catch (error) {
-      return rejectWithValue(error instanceof Error ? error.message : 'Unknown error');
+      throw new Error(error instanceof Error ? error.message : 'Unknown error');
     }
   },
 );

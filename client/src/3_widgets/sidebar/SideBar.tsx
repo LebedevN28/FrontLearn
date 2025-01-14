@@ -31,6 +31,11 @@ export default function SideBar(): React.JSX.Element {
       <Row className="sidebar-row">
         <Col>Задания</Col>
       </Row>
+      <Row className="sidebar-row">
+        <RouterLink to={`/leaderboard`} className="sidebar-row">
+          <Col>Рейтинг</Col>
+        </RouterLink>
+      </Row>
     </Container>
   );
 }

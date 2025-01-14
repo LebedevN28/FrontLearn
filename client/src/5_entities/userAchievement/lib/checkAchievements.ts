@@ -1,30 +1,33 @@
 import { AchievementType } from '../../achievement/model/achievement.types';
 import { UserStatsType } from '../model/userStats.types';
 
-// Условия для получения ачивок
+// Условия для проверки достижений
 const achievementConditions: {
-  [key: string]: (criteria: any, userStats: UserStatsType) => boolean;
+  [key: string]: (criteria: string, userStats: UserStatsType) => boolean;
 } = {
-  level: (criteria: { requiredLevel: number }, userStats: UserStatsType) =>
-    userStats.level >= criteria.requiredLevel,
-
-  answers: (criteria: { requiredAnswers: number }, userStats: UserStatsType) =>
-    userStats.totalAnswers >= criteria.requiredAnswers,
+  level: (criteria, userStats) => {
+    const requiredLevel = parseInt(criteria, 10);
+    return !isNaN(requiredLevel) && userStats.level >= requiredLevel;
+  },
+  answers: (criteria, userStats) => {
+    const requiredAnswers = parseInt(criteria, 10);
+    return !isNaN(requiredAnswers) && userStats.totalAnswers >= requiredAnswers;
+  },
 };
-// Проверить ачивки
+
+// Функция для проверки достижений
 export function checkAchievements(
   achievements: AchievementType[],
   userStats: UserStatsType,
 ): AchievementType[] {
   return achievements.filter((achievement) => {
-    const criteria = JSON.parse(achievement.criteria);
     const condition = achievementConditions[achievement.type];
 
     if (!condition) {
-      console.warn(`Condition for type "${achievement.type}" is not implemented.`);
-      return false; // Игнорировать достижения с неподдерживаемым типом
+      console.warn(`Achievement type "${achievement.type}" is not supported.`);
+      return false;
     }
 
-    return condition(criteria, userStats);
+    return condition(achievement.criteria, userStats);
   });
 }
