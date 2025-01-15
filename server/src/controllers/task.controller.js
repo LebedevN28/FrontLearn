@@ -18,10 +18,10 @@ module.exports = {
       if (!task) {
         return res.status(404).json({ message: 'Task not found' });
       }
-      return res.status(200).json(task); 
+      return res.status(200).json(task);
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ message: 'Error fetching task' }); 
+      return res.status(500).json({ message: 'Error fetching task' });
     }
   },
 
@@ -36,56 +36,13 @@ module.exports = {
     }
   },
 
-  // async updateTask(req, res) {
-  //   try {
-  //     const { id } = req.params;
-  //     const taskData = req.body;
-  //     const updatedTask = await taskService.updateTask(id, taskData);
-  //     if (!updatedTask) {
-  //       return res.status(404).json({ message: 'Task not found' });
-  //     }
-  //     res.status(200).json(updatedTask);
-  //   } catch (error) {
-  //     console.error(error);
-  //     res.status(500).json({ message: 'Error updating task' });
-  //   }
-  // },
-
-  // async deleteTask(req, res) {
-  //   try {
-  //     const { id } = req.params;
-  //     const deletedTask = await taskService.deleteTask(id);
-  //     if (!deletedTask) {
-  //       return res.status(404).json({ message: 'Task not found' });
-  //     }
-  //     res.status(200).json({ message: 'Task deleted successfully' });
-  //   } catch (error) {
-  //     console.error(error);
-  //     res.status(500).json({ message: 'Error deleting task' });
-  //   }
-  // },
-
-  // async getTasksByDifficulty(req, res) {
-  //   try {
-  //     const { difficulty } = req.params;
-  //     const tasks = await taskService.getTasksByDifficulty(difficulty);
-
-  //     if (!tasks || tasks.length === 0) {
-  //       return res
-  //         .status(404)
-  //         .json({ message: `No tasks found with difficulty: ${difficulty}` });
-  //     }
-  //     res.status(200).json(tasks);
-  //   } catch (error) {
-  //     console.error(error);
-  //     res.status(500).json({ message: 'Error fetching tasks by difficulty' });
-  //   }
-  // },
-
   async getTaskByModuleId(req, res) {
     try {
       const { moduleId } = req.params;
-      const task = await taskService.getTaskByModuleId(moduleId);
+      const { difficulty } = req.query;
+      // console.log(difficulty);
+
+      const task = await taskService.getTaskByModuleId(moduleId, difficulty);
 
       if (!task || task.length === 0) {
         return res.status(404).json({ message: 'Вопросы не найдены для этого модуля' });
