@@ -3,14 +3,15 @@ import { useParams } from 'react-router';
 import ProfileEditForm from '../../3_widgets/EditForms/ProfileEditForm';
 import { AuthStatus } from '../../4_features/auth/model/auth.types';
 import { logoutThunk } from '../../4_features/auth/model/authThunks';
-import { Button } from '@mui/material'; // Импортируем Button из MUI
+import { Button } from '@mui/material';
 import {
   deleteUserThunk,
   getUserByIdThunk,
   uploadPhotoThunk,
 } from '../../5_entities/user/model/userThunks';
 import { useAppDispatch, useAppSelector } from '../../6_shared/lib/hooks';
-import './ProfilePage.css';
+import DeleteConfirmationModal from '../../4_features/deleteModal/DeleteConfirmationModal'
+import './ProfilePage.css'; 
 
 export default function ProfilePage(): React.JSX.Element {
   const dispatch = useAppDispatch();
@@ -19,6 +20,7 @@ export default function ProfilePage(): React.JSX.Element {
   const { id } = useParams<{ id: string }>();
   const [isEditing, setIsEditing] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const handleEdit = (): void => {
     setIsEditing(true);
@@ -39,18 +41,15 @@ export default function ProfilePage(): React.JSX.Element {
     }
   };
 
-  const handleDelete = async (): Promise<void> => {
-    const confirmDelete = window.confirm(
-      'Вы уверены, что хотите удалить ваш аккаунт? Это действие необратимо.',
-    );
-    if (confirmDelete) {
-      try {
-        await dispatch(deleteUserThunk(Number(id)));
-        await dispatch(logoutThunk());
-      } catch (error) {
-        console.error(error);
-        setErrorMessage('Ошибка удаления пользователя');
-      }
+  const handleDeleteConfirm = async (): Promise<void> => {
+    try {
+      await dispatch(deleteUserThunk(Number(id)));
+      await dispatch(logoutThunk());
+    } catch (error) {
+      console.error(error);
+      setErrorMessage('Ошибка удаления пользователя');
+    } finally {
+      setIsDeleteModalOpen(false);
     }
   };
 
@@ -66,22 +65,22 @@ export default function ProfilePage(): React.JSX.Element {
       <h1 className="profile-page__heading">{user?.name}</h1>
 
       <div className="profile-page__container">
-  <div className="profile-page__info-container">
-    <div className="profile-page__info">Очки: {user?.points}</div>
-    <div className="profile-page__info">Уровень: {user?.level}</div>
-  </div>
-</div>
+        <div className="profile-page__info-container">
+          <div className="profile-page__info">Очки: {user?.points}</div>
+          <div className="profile-page__info">Уровень: {user?.level}</div>
+        </div>
+      </div>
       <div className="profile-page__container">
-        <div className="profile_page__photo-container">
+        <div className="profile-page__photo-container">
           <>
             <img
               src={user?.image ? `/images/${user.image}` : '/imgs/hog.png'}
               alt="User"
-              className="profile_page__photo"
+              className="profile-page__photo"
               style={{ width: '150px' }}
             />
             {errorMessage && <p className="error">{errorMessage}</p>}
-            <div className="profile_page__input">
+            <div className="profile-page__input">
               <input
                 id="addPicInput"
                 type="file"
@@ -92,8 +91,8 @@ export default function ProfilePage(): React.JSX.Element {
               <label htmlFor="addPicInput">
                 <Button
                   variant="contained"
-                  component="span" 
-                  sx={{ width: '100%', marginTop: '10px' }} 
+                  component="span"
+                  sx={{ width: '100%', marginTop: '10px' }}
                   color="secondary"
                 >
                   Выбери картинку
@@ -102,11 +101,11 @@ export default function ProfilePage(): React.JSX.Element {
             </div>
           </>
         </div>
-        <div className="profile_page__values-container">
+        <div className="profile-page__values-container">
           {isEditing && user ? (
             <ProfileEditForm user={user} setIsEditing={setIsEditing} />
           ) : (
-            <div className="profile_page__values-container">
+            <div className="profile-page__values-container">
               <div className="profile-page__value">
                 <label htmlFor="name">Имя:</label>
                 <span>{user?.name}</span>
@@ -129,14 +128,19 @@ export default function ProfilePage(): React.JSX.Element {
           )}
           <Button
             variant="contained"
-            color="error" 
+            color="error"
             sx={{ width: '50%', marginTop: '10px' }}
-            onClick={handleDelete}
+            onClick={() => setIsDeleteModalOpen(true)}
           >
             Удалить аккаунт
           </Button>
         </div>
       </div>
+      <DeleteConfirmationModal
+        open={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onConfirm={handleDeleteConfirm}
+      />
     </div>
   );
 }
