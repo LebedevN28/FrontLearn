@@ -1,59 +1,84 @@
 .profile-page {
-  min-height: 100vh; /* Занимает всю высоту экрана */
-  padding: 20px; /* Отступы для содержимого */
-  background-image: url('/imgs/profile2.jpeg'); /* Путь к фоновому изображению */
-  background-size: cover; /* Растягиваем изображение на весь экран */
-  background-position: center; /* Центрируем изображение */
-  background-repeat: no-repeat; /* Запрещаем повторение изображения */
+  min-height: 100vh;
+  padding: 20px;
+  background-image: url('/imgs/profile2.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .profile-page__heading {
-  color: white; /* Белый текст для контраста с фоном */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Тень для текста */
+  color: rgb(15, 3, 3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .profile-page__container {
-  background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон для контейнеров */
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;
   border-radius: 10px;
   margin-top: 20px;
   width: 100%;
   max-width: 600px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.profile_page__photo-container {
+.profile-page__info-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.profile-page__info {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  flex: 1;
+}
+
+.profile-page__info:first-child {
+  margin-right: 10px;
+}
+
+.profile-page__info:last-child {
+  margin-left: 10px;
+}
+
+.profile-page__photo-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
 }
 
-.profile_page__photo {
-  width: 150px; /* Фиксированная ширина изображения */
-  height: 150px; /* Фиксированная высота изображения */
-  border-radius: 50%; /* Круглое изображение */
-  border: 3px solid white; /* Белая рамка */
-  object-fit: cover; /* Сохраняем пропорции изображения */
+.profile-page__photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid white;
+  object-fit: cover;
   margin-bottom: 10px;
 }
 
-.profile_page__input {
+.profile-page__input {
   display: flex;
   justify-content: center;
-  width: 100%; /* Ширина на весь контейнер */
-  margin-bottom: 20px; /* Отступ снизу для кнопки */
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-.profile_page__values-container {
+.profile-page__values-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  width: 100%; /* Ширина на весь контейнер */
+  width: 100%;
 }
 
 .profile-page__value {
@@ -62,72 +87,65 @@
   width: 100%;
   margin-bottom: 10px;
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.9); /* Белый фон для текста */
-  border-radius: 5px; /* Закругленные углы */
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
 }
 
 .profile-page__value label {
-  font-weight: bold; /* Жирный шрифт для меток */
+  font-weight: bold;
 }
 
 .profile-page__value span {
-  text-align: right; /* Выравнивание текста справа */
+  text-align: right;
 }
 
 .error {
-  color: red; /* Красный цвет для сообщений об ошибках */
-  text-align: center; /* Центрируем текст ошибки */
+  color: red;
+  text-align: center;
 }
 
-/* Стили для кнопок */
-.button-container {
+.profile-page__value-edit {
   display: flex;
   flex-direction: column;
-  gap: 100px;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.profile-page__value-edit label {
+  font-weight: bold;
+}
+
+.profile-page__value-edit input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   width: 100%;
 }
 
-.button-container button {
-  width: 100%; /* Ширина кнопок на весь контейнер */
-  padding: 10px; /* Отступы внутри кнопок */
-  font-size: 16px; /* Размер шрифта */
-}
-
-.profile-page__heading {
-  color: #000000; /* Черный цвет текста */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Тень для текста */
-  font-size: 2.5rem; /* Размер шрифта */
-  font-weight: bold; /* Жирный шрифт */
-  margin-bottom: 20px; /* Отступ снизу */
-}
-.profile-page__container {
-  background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон для контейнеров */
-  padding: 20px;
-  border-radius: 10px;
+.profile-page__button-container {
+  display: flex;
+  gap: 10px;
+  width: 100%;
   margin-top: 20px;
+}
+
+.profile-page__button {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
   width: 100%;
-  max-width: 600px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
 }
 
-.profile-page__info-container {
-  display: flex; /* Разделяем на две колонки */
-  justify-content: space-between; /* Равномерное распределение */
-  width: 100%; /* Ширина на весь контейнер */
-  margin-bottom: 20px; /* Отступ снизу */
+.profile-page__button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
-.profile-page__info {
-  font-size: 1.5rem; /* Увеличиваем размер шрифта */
-  font-weight: bold; /* Жирный шрифт */
-  text-align: center; /* Центрируем текст */
-  flex: 1; /* Равномерное распределение пространства */
+.profile-page__button.cancel {
+  background-color: #dc3545;
 }
 
-.profile-page__info:first-child {
-  margin-right: 10px; /* Отступ между "Очками" и "Уровнем" */
-}
-
-.profile-page__info:last-child {
-  margin-left: 10px; /* Отступ между "Очками" и "Уровнем" */
-}
