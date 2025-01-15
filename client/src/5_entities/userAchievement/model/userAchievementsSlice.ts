@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { saveUserAchievements } from './userAchievementThunks';
 
+// Восстанавливаем данные из localStorage, если они есть
+const getInitialUnlockedAchievements = (): number[] => {
+  const storedAchievements = localStorage.getItem('unlockedAchievementsIds');
+  return storedAchievements ? JSON.parse(storedAchievements) : [];
+};
+
 type UserAchievementsState = {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
@@ -10,9 +16,8 @@ type UserAchievementsState = {
 const initialState: UserAchievementsState = {
   status: 'idle',
   error: null,
-  unlockedAchievementsIds: [], // Изначально пустой массив
+  unlockedAchievementsIds: getInitialUnlockedAchievements(),
 };
-
 
 const userAchievementsSlice = createSlice({
   name: 'userAchievements',
@@ -23,6 +28,12 @@ const userAchievementsSlice = createSlice({
       state.unlockedAchievementsIds = [
         ...new Set([...state.unlockedAchievementsIds, ...action.payload]),
       ];
+
+      // Сохраняем в localStorage
+      localStorage.setItem(
+        'unlockedAchievementsIds',
+        JSON.stringify(state.unlockedAchievementsIds),
+      );
     },
   },
   extraReducers: (builder) => {
@@ -44,4 +55,3 @@ const userAchievementsSlice = createSlice({
 export const { addUnlockedAchievements } = userAchievementsSlice.actions;
 export const userAchievementsReducer = userAchievementsSlice.reducer;
 export default userAchievementsReducer;
-

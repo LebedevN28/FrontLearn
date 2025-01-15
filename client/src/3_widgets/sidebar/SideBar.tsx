@@ -35,6 +35,9 @@ export default function SideBar(): React.JSX.Element {
         <RouterLink to={`/leaderboard`} className="sidebar-row">
           <Col>Рейтинг</Col>
         </RouterLink>
+        <RouterLink to={`/achievements`} className="sidebar-row">
+          <Col>Ачивки</Col>
+        </RouterLink>
       </Row>
     </Container>
   );
