@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { TaskT, TaskSliceT } from './types';
-import { getTaskByIdThunk, getTasksByDifficultyThunk, getTasksByModuleIdThunk } from './taskThunk';
+import { getTaskByIdThunk, getTasksByModuleIdThunk, getTasksByDifficultyThunk } from './taskThunk';
 
 const initialState: TaskSliceT = {
   tasks: [],
