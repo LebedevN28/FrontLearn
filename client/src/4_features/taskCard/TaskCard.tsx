@@ -1,6 +1,8 @@
 import React from 'react';
 import type { TaskT } from '../../5_entities/task/model/types';
 import styles from './TaskCard.module.scss';
+import PetsIcon from '@mui/icons-material/Pets';
+
 
 type TaskCardProps = {
   task: TaskT;
@@ -17,7 +19,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onClick, isCompleted }) => {
       onClick={() => !isCompleted && onClick(task.id)} // Отключаем клик, если задача завершена
     >
       <div className={styles.iconContainer}>
-        <span className={styles.starIcon}>★</span>
+        <PetsIcon className={styles.hedgehogIcon} />
       </div>
       <button className={styles.startButton} disabled={isCompleted}>
         {isCompleted ? 'ПРОЙДЕНО' : 'НАЧАТЬ'}

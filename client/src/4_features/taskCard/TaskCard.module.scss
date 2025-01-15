@@ -9,8 +9,8 @@ $hover-scale: 1.05; // Коэффициент увеличения при нав
 /* Общий стиль для карточки */
 .taskCard {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -55,7 +55,7 @@ $hover-scale: 1.05; // Коэффициент увеличения при нав
 /* Контейнер для иконки звезды */
 .iconContainer {
   position: absolute;
-  top: 27px; /* Смещаем контейнер ниже */
+  top: 22px; /* Смещаем контейнер ниже */
   left: 50%;
   transform: translateX(-50%);
   width: 48px;
