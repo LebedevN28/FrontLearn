@@ -12,6 +12,10 @@ class UserAchievementsService {
   static async saveUserAchievements(userId: number, achievements: number[]): Promise<void> {
     await axiosInstance.post(`/user-achievements/${userId}`, { achievements });
   }
+  static async checkAndUpdateAchievements(userId: number): Promise<AchievementType[]> {
+    const response = await axiosInstance.get(`/user-achievements/check/${userId}`);
+    return response.data;
+  }
 }
 
 export default UserAchievementsService;
