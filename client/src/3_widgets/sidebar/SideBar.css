@@ -1,11 +1,13 @@
 .sidebar-container {
   padding: 20px;
   height: 100%;
+  background-color: #ffffff;
+  border-right: 2px solid #ddd; /* Линия, отделяющая сайдбар */
 }
 
 .sidebar-row {
   padding: 30px;
-  border-bottom: 1px solid #fcfdf5;
+  border-bottom: 1px solid #ffffff;
   color: #5c5a5a;
   font-weight: bold;
   font-size: 1.6rem;
@@ -41,7 +43,7 @@
   position: relative;
   width: 100%;
   min-width: 150px;
-  background-color: #f2e3b8;
+  background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   max-height: 0;
@@ -73,5 +75,5 @@
 }
 
 .sidebar-row__hoverbar-btn:hover {
-  background-color: #c9c9c6;
+  background-color: #ffffff;
 }

@@ -16,6 +16,7 @@ const initModules = store.dispatch(getModulesThunk());
 const initAchievements = store.dispatch(getAchievements());
 const initTasks = store.dispatch(getAllTasksThunk());
 // const initProgress = store.dispatch(getProgressByUser(1));
+// const initProgress = store.dispatch(getProgressByUser(1));
 const initUsers = store.dispatch(getAllUsersThunk());
 
 // Ожидаем завершения всех асинхронных операций
