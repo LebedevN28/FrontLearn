@@ -40,7 +40,7 @@ module.exports = {
     try {
       const { moduleId } = req.params;
       const { difficulty } = req.query;
-      // console.log(difficulty);
+      console.log(difficulty, '=========');
 
       const task = await taskService.getTaskByModuleId(moduleId, difficulty);
 

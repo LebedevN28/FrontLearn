@@ -10,9 +10,11 @@ module.exports = {
   /** ****  7c864eb7-e22d-4493-bfc4-8f53851c54a6  ****** */
   async getAllTasks() {
     return Task.findAll();
+    return Task.findAll();
   },
 
   async getTaskById(id) {
+    return Task.findByPk(id);
     return Task.findByPk(id);
   },
 
@@ -45,6 +47,7 @@ module.exports = {
     const task = await Task.findAll({
       where: {
         moduleId,
+        difficulty,
         difficulty,
       },
     });
