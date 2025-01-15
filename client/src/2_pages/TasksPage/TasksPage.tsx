@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import React, { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../6_shared/lib/hooks';
 import { getTasksByModuleIdThunk } from '../../5_entities/task/model/taskThunk';
 import { useNavigate, useParams } from 'react-router-dom';
 import TaskCard from '../../4_features/taskCard/TaskCard';
-import styles from './TaskPage.module.css';
+import styles from './TaskPage.module.scss';
 
 function TaskPage(): React.JSX.Element {
   const { moduleId } = useParams<{ moduleId: string }>();
