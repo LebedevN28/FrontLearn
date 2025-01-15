@@ -1,6 +1,7 @@
 import { AxiosError, type AxiosInstance } from 'axios';
-import type { ProgressType } from '../model/progress.types';
-import { progressSchema } from '../model/progress.schema';
+import type { ProgressType, TaskProgressType } from '../model/progress.types';
+import { taskProgressSchema, progressSchema } from '../model/progress.schema';
+// import type { ProgressSliceType } from '../model/progress.types';
 import axiosInstance from '../../../6_shared/api/axiosInstance';
 import { ZodError } from 'zod';
 
@@ -20,19 +21,21 @@ class ProgressService {
 
   async getTotalUserProgress(userId: number): Promise<ProgressType[]> {
     try {
-      const response = await this.client.get<ProgressType[]>(`/progress/total/${String(userId)}`);
+      const response = await this.client.get<ProgressType[]>(
+        `/progress/total/${String(userId)}`,
+      );
       return progressSchema.array().parse(response.data);
     } catch (error) {
       this.handleError(error);
     }
   }
 
-  async getUserProgressByModule(userId: number, moduleId: number): Promise<ProgressType[]> {
+  async getUserProgressByModule(userId: number, moduleId: number): Promise<TaskProgressType[]> {
     try {
-      const response = await this.client.get<ProgressType[]>(
+      const response = await this.client.get<TaskProgressType[]>(
         `/progress/module/${String(userId)}/${String(moduleId)}`,
       );
-      return progressSchema.array().parse(response.data);
+      return taskProgressSchema.array().parse(response.data);
     } catch (error) {
       this.handleError(error);
     }

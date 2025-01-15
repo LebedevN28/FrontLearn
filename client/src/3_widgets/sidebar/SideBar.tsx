@@ -33,17 +33,15 @@ export default function SideBar(): React.JSX.Element {
       </Row>
 
       <Row className="sidebar-row">
-        <Col className="sidebar-btn">
-          <FaBoxOpen className="sidebar-icon" /> 
-          <span>Задания</span>
-        </Col>
+        <RouterLink to={`/daily`}>
+        <FaBoxOpen className="sidebar-icon" /> 
+          <Col>Вопрос дня</Col>
+        </RouterLink>
       </Row>
       <Row className="sidebar-row">
-        <RouterLink to={`/leaderboard`} className="sidebar-btn">
-          <Col>
-            <FaTrophy className="sidebar-icon" /> 
-            <span>Рейтинг</span>
-          </Col>
+        <RouterLink to={`/leaderboard`}>
+        <FaTrophy className="sidebar-icon" /> 
+          <Col>Рейтинг</Col>
         </RouterLink>
       </Row>
     </Container>

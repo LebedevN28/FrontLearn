@@ -38,7 +38,7 @@ module.exports = {
     try {
       const { userId } = req.params;
       const { taskId, gotCorrect } = req.body;
-      const newProgress = await progressService.createProgress(
+      const newProgress = await progressService.createUserProgress(
         userId,
         taskId,
         gotCorrect,
