@@ -2,6 +2,8 @@ import React from 'react';
 import { useAppSelector } from '../../6_shared/lib/hooks';
 import LeaderCard from '../../4_features/leaderCard/LeaderCard';
 
+
+
 export default function LeaderboardPage(): React.JSX.Element {
   const users = useAppSelector((store) => store.user.users);
   const onlineUsers = useAppSelector((store) => store.userState.users);
