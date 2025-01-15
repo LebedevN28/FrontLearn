@@ -14,6 +14,7 @@ import type { UserStatsType } from '../../5_entities/userAchievement/model/userS
 import {
   createProgressThunk,
   getTotalUserProgressThunk,
+  getUserProgressByModuleThunk,
   getUserProgressByTaskThunk,
 } from '../../5_entities/progress/model/progressThunks';
 
@@ -38,6 +39,7 @@ export const useHandleAnswer = ({
 
   const handleAnswerClick = async (answer: AnswerType): Promise<void> => {
     const { id } = thisUser;
+    const {moduleId} = task;
     if (answer.isCorrect) {
       const points = calculatePoints(task.difficulty);
 
@@ -87,6 +89,7 @@ export const useHandleAnswer = ({
 
       // Обновляем общий прогресс пользователя
       dispatch(getTotalUserProgressThunk(id)).catch(console.log);
+      dispatch(getUserProgressByModuleThunk( {userId: id, moduleId })).catch(console.log);
       dispatch(getUserProgressByTaskThunk({ userId: id, taskId: task.id })).catch(console.log);
     } catch (error) {
       console.error('Error creating progress:', error);

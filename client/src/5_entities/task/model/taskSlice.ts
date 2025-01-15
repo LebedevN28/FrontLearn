@@ -1,10 +1,11 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { TaskT, TaskSliceT } from './types';
-import { getTaskByIdThunk, getTasksByModuleIdThunk, getTasksByDifficultyThunk } from './taskThunk';
+import { getTaskByIdThunk, getAllTasksInModuleThunk, getTasksByModuleIdThunk, getTasksByDifficultyThunk } from './taskThunk';
 
 const initialState: TaskSliceT = {
   tasks: [],
+  tasksInModule: [],
   selectedModuleId: null,
   selectedTask: null,
   selectedDifficulty: null,
@@ -46,6 +47,17 @@ const tasksSlice = createSlice({
         state.tasks = action.payload;
       })
       .addCase(getTasksByModuleIdThunk.rejected, (state, action) => {
+        state.status = 'failed';
+        console.error('Error fetching tasks by module:', action.error.message);
+      })
+      .addCase(getAllTasksInModuleThunk.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(getAllTasksInModuleThunk.fulfilled, (state, action: PayloadAction<TaskT[]>) => {
+        state.status = 'succeeded';
+        state.tasksInModule = action.payload;
+      })
+      .addCase(getAllTasksInModuleThunk.rejected, (state, action) => {
         state.status = 'failed';
         console.error('Error fetching tasks by module:', action.error.message);
       })

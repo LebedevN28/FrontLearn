@@ -17,6 +17,12 @@ export const getTasksByModuleIdThunk = createAsyncThunk(
     await taskService.getTasksByModuleId({ moduleId, difficulty }),
 );
 
+export const getAllTasksInModuleThunk = createAsyncThunk(
+  'tasks/getAllTasksInModuleThunk',
+  async ({ moduleId, difficulty }: { moduleId: number; difficulty: string }) =>
+    await taskService.getAllTasksInModule({moduleId, difficulty} ),
+);
+
 export const getTaskByIdThunk = createAsyncThunk('tasks/getTaskByIdThunk', async (taskId: number) =>
   taskService.getTaskById(taskId),
 );
