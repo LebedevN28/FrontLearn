@@ -6,10 +6,10 @@ module.exports = {
       // Уровневые достижения
       {
         id: 1,
-        title: 'Level 1 Achiever',
-        description: 'Reach level 1.',
+        title: 'Level 3 Achiever',
+        description: 'Reach level 3.',
         type: 'level',
-        criteria: '1', // Упрощенный критерий
+        criteria: '3', // Упрощенный критерий
         points: 10,
         createdAt: new Date(),
         updatedAt: new Date(),
