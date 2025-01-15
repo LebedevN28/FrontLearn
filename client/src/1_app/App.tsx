@@ -7,6 +7,7 @@ import { store } from './store/store';
 import { ErrorBoundary } from 'react-error-boundary';
 import InitProvider from './providers/initProvider/InitProvider';
 import WebSocketProvider from './webSocketProvider/WebSocketProvider';
+import ToastProvider from './providers/ToastProvider';
 
 function App(): React.JSX.Element {
   return (
@@ -22,6 +23,7 @@ function App(): React.JSX.Element {
           </Provider>
         </Suspense>
       </ErrorBoundary>
+      <ToastProvider />
     </BrowserRouter>
   );
 }

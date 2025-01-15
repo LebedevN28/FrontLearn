@@ -1,0 +1,6 @@
+.customProgressBar {
+  height: 20px !important; /* Увеличиваем высоту */
+  width: 100%; /* Ширина на весь контейнер */
+  border-radius: 10px; /* Закругляем углы */
+  background-color: rgb(255, 0, 0) !important;
+}

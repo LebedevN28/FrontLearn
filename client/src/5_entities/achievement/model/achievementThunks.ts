@@ -1,15 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AchievementType } from '../model/achievement.types'; // Путь к типам
-import achievementService from '../api/achievementService'; // Путь к сервису
+import { AchievementType } from '../model/achievement.types';
+import achievementService from '../api/achievementService';
 
 // Получить все достижения
 export const getAchievements = createAsyncThunk<AchievementType[]>(
   'achievements/getAchievements',
-  async (_, { rejectWithValue }) => {
-    try {
-      return await achievementService.getAchievements();
-    } catch (error) {
-      return rejectWithValue(error instanceof Error ? error.message : 'Unknown error');
-    }
+  async () => {
+    return await achievementService.getAchievements(); // Обработка ошибок в сервисе
   },
 );
