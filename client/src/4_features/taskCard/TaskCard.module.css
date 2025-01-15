@@ -12,7 +12,7 @@
   cursor: pointer; /* Курсор в виде указателя при наведении на карточку */
 }
 
-.taskCard:hover {
+.taskCard:not(.completed):hover {
   transform: scale(1.05); /* Увеличение карточки при наведении */
 }
 
@@ -34,4 +34,15 @@ h3 {
 p {
   font-size: 0.9rem;
   color: #555;
+}
+
+/* Стили для решенных задач */
+.completed {
+  background-color: #706e6e; /* Серый фон */
+  opacity: 0.7; /* Немного прозрачности */
+}
+
+.completed button {
+  cursor: not-allowed; /* Курсор "недоступно" для кнопки */
+  opacity: 0.6; /* Снижаем прозрачность кнопки */
 }

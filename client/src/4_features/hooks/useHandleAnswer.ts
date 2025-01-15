@@ -7,6 +7,15 @@ import { updateStats } from '../../5_entities/user/model/userSlice';
 import { toast } from 'react-toastify';
 import type { AnswerType } from '../../5_entities/answer/model/answer.types';
 import { calculatePoints } from '../../6_shared/utils/pointsCalculator';
+import type { TaskT } from '../../5_entities/task/model/types';
+import type { AchievementType } from '../../5_entities/achievement/model/achievement.types';
+import type { UserType } from '../../5_entities/user/model/user.types';
+import type { UserStatsType } from '../../5_entities/userAchievement/model/userStats.types';
+import {
+  createProgressThunk,
+  getTotalUserProgressThunk,
+  getUserProgressByTaskThunk,
+} from '../../5_entities/progress/model/progressThunks';
 
 export const useHandleAnswer = ({
   task,
@@ -14,23 +23,23 @@ export const useHandleAnswer = ({
   thisUser,
   achievements,
 }: {
-  task: any;
-  userStats: any;
-  thisUser: any;
-  achievements: any[];
-}) => {
+  task: TaskT;
+  userStats: UserStatsType;
+  thisUser: UserType;
+  achievements: AchievementType[];
+}): ((answer: AnswerType) => Promise<void>) => {
   const dispatch = useAppDispatch();
 
   // Хранилище для уже разблокированных достижений
   const [unlockedAchievementIds, setUnlockedAchievementIds] = useState<number[]>([]);
 
-  const handleAnswerClick = (answer: AnswerType) => {
-    if (answer.isCorrect && thisUser && userStats) {
-      const points = task ? calculatePoints(task.difficulty) : 0;
-      const { id } = thisUser;
+  const handleAnswerClick = async (answer: AnswerType): Promise<void> => {
+    const { id } = thisUser;
+    if (answer.isCorrect) {
+      const points = calculatePoints(task.difficulty);
 
       // Обновляем очки пользователя
-      dispatch(updateUserPointsThunk({ id, points }));
+      dispatch(updateUserPointsThunk({ id, points })).catch(console.log);
 
       // Обновляем статистику пользователя
       const updatedStats = {
@@ -59,8 +68,24 @@ export const useHandleAnswer = ({
             userId: id,
             achievements: unlockedAchievements.map((a) => a.id),
           }),
-        );
+        ).catch(console.log);
       }
+    }
+    // Создаем прогресс для задачи
+    try {
+      await dispatch(
+        createProgressThunk({
+          userId: id,
+          taskId: task.id,
+          gotCorrect: answer.isCorrect,
+        }),
+      ).unwrap(); // unwrap() для обработки ошибок
+
+      // Обновляем общий прогресс пользователя
+      dispatch(getTotalUserProgressThunk(id)).catch(console.log);
+      dispatch(getUserProgressByTaskThunk({ userId: id, taskId: task.id })).catch(console.log);
+    } catch (error) {
+      console.error('Error creating progress:', error);
     }
   };
 

@@ -5,28 +5,27 @@ import styles from './TaskCard.module.css'; // Импортируем стили
 type TaskCardProps = {
   task: TaskT;
   onClick: (taskId: number) => void; // Добавляем обработчик нажатия
+  isCompleted: boolean; // Добавляем свойство для отображения галочки при завершенной задаче
 };
 
-const TaskCard: React.FC<TaskCardProps> = ({ task, onClick }) => {
-  let imagePath = '';
+const TaskCard: React.FC<TaskCardProps> = ({ task, onClick, isCompleted }) => {
+ // Определяем путь к изображению на основе сложности задачи
+ const imagePath = (() => {
   switch (task.difficulty) {
     case 'easy':
-      imagePath = '/imgs/blueberry.jpg'; // Картинка для легких задач
-      break;
+      return '/imgs/blueberry.jpg'; // Картинка для легких задач
     case 'medium':
-      imagePath = '/imgs/raspberry.png'; // Картинка для задач средней сложности
-      break;
+      return '/imgs/raspberry.png'; // Картинка для задач средней сложности
     case 'hard':
-      imagePath = '/imgs/strawberry.jpg'; // Картинка для сложных задач
-      break;
+      return '/imgs/strawberry.jpg'; // Картинка для сложных задач
     default:
-      imagePath = '/imgs/goosberry.jpg'; // Картинка по умолчанию
-      break;
+      return '/imgs/goosberry.jpg'; // Картинка по умолчанию
   }
+})();
 
   return (
-    <div className={styles.taskCard}>
-      <button onClick={() => onClick(task.id)}>
+    <div className={`${styles.taskCard} ${isCompleted ? styles.completed : ''}`}>
+      <button onClick={() => onClick(task.id)} disabled={isCompleted}>
         <img src={imagePath} alt="Task" className={styles.taskImage} />
       </button>
       <h3>{task.title}</h3>

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { ProgressType } from '../model/progress.types';
+import type { ProgressType, TaskProgressType } from '../model/progress.types';
 import progressService from '../api/progressService';
 
 // Получить общий прогресс пользователя
@@ -16,7 +16,7 @@ export const getTotalUserProgressThunk = createAsyncThunk<ProgressType[], number
 
 // Получить прогресс пользователя по модулю
 export const getUserProgressByModuleThunk = createAsyncThunk<
-  ProgressType[],
+  TaskProgressType[],
   { userId: number; moduleId: number }
 >('progress/getUserProgressByModuleThunk', async ({ userId, moduleId }, { rejectWithValue }) => {
   try {
