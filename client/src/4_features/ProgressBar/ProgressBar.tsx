@@ -8,14 +8,14 @@ interface ProgressBarProps {
 
 export default function ProgressBar({ progress }: ProgressBarProps): React.JSX.Element {
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '80%' }}>
       <LinearProgress
         variant="determinate"
         value={progress}
         sx={{
           height: '20px',
           borderRadius: '10px',
-          backgroundColor: 'red', 
+          backgroundColor: 'lightgrey', 
           '& .MuiLinearProgress-bar': {
             backgroundColor: 'green', 
           },
