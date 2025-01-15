@@ -4,7 +4,7 @@ import styles from './TaskCard.module.css'; // Импортируем стили
 
 type TaskCardProps = {
   task: TaskT;
-  onClick: (taskId: number) => void; // Добавляем обработчик нажатия
+  onClick: (taskId: number) => void;
 };
 
 const TaskCard: React.FC<TaskCardProps> = ({ task, onClick }) => {
@@ -25,16 +25,19 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onClick }) => {
   }
 
   return (
-    <div className={styles.taskCard}>
-      <button onClick={() => onClick(task.id)}>
-        <img src={imagePath} alt="Task" className={styles.taskImage} />
-      </button>
-      <h3>{task.title}</h3>
-      {/* <p>{task.description}</p> */}
-      <p>
-        <strong>Сложность:</strong> {task.difficulty}
-      </p>
-    </div>
+    // <div className={styles.taskCard}>
+    //   <button onClick={() => onClick(task.id)}>
+    //     <img src={imagePath} alt="Task" className={styles.taskImage} />
+    //   </button>
+    //   {/* <h3>{task.title}</h3> */}
+
+    //   {/* <p>
+    //     <strong>Сложность:</strong> {task.difficulty}
+    //   </p> */}
+    // </div>
+    <button onClick={() => onClick(task.id)}>
+      <img src={imagePath} alt="Task" className={styles.taskImage} />
+    </button>
   );
 };
 

@@ -11,3 +11,10 @@
   width: 200px; /* Ширина каждой карточки */
   text-align: center; /* Центрируем содержимое карточки */
 }
+.checkboxContainer {
+  margin-bottom: 20px;
+}
+
+.checkboxContainer label {
+  margin-right: 10px;
+}

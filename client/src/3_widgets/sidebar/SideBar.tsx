@@ -29,10 +29,12 @@ export default function SideBar(): React.JSX.Element {
       </Row>
 
       <Row className="sidebar-row">
-        <Col>Задания</Col>
+        <RouterLink to={`/daily`}>
+          <Col>Вопрос дня</Col>
+        </RouterLink>
       </Row>
       <Row className="sidebar-row">
-        <RouterLink to={`/leaderboard`} className="sidebar-row">
+        <RouterLink to={`/leaderboard`}>
           <Col>Рейтинг</Col>
         </RouterLink>
       </Row>
