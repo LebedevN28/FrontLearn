@@ -11,6 +11,28 @@
   font-size: 1.6rem;
   position: relative;
   cursor: pointer;
+
+  /* Плавный переход для transform и box-shadow */
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Эффект при наведении */
+.sidebar-row:hover {
+  transform: translateX(5px); /* Легкое смещение вправо */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Добавление мягкой тени */
+}
+
+/* Сброс стилей ссылки для всех кнопок в SideBar */
+.sidebar-row a {
+  text-decoration: none; /* Убирает подчеркивание */
+  color: inherit; /* Наследует цвет от родителя */
+}
+
+.sidebar-row a:hover {
+  text-decoration: none; /* Подчеркивание не появляется при наведении */
+  color: inherit; /* Наследует цвет от родителя */
 }
 
 .sidebar-row__hover-bar {

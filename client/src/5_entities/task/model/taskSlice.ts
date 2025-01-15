@@ -21,8 +21,8 @@ const tasksSlice = createSlice({
     setSelectedModuleId(state, action: PayloadAction<number | null>) {
       state.selectedModuleId = action.payload;
     },
-    setSelectedDifficulty(state, action: PayloadAction<'easy' | 'medium' | 'hard' | null>) {
-      state.selectedDifficulty = action.payload;
+    setSelectedDifficulty(state, action: PayloadAction<TaskT[]>) {
+      state.tasks = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -49,9 +49,9 @@ const tasksSlice = createSlice({
         state.status = 'failed';
         console.error('Error fetching tasks by module:', action.error.message);
       })
-      .addCase(getTaskByIdThunk.fulfilled, (state , action) => {
+      .addCase(getTaskByIdThunk.fulfilled, (state, action) => {
         state.selectedTask = action.payload;
-      })
+      });
   },
 });
 

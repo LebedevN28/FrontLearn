@@ -11,59 +11,87 @@ function TaskPage(): React.JSX.Element {
   const tasks = useAppSelector((state) => state.tasks.tasks);
   const navigate = useNavigate();
 
-  const [filter, setFilter] = useState<string>('all');
+  const [difficulty, setDifficulty] = useState<string>('');
+
+  const handleCheckboxChange = (level: string) => {
+    if (level === 'all') {
+      setDifficulty('');
+      return;
+    }
+    setDifficulty((prevDifficulty) => {
+      if (prevDifficulty.includes(level)) {
+        return prevDifficulty.filter((item) => item !== level);
+      }
+      return level;
+    });
+  };
+
+  console.log(difficulty);
 
   useEffect(() => {
     if (moduleId) {
-      dispatch(getTasksByModuleIdThunk(Number(moduleId))).catch((error: unknown) => {
-        console.error('Error loading tasks:', error);
-      });
+      dispatch(getTasksByModuleIdThunk({ moduleId: Number(moduleId), difficulty })).catch(
+        (error: unknown) => {
+          console.error('Error loading tasks:', error);
+        },
+      );
     }
-  }, [moduleId, dispatch]);
+  }, [moduleId, difficulty, dispatch]);
 
   const handleClick = (taskId: number): void => {
     void navigate(`/task/${String(taskId)}`);
   };
-
-  const filteredTasks = tasks.filter((task) =>
-    filter === 'all' ? true : task.difficulty === filter,
-  );
 
   if (!tasks.length) {
     return <div>Loading tasks...</div>;
   }
 
   return (
-    <div className={styles.taskPage}>
+    <div>
       <h1>Вопросы по {moduleId}-й Фазе</h1>
-      <div className={styles.filters}>
-        <button
-          className={`${styles.filterButton} ${filter === 'all' ? styles.active : ''}`}
-          onClick={() => setFilter('all')}
-        >
-          Все
-        </button>
-        <button
-          className={`${styles.filterButton} ${filter === 'easy' ? styles.active : ''}`}
-          onClick={() => setFilter('easy')}
-        >
-          Легкие
-        </button>
-        <button
-          className={`${styles.filterButton} ${filter === 'medium' ? styles.active : ''}`}
-          onClick={() => setFilter('medium')}
-        >
-          Средние
-        </button>
-        <button
-          className={`${styles.filterButton} ${filter === 'hard' ? styles.active : ''}`}
-          onClick={() => setFilter('hard')}
-        >
-          Сложные
-        </button>
+
+      <div className={styles.checkboxContainer}>
+        <label>
+          <input
+            type="checkbox"
+            checked={
+              difficulty.includes('') &&
+              difficulty !== 'easy' &&
+              difficulty !== 'medium' &&
+              difficulty !== 'hard'
+            }
+            onChange={() => handleCheckboxChange('all')}
+          />
+          All
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={difficulty.includes('easy')}
+            onChange={() => handleCheckboxChange('easy')}
+          />
+          Easy
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={difficulty.includes('medium')}
+            onChange={() => handleCheckboxChange('medium')}
+          />
+          Medium
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={difficulty.includes('hard')}
+            onChange={() => handleCheckboxChange('hard')}
+          />
+          Hard
+        </label>
       </div>
+
       <div className={styles.taskList}>
-        {filteredTasks.map((task) => (
+        {tasks.map((task) => (
           <TaskCard key={task.id} task={task} onClick={handleClick} />
         ))}
       </div>

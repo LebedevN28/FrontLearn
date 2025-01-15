@@ -17,7 +17,7 @@ export default function LeaderCard({ user, index, isOnline }: LeaderCardProps): 
         <div className={styles.avatar} style={{ borderColor: isOnline ? '#22c55e' : 'red' }}>
           {user.image ? (
             <img
-              src={user.image}
+              src={`/images/${user.image}`}
               alt={`${user.name}'s avatar`}
               className="h-full w-full object-cover rounded-full"
             />
