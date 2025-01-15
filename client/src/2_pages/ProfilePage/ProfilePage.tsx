@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import ProfileEditForm from '../../3_widgets/EditForms/ProfileEditForm';
 import { AuthStatus } from '../../4_features/auth/model/auth.types';
 import { logoutThunk } from '../../4_features/auth/model/authThunks';
+import { Button } from '@mui/material'; // Импортируем Button из MUI
 import {
   deleteUserThunk,
   getUserByIdThunk,
@@ -30,7 +31,6 @@ export default function ProfilePage(): React.JSX.Element {
       formData.append('image', file);
       try {
         await dispatch(uploadPhotoThunk({ id: Number(id), formData }));
-        // После успешной загрузки обновляем данные пользователя
         await dispatch(getUserByIdThunk(Number(id)));
       } catch (error) {
         console.error(error);
@@ -66,9 +66,11 @@ export default function ProfilePage(): React.JSX.Element {
       <h1 className="profile-page__heading">{user?.name}</h1>
 
       <div className="profile-page__container">
-        <div className="profile-page__info">Очки: {user?.points}</div>
-        <div className="profile-page__info">Уровень: {user?.level}</div>
-      </div>
+  <div className="profile-page__info-container">
+    <div className="profile-page__info">Очки: {user?.points}</div>
+    <div className="profile-page__info">Уровень: {user?.level}</div>
+  </div>
+</div>
       <div className="profile-page__container">
         <div className="profile_page__photo-container">
           <>
@@ -79,7 +81,6 @@ export default function ProfilePage(): React.JSX.Element {
               style={{ width: '150px' }}
             />
             {errorMessage && <p className="error">{errorMessage}</p>}
-
             <div className="profile_page__input">
               <input
                 id="addPicInput"
@@ -88,8 +89,15 @@ export default function ProfilePage(): React.JSX.Element {
                 accept="image/*"
                 onChange={handleFileChange}
               />
-              <label htmlFor="addPicInput" className="profile_page__file-label">
-                Выбери картинку
+              <label htmlFor="addPicInput">
+                <Button
+                  variant="contained"
+                  component="span" 
+                  sx={{ width: '100%', marginTop: '10px' }} 
+                  color="secondary"
+                >
+                  Выбери картинку
+                </Button>
               </label>
             </div>
           </>
@@ -109,14 +117,24 @@ export default function ProfilePage(): React.JSX.Element {
                 <span>{user?.email}</span>
               </div>
 
-              <button className="profile_page__button" type="button" onClick={handleEdit}>
+              <Button
+                variant="contained"
+                color="success"
+                sx={{ width: '50%' }}
+                onClick={handleEdit}
+              >
                 Изменить данные
-              </button>
+              </Button>
             </div>
           )}
-          <button className="profile_page__button" type="button" onClick={handleDelete}>
+          <Button
+            variant="contained"
+            color="error" 
+            sx={{ width: '50%', marginTop: '10px' }}
+            onClick={handleDelete}
+          >
             Удалить аккаунт
-          </button>
+          </Button>
         </div>
       </div>
     </div>

@@ -35,7 +35,7 @@
   width: 48px;
   border-radius: 50%;
   border: 2px solid;
-  background-color: #22c55e;
+  /* background-color: #22c55e; */
   overflow: hidden;
   cursor: pointer;
 }

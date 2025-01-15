@@ -39,7 +39,7 @@ module.exports = {
         password: await bcrypt.hash('123', 10),
         level: 79,
         points: 3100,
-        image: 'image-1736514045404-819809822.jpeg',
+        image: 'image-Igor.jpeg',
         createdAt: new Date(),
         updatedAt: new Date(),
       },

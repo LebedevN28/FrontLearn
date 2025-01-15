@@ -62,9 +62,19 @@
   height: 48px;
   width: 48px;
   border-radius: 50%;
-  border: 2px solid #22c55e; /* Зеленая рамка */
-  background-color: #22c55e;
+  border: 2px solid #22c55e;
+  /* background-color: #22c55e; */
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Обрезаем части картинки, которые выходят за круг */
+  object-fit: cover;
 }
 
-/* Заглу
+/* Для изображения внутри аватара */
+.avatar img {
+  width: 100%; /* Растягиваем изображение на всю ширину контейнера */
+  height: 100%; /* Растягиваем изображение на всю высоту контейнера */
+  object-fit: cover; /* Обеспечивает, чтобы изображение полностью заполнило контейнер, сохраняя пропорции */
+}

@@ -8,7 +8,7 @@ import {
   uploadPhotoThunk,
   deleteUserThunk,
 } from './userThunks';
-import { UserStatsType } from '../../userAchievement/model/userStats.types';
+import type { UserStatsType } from '../../userAchievement/model/userStats.types';
 
 type UserState = {
   stats: UserStatsType; // Добавляем статистику
@@ -35,6 +35,13 @@ export const userSlice = createSlice({
         ...state.stats,
         ...action.payload,
       };
+    },
+    updateUserPoints: (state, action: PayloadAction<{ userId: number; points: number }>) => {
+      const { userId, points } = action.payload;
+      const user = state.users.find((u) => u.id === userId);
+      if (user) {
+        user.points = points;
+      }
     },
   },
   extraReducers(builder) {
@@ -63,5 +70,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { updateStats } = userSlice.actions;
+export const { updateStats, updateUserPoints } = userSlice.actions;
 export default userSlice.reducer;
