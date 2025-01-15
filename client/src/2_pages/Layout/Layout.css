@@ -1,0 +1,26 @@
+.layout-container {
+  background-color: #fcfdf5;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-lower {
+  flex: 1;
+  display: flex;
+}
+
+.layout-sidebar {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #f2e3b8;
+  min-width: 200px;
+}
+
+.layout-outlet {
+  padding: 0;
+  flex: 1;
+}

@@ -1,0 +1,71 @@
+/* Общие стили для всего приложения */
+body {
+  background: linear-gradient(to bottom, #fcfdf5, #f2e3b8); /* Градиент фона */
+}
+
+/* Стили для заголовков */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #a91ab0;
+  margin: 0.5em 0;
+}
+
+/* Основной текст */
+p {
+  color: #333333;
+  line-height: 1.6;
+  margin: 1em 0;
+}
+
+/* Стили кнопок */
+button {
+  background-color: #568f6f;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #457a5d;
+}
+
+button:disabled {
+  background-color: #a5cbb3;
+  cursor: not-allowed;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* Стили для Navbar */
+.navbar {
+  background-color: #fcfdf5;
+}
+
+/* Формы */
+input,
+textarea,
+select {
+  border: 1px solid #568f6f;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+  margin: 10px 0;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #a91ab0;
+}
