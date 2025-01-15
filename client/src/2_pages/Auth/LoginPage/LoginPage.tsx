@@ -14,9 +14,13 @@ export default function LoginPage(): React.JSX.Element {
 
   return (
     <div className={styles.container}>
-     {/* <img
-     src='/imgs/leaves.jpeg' 
-     /> */}
+      {/* Фоновое изображение */}
+      <img
+        src="/imgs/leaves.jpeg"
+        alt="Background"
+        className={styles.backgroundImage}
+      />
+      {/* Форма логина */}
       <Form
         onSubmit={submitHandler}
         className={styles.formContainer}
