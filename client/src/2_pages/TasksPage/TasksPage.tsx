@@ -3,6 +3,8 @@ import { useAppSelector, useAppDispatch } from '../../6_shared/lib/hooks';
 import { getTasksByModuleIdThunk } from '../../5_entities/task/model/taskThunk';
 import { useNavigate, useParams } from 'react-router-dom';
 import TaskCard from '../../4_features/taskCard/TaskCard';
+
+import { getUserProgressByModuleThunk } from '../../5_entities/progress/model/progressThunks';
 import styles from './TaskPage.module.scss';
 
 function TaskPage(): React.JSX.Element {
@@ -10,6 +12,8 @@ function TaskPage(): React.JSX.Element {
   const dispatch = useAppDispatch();
   const tasks = useAppSelector((state) => state.tasks.tasks);
   const navigate = useNavigate();
+  const user = useAppSelector((store) => store.user.selectedUser);
+  const userProgress = useAppSelector((state) => state.progress.progressModule);
 
   const [difficulty, setDifficulty] = useState<string>('');
 
@@ -26,17 +30,25 @@ function TaskPage(): React.JSX.Element {
     });
   };
 
-  console.log(difficulty);
-
   useEffect(() => {
     if (moduleId) {
-      dispatch(getTasksByModuleIdThunk({ moduleId: Number(moduleId), difficulty })).catch(
-        (error: unknown) => {
-          console.error('Error loading tasks:', error);
-        },
-      );
+      const moduleIdNumber = Number(moduleId);
+
+      dispatch(getTasksByModuleIdThunk({moduleId: moduleIdNumber, difficulty})).catch((error: unknown) => {
+        console.error('Error loading tasks:', error);
+      });
+      const userId = user?.id;
+      if (userId)
+        dispatch(getUserProgressByModuleThunk({ userId, moduleId: moduleIdNumber })).catch(
+          console.error,
+        );
     }
-  }, [moduleId, difficulty, dispatch]);
+
+  }, [moduleId, user?.id, difficulty, dispatch]);
+
+  // Функция для проверки, решена ли задача
+  const isTaskCompleted = (taskId: number): boolean =>
+    userProgress.some((progress) => progress.Progresses.some((p) => p.taskId === taskId));
 
   const handleClick = (taskId: number): void => {
     void navigate(`/task/${String(taskId)}`);
@@ -92,7 +104,7 @@ function TaskPage(): React.JSX.Element {
 
       <div className={styles.taskList}>
         {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} onClick={handleClick} />
+          <TaskCard key={task.id} task={task} onClick={handleClick} isCompleted={isTaskCompleted(task.id)}/>
         ))}
       </div>
     </div>

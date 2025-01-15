@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router';
 import ProtectedRoute from '../../4_features/auth/lib/ProtectedRoute';
-import { useAppSelector } from '../../6_shared/lib/hooks';
+import { useAppDispatch, useAppSelector } from '../../6_shared/lib/hooks';
 import SignupPage from '../../2_pages/Auth/SignupPage/SignupPage';
 import LoginPage from '../../2_pages/Auth/LoginPage/LoginPage';
 import MainPage from '../../2_pages/MainPage/MainPage';
@@ -12,10 +12,20 @@ import ProfilePage from '../../2_pages/ProfilePage/ProfilePage';
 import StartPage from '../../2_pages/StartPage/StartPage';
 import TasksPage from '../../2_pages/TasksPage/TasksPage';
 import LeaderboardPage from '../../2_pages/LeaderboardPage/LeaderboardPage';
+import { getTotalUserProgressThunk } from '../../5_entities/progress/model/progressThunks';
+import { getUserByIdThunk } from '../../5_entities/user/model/userThunks';
 import DailyTaskPage from '../../2_pages/DailyTaskPage/DailyTaskPage';
 export default function RouterProvider(): React.JSX.Element {
-  const status = useAppSelector((store) => store.auth.data.status);
+  const authData = useAppSelector((store) => store.auth.data);
 
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (authData.status === AuthStatus.authenticated) {
+      const userId = authData.user.id;
+      dispatch(getTotalUserProgressThunk(userId)).catch(console.error);
+      dispatch(getUserByIdThunk(Number(userId))).catch(console.error);
+    }
+  }, [authData, dispatch]);
   return (
     <Routes>
       <Route element={<Layout />}>
@@ -24,7 +34,7 @@ export default function RouterProvider(): React.JSX.Element {
           path="/profile/:id"
           element={
             <ProtectedRoute
-              isAllowed={status === AuthStatus.authenticated}
+              isAllowed={authData.status === AuthStatus.authenticated}
               redirectTo="/auth/login"
             >
               <ProfilePage />
@@ -35,7 +45,7 @@ export default function RouterProvider(): React.JSX.Element {
           path="/start"
           element={
             <ProtectedRoute
-              isAllowed={status === AuthStatus.authenticated}
+              isAllowed={authData.status === AuthStatus.authenticated}
               redirectTo="/auth/login"
             >
               <StartPage />
@@ -46,7 +56,7 @@ export default function RouterProvider(): React.JSX.Element {
           path="/task/:taskId"
           element={
             <ProtectedRoute
-              isAllowed={status === AuthStatus.authenticated}
+              isAllowed={authData.status === AuthStatus.authenticated}
               redirectTo="/auth/login"
             >
               <QuestionPage />
@@ -58,7 +68,7 @@ export default function RouterProvider(): React.JSX.Element {
           path="/tasks/:moduleId"
           element={
             <ProtectedRoute
-              isAllowed={status === AuthStatus.authenticated}
+              isAllowed={authData.status === AuthStatus.authenticated}
               redirectTo="/auth/login"
             >
               <TasksPage />
@@ -69,7 +79,7 @@ export default function RouterProvider(): React.JSX.Element {
           path="/leaderboard"
           element={
             <ProtectedRoute
-              isAllowed={status === AuthStatus.authenticated}
+              isAllowed={authData.status === AuthStatus.authenticated}
               redirectTo="/auth/login"
             >
               <LeaderboardPage />
@@ -89,7 +99,11 @@ export default function RouterProvider(): React.JSX.Element {
         />
 
         {/* Аутентификация */}
-        <Route element={<ProtectedRoute isAllowed={status === AuthStatus.guest} redirectTo="/" />}>
+        <Route
+          element={
+            <ProtectedRoute isAllowed={authData.status === AuthStatus.guest} redirectTo="/" />
+          }
+        >
           <Route path="/auth/signup" element={<SignupPage />} />
           <Route path="/auth/login" element={<LoginPage />} />
         </Route>
