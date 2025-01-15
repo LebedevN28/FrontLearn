@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../6_shared/lib/hooks';
 import { getTasksByModuleIdThunk } from '../../5_entities/task/model/taskThunk';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -42,12 +43,16 @@ function TaskPage(): React.JSX.Element {
     void navigate(`/task/${String(taskId)}`);
   };
 
+  const filteredTasks = tasks.filter((task) =>
+    filter === 'all' ? true : task.difficulty === filter,
+  );
+
   if (!tasks.length) {
     return <div>Loading tasks...</div>;
   }
 
   return (
-    <div>
+    <div className={styles.taskPage}>
       <h1>Вопросы по {moduleId}-й Фазе</h1>
 
       <div className={styles.checkboxContainer}>
@@ -91,7 +96,7 @@ function TaskPage(): React.JSX.Element {
       </div>
 
       <div className={styles.taskList}>
-        {tasks.map((task) => (
+        {filteredTasks.map((task) => (
           <TaskCard key={task.id} task={task} onClick={handleClick} />
         ))}
       </div>

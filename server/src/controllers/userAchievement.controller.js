@@ -12,17 +12,37 @@ module.exports = {
       res.status(500).json({ message: 'Error fetching user achievements' });
     }
   },
- 
+
   // Добавить достижения для пользователя
   async createUserAchievements(req, res) {
     try {
       const { userId } = req.params;
       const { achievements } = req.body; // Список ID достижений
-      const newAchievements = await userAchievementService.createUserAchievements(
+
+      // Получаем существующие достижения пользователя
+      const existingAchievements = await userAchievementService.getUserAchievements(
         userId,
-        achievements,
       );
-      res.status(201).json(newAchievements);
+
+      // Создаём Set для быстрого поиска существующих ID
+      const existingIds = new Set(
+        existingAchievements.map((achievement) => achievement.achievementId),
+      );
+
+      // Фильтруем только новые достижения
+      const newAchievements = achievements.filter((id) => !existingIds.has(id));
+
+      if (newAchievements.length === 0) {
+        return res.status(200).json({ message: 'No new achievements to add' });
+      }
+
+      // Добавляем только новые достижения
+      const addedAchievements = await userAchievementService.createUserAchievements(
+        userId,
+        newAchievements,
+      );
+
+      res.status(201).json(addedAchievements);
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Error creating user achievements' });
