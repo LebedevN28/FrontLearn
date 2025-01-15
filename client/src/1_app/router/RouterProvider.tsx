@@ -14,7 +14,7 @@ import TasksPage from '../../2_pages/TasksPage/TasksPage';
 import LeaderboardPage from '../../2_pages/LeaderboardPage/LeaderboardPage';
 import { getTotalUserProgressThunk } from '../../5_entities/progress/model/progressThunks';
 import { getUserByIdThunk } from '../../5_entities/user/model/userThunks';
-
+import DailyTaskPage from '../../2_pages/DailyTaskPage/DailyTaskPage';
 export default function RouterProvider(): React.JSX.Element {
   const authData = useAppSelector((store) => store.auth.data);
 
@@ -83,6 +83,17 @@ export default function RouterProvider(): React.JSX.Element {
               redirectTo="/auth/login"
             >
               <LeaderboardPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/daily"
+          element={
+            <ProtectedRoute
+              isAllowed={status === AuthStatus.authenticated}
+              redirectTo="/auth/login"
+            >
+              <DailyTaskPage />
             </ProtectedRoute>
           }
         />

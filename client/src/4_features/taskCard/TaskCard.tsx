@@ -1,6 +1,6 @@
 import React from 'react';
 import type { TaskT } from '../../5_entities/task/model/types';
-import styles from './TaskCard.module.css'; // Импортируем стили
+import styles from './TaskCard.module.scss';
 
 type TaskCardProps = {
   task: TaskT;
@@ -9,30 +9,16 @@ type TaskCardProps = {
 };
 
 const TaskCard: React.FC<TaskCardProps> = ({ task, onClick, isCompleted }) => {
- // Определяем путь к изображению на основе сложности задачи
- const imagePath = (() => {
-  switch (task.difficulty) {
-    case 'easy':
-      return '/imgs/blueberry.jpg'; // Картинка для легких задач
-    case 'medium':
-      return '/imgs/raspberry.png'; // Картинка для задач средней сложности
-    case 'hard':
-      return '/imgs/strawberry.jpg'; // Картинка для сложных задач
-    default:
-      return '/imgs/goosberry.jpg'; // Картинка по умолчанию
-  }
-})();
+  const difficultyClass = styles[task.difficulty];
+
 
   return (
-    <div className={`${styles.taskCard} ${isCompleted ? styles.completed : ''}`}>
-      <button onClick={() => onClick(task.id)} disabled={isCompleted}>
-        <img src={imagePath} alt="Task" className={styles.taskImage} />
-      </button>
-      <h3>{task.title}</h3>
-      {/* <p>{task.description}</p> */}
-      <p>
-        <strong>Сложность:</strong> {task.difficulty}
-      </p>
+    <div className={`${styles.taskCard} ${isCompleted ? styles.completed : ''} ${difficultyClass}`} onClick={() => onClick(task.id)} >
+      <div className={styles.iconContainer}>
+        {/* Звезда */}
+        <span className={styles.starIcon}>★</span>
+      </div>
+      <button className={styles.startButton} disabled={isCompleted}>НАЧАТЬ</button>
     </div>
   );
 };
