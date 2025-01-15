@@ -78,21 +78,22 @@ const QuestionPage: React.FC = () => {
                 handleAnswerClick(answer);
               }}
             />
-            {selectedAnswerId && (
-              <Button
-                variant="contained"
-                onClick={handleNext}
-                sx={{ marginTop: 2, textTransform: 'none', backgroundColor: 'secondary.main' }}
-              >
-                Следующий вопрос
-              </Button>
-            )}
           </Box>
         </Box>
         <Box className={styles.imageContainer}>
           <img src="/imgs/questionheg.jpeg" alt="Main Image" className={styles.image} />
         </Box>
       </Box>
+      {selectedAnswerId && (
+        <Box className={styles.descContainer}>
+          <Box>{task?.description}</Box>
+          <Box className={styles.nextButtonContainer}>
+            <Button variant="contained" onClick={handleNext} className={styles.nextButton}>
+              ДАЛЕЕ
+            </Button>
+          </Box>
+        </Box>
+      )}
     </>
   );
 };
