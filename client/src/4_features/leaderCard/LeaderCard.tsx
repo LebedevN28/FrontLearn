@@ -20,6 +20,11 @@ export default function LeaderCard({ user, index, isOnline }: LeaderCardProps): 
             <Avatar
               alt={user.name}
               src={user.image ? `/images/${user.image}` : '/imgs/hog.png'}
+              sx={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
               // className="h-full w-full object-cover rounded-full"
             />
           ) : (

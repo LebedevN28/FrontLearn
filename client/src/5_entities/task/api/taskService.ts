@@ -47,6 +47,30 @@ class TaskService {
     }
   }
 
+  async getAllTasksInModule({
+    moduleId,
+    difficulty,
+  }: {
+    moduleId: number;
+    difficulty: string;
+  }): Promise<TaskT[]> {
+    try {
+      const response = await this.client(
+        `/tasks/module/${String(moduleId)}?difficulty=${difficulty}`,
+      );
+      if (response.status !== 200) throw new Error('Неверный статус, ожидалось 200');
+      const data = taskSchema.array().parse(response.data);
+      return data;
+    } catch (error) {
+      if (error instanceof ZodError) {
+        console.log('Zod error:', error.issues);
+      } else if (error instanceof AxiosError) {
+        console.log('Axios error:', error.response?.data);
+      }
+      throw error;
+    }
+  }
+
   async getTaskById(taskId: number): Promise<TaskT> {
     try {
       const response = await this.client(`/tasks/${String(taskId)}`);
