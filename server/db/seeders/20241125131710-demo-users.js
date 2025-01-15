@@ -1,4 +1,5 @@
 'use strict';
+
 const bcrypt = require('bcrypt');
 
 module.exports = {
@@ -19,6 +20,35 @@ module.exports = {
         password: await bcrypt.hash('123', 10),
         level: 3,
         points: 80,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Anya',
+        email: 'bilberian@mail.ru',
+        password: await bcrypt.hash('123', 10),
+        level: 80,
+        points: 3500,
+        image: 'image-1736780107521-442064739.jpeg',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Igor',
+        email: 'mortek90@mail.ru',
+        password: await bcrypt.hash('123', 10),
+        level: 79,
+        points: 3100,
+        image: 'image-1736514045404-819809822.jpeg',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Sasha',
+        email: 'sasha@mail.ru',
+        password: await bcrypt.hash('123', 10),
+        level: 45,
+        points: 2500,
         createdAt: new Date(),
         updatedAt: new Date(),
       },

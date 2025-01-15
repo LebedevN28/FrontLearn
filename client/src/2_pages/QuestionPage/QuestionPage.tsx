@@ -7,6 +7,7 @@ import { getTaskByIdThunk, getTasksByModuleIdThunk } from '../../5_entities/task
 import { useHandleAnswer } from '../../4_features/hooks/useHandleAnswer';
 import { useHandleNavigation } from '../../4_features/hooks/useHandleNavigation';
 import { AnswerButtons } from '../../4_features/components/AnswerButtons';
+import styles from './QuestionPage.module.css'; // Импортируем стили как объект
 
 const QuestionPage: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
@@ -38,35 +39,38 @@ const QuestionPage: React.FC = () => {
   const handleNextTask = useHandleNavigation(thisModuleTasks, task);
 
   return (
-    <Box sx={{ padding: 3 }}>
-      <Typography variant="h4" gutterBottom>
-        {task?.title || 'Loading Task...'}
-      </Typography>
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <AnswerButtons
-          answers={answers.filter((answer) => answer.taskId === Number(taskId))}
-          selectedAnswerId={selectedAnswerId}
-          handleAnswerClick={(answer) => {
-            setSelectedAnswerId(answer.id);
-            handleAnswerClick(answer);
-          }}
-        />
-        {selectedAnswerId && (
-          <Button
-            variant="contained"
-            onClick={handleNextTask}
-            sx={{ marginTop: 2, textTransform: 'none', backgroundColor: 'secondary.main' }}
-          >
-            Следующий вопрос
-          </Button>
-        )}
+    <Box className={styles.container}>
+      <Box className={styles.questionsContainer}>
+        <Typography variant="h4" gutterBottom>
+          {task?.title || 'Loading Task...'}
+        </Typography>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <AnswerButtons
+            answers={answers.filter((answer) => answer.taskId === Number(taskId))}
+            selectedAnswerId={selectedAnswerId}
+            handleAnswerClick={(answer) => {
+              setSelectedAnswerId(answer.id);
+              handleAnswerClick(answer);
+            }}
+          />
+          {selectedAnswerId && (
+            <Button
+              variant="contained"
+              onClick={handleNextTask}
+              sx={{ marginTop: 2, textTransform: 'none', backgroundColor: 'secondary.main' }}
+            >
+              Следующий вопрос
+            </Button>
+          )}
+        </Box>
       </Box>
-      <img 
-          src="/imgs/questionheg.jpeg" 
-          alt="Main Image" 
-          height='500px'
-          width='500px'
+      <Box className={styles.imageContainer}>
+        <img
+          src="/imgs/questionheg.jpeg"
+          alt="Main Image"
+          className={styles.image}
         />
+      </Box>
     </Box>
   );
 };
