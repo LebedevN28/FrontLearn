@@ -1,37 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Button, Typography, Box } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../../6_shared/lib/hooks';
+import { useNavigate } from 'react-router-dom';
 import {
   selectAnswers,
   selectStatus,
   selectError,
 } from '../../5_entities/answer/model/answerSlice';
-import { useAppDispatch, useAppSelector } from '../../6_shared/lib/hooks';
 import { getAnswersByTask } from '../../5_entities/answer/model/answerThunks';
 import { getTaskByIdThunk } from '../../5_entities/task/model/taskThunk';
 import { updateUserPointsThunk } from '../../5_entities/user/model/userThunks';
+import CongratModal from '../../3_widgets/CongratModal/CongratModal';
 import type { AnswerType } from '../../5_entities/answer/model/answer.types';
 
 const DailyTaskPage: React.FC = () => {
-  const [taskId, setTaskId] = useState<number | null>(null);
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [taskId, setTaskId] = useState<number | null>(null);
+  const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [earnedPoints, setEarnedPoints] = useState(0);
 
+  const dispatch = useAppDispatch();
   const answers = useAppSelector(selectAnswers);
   const status = useAppSelector(selectStatus);
   const error = useAppSelector(selectError);
   const task = useAppSelector((state) => state.tasks.selectedTask);
-  const thisModuleTasks = useAppSelector((state) => state.tasks.tasks);
   const thisUser = useAppSelector((state) => state.user.selectedUser);
-
-  const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
-
+  // const user = useAppSelector((state) => state.user.selectedUser);
   useEffect(() => {
     const randomTaskId = Math.floor(Math.random() * 81) + 1;
     setTaskId(randomTaskId);
   }, []);
-  // const taskId = 1;
-  console.log(taskId);
 
   useEffect(() => {
     if (taskId) {
@@ -56,22 +55,23 @@ const DailyTaskPage: React.FC = () => {
   const handleAnswerClick = (answer: AnswerType): void => {
     setSelectedAnswerId(answer.id);
 
-    if (answer.isCorrect && thisUser) {
-      const points = task ? calculatePoints(task.difficulty) : 0;
-      const { id } = thisUser;
-      dispatch(updateUserPointsThunk({ id, points })).catch(console.log);
+    if (thisUser) {
+      if (answer.isCorrect) {
+        const points = task ? calculatePoints(task.difficulty) : 0;
+        setEarnedPoints(points);
+        setModalOpen(true);
+        const { id } = thisUser;
+        dispatch(updateUserPointsThunk({ id, points })).catch(console.log);
+      } else {
+        setModalOpen(true);
+        setEarnedPoints(0); // Нет заработанных очков
+      }
     }
   };
 
-  const handleNextTask = (): void => {
-    const currentIndex = thisModuleTasks.findIndex((t) => t.id === task?.id);
-    const nextTask = thisModuleTasks[currentIndex + 1];
-
-    if (nextTask) {
-      navigate(`/task/${String(nextTask.id)}`);
-    } else {
-      navigate(`/tasks/${String(task?.moduleId)}`);
-    }
+  const handleCloseModal = (): void => {
+    setModalOpen(false);
+    navigate('/');
   };
 
   if (status === 'loading') {
@@ -111,22 +111,9 @@ const DailyTaskPage: React.FC = () => {
             {answer.content}
           </Button>
         ))}
-
-        {selectedAnswerId && (
-          <Button
-            variant="contained"
-            onClick={handleNextTask}
-            sx={{
-              textTransform: 'none',
-              backgroundColor: 'secondary.main',
-              color: 'white',
-              marginTop: 2,
-            }}
-          >
-            Следующий вопрос
-          </Button>
-        )}
       </Box>
+
+      <CongratModal open={isModalOpen} onClose={handleCloseModal} points={earnedPoints} />
     </Box>
   );
 };
