@@ -1,6 +1,6 @@
 /* Общие стили для всего приложения */
 body {
-  background: linear-gradient(to bottom, #fcfdf5, #f2e3b8); /* Градиент фона */
+  background: linear-gradient(to bottom, #fcfdf5, #ffffff); /* Градиент фона */
 }
 
 /* Стили для заголовков */
