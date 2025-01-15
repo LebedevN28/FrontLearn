@@ -4,6 +4,7 @@ import { BeatLoader } from 'react-spinners';
 import type { UserType } from '../../5_entities/user/model/user.types';
 import { editAccountValuesThunk } from '../../5_entities/user/model/userThunks';
 import { useAppDispatch } from '../../6_shared/lib/hooks';
+import './ProfileEditForm.css';
 
 type ProfileFormValues = {
   name: string;
@@ -57,47 +58,50 @@ export default function ProfileEditForm({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
-      <div className="profile_page__values-container">
-        <div className="profile-page__value-edit">
-          <label htmlFor="name">Имя:</label>
-          <Controller
-            name="name"
-            control={control}
-            rules={{
-              required: 'Имя обязательно',
-            }}
-            render={({ field }) => <input {...field} placeholder="Добавьте имя" />}
-          />
-        </div>
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="profile-edit-form">
+      <div className="profile-edit-form__field">
+        <label htmlFor="name">Имя:</label>
+        <Controller
+          name="name"
+          control={control}
+          rules={{
+            required: 'Имя обязательно',
+          }}
+          render={({ field }) => <input {...field} placeholder="Добавьте имя" />}
+        />
         {errors.name && <p className="error">{errors.name.message}</p>}
+      </div>
 
-        <div className="profile-page__value-edit">
-          <label htmlFor="email">Email:</label>
-          <Controller
-            name="email"
-            control={control}
-            rules={{
-              required: 'Email обязателен',
-              pattern: {
-                value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-z]{2,3}/gm,
-                message: 'Некорректный email',
-              },
-            }}
-            render={({ field }) => (
-              <input {...field} type="email" id="email" placeholder="Введите email" />
-            )}
-          />
-        </div>
+      <div className="profile-edit-form__field">
+        <label htmlFor="email">Email:</label>
+        <Controller
+          name="email"
+          control={control}
+          rules={{
+            required: 'Email обязателен',
+            pattern: {
+              value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-z]{2,3}/gm,
+              message: 'Некорректный email',
+            },
+          }}
+          render={({ field }) => (
+            <input {...field} type="email" id="email" placeholder="Введите email" />
+          )}
+        />
         {errors.email && <p className="error">{errors.email.message}</p>}
       </div>
+
       {errorMessage && <p className="error">{errorMessage}</p>}
-      <div className="profile_page__button-container">
-        {' '}
-        <button type="submit" className="profile_page__button" disabled={loading}>
+
+      <div className="button-container">
+        <button type="submit" className="button" disabled={loading}>
           {loading ? <BeatLoader size="10px" color="#e3d9d9" /> : 'Сохранить изменения'}
         </button>
-        <button className="profile_page__button" type="button" onClick={() => setIsEditing(false)}>
+        <button
+          className="button cancel"
+          type="button"
+          onClick={() => setIsEditing(false)}
+        >
           Отменить
         </button>
       </div>

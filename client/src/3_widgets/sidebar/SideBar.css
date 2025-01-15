@@ -6,58 +6,60 @@
 }
 
 .sidebar-row {
-  padding: 30px;
+  padding: 15px 20px; /* Уменьшаем отступы */
   border-bottom: 1px solid #ffffff;
-  color: #5c5a5a;
+  color: #67af4a;
   font-weight: bold;
-  font-size: 1.6rem;
-  position: relative;
+  font-size: 1.4rem; /* Уменьшаем размер шрифта */
   cursor: pointer;
-
-  /* Плавный переход для transform и box-shadow */
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column; /* Меняем направление на колонку */
 }
 
-/* Эффект при наведении */
-.sidebar-row:hover {
-  transform: translateX(5px); /* Легкое смещение вправо */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Добавление мягкой тени */
+.sidebar-btn {
+  display: flex;
+  align-items: center; /* Выравниваем иконку и текст по вертикали */
+  gap: 10px; /* Расстояние между иконкой и текстом */
+  padding: 10px 20px; /* Отступы внутри кнопки */
+  border-radius: 50px; /* Круглая форма */
+  background-color: #f0f0f0; /* Цвет фона кнопки */
+  transition: background-color 0.3s ease; /* Плавный переход */
+  width: 100%; /* Занимает всю ширину контейнера */
 }
 
-/* Сброс стилей ссылки для всех кнопок в SideBar */
-.sidebar-row a {
-  text-decoration: none; /* Убирает подчеркивание */
-  color: inherit; /* Наследует цвет от родителя */
+.sidebar-btn:hover {
+  background-color: #000000; /* Черный цвет при наведении */
+  color: #ffffff; /* Белый текст при наведении */
 }
 
-.sidebar-row a:hover {
-  text-decoration: none; /* Подчеркивание не появляется при наведении */
-  color: inherit; /* Наследует цвет от родителя */
+.sidebar-btn:hover .sidebar-icon {
+  color: #ffffff; /* Белый цвет иконки при наведении */
 }
 
+.sidebar-icon {
+  font-size: 1.4rem; /* Размер иконок */
+  color: #5c5a5a; /* Цвет иконок */
+  transition: color 0.3s ease; /* Плавный переход для иконок */
+}
+
+/* Стили для выпадающего меню */
 .sidebar-row__hover-bar {
   display: flex;
   flex-direction: column;
-  position: relative;
   width: 100%;
   min-width: 150px;
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  max-height: 0;
-  transition:
-    max-height 0.5s ease-in-out,
-    opacity 0.3s ease;
-  opacity: 0;
+  max-height: 0; /* Начальная высота */
+  transition: max-height 0.5s ease-in-out; /* Плавная анимация */
 }
 
 .sidebar-row__hover-bar.visible {
-  max-height: 200px;
-  opacity: 1;
+  max-height: 200px; /* Максимальная высота при появлении */
 }
 
+/* Стили для кнопок внутри выпадающего меню */
 .sidebar-row__hoverbar-btn {
   min-width: 105%;
   background-color: #fcfdf5;
@@ -68,12 +70,26 @@
   font-weight: bold;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
+  border-radius: 50px; /* Закругление углов */
 }
 
 .sidebar-row__hoverbar-btn:not(:last-child) {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ddd; /* Разделитель между кнопками */
 }
 
 .sidebar-row__hoverbar-btn:hover {
-  background-color: #ffffff;
+  background-color: #000000; /* Черный цвет при наведении */
+  color: #ffffff; /* Белый текст при наведении */
+}
+
+/* Убираем подчеркивание у всех ссылок внутри сайдбара */
+.sidebar-row a {
+  text-decoration: none; /* Убираем подчеркивание */
+  color: inherit; /* Наследуем цвет текста */
+}
+
+/* Убираем подчеркивание при наведении */
+.sidebar-row a:hover {
+  text-decoration: none; /* Подчеркивание не появляется при наведении */
+  color: inherit; /* Наследуем цвет текста */
 }
