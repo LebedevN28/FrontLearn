@@ -34,7 +34,7 @@ export const useHandleAnswer = ({
   );
 
   // Хранилище для уже разблокированных достижений
-  const [unlockedAchievementIds, setUnlockedAchievementIds] = useState<number[]>([]);
+  // const [unlockedAchievementIds, setUnlockedAchievementIds] = useState<number[]>([]);
 
   const handleAnswerClick = async (answer: AnswerType): Promise<void> => {
     const { id } = thisUser;
@@ -68,16 +68,13 @@ export const useHandleAnswer = ({
           // Сохраняем достижения на сервере
           await dispatch(
             saveUserAchievements({
-              userId,
+              userId: id,
               achievements: newAchievements.map((a) => a.id),
             }),
           );
         }
-      } catch (error) {
-        console.error('Error handling answer:', error);
-        toast.error('An error occurred while processing your answer.');
-      }
-    }
+      } 
+      
     // Создаем прогресс для задачи
     try {
       await dispatch(
@@ -108,7 +105,8 @@ export const useHandleAnswer = ({
       dispatch(getTotalUserProgressThunk(id)).catch(console.log);
       dispatch(getUserProgressByTaskThunk({ userId: id, taskId: task.id })).catch(console.log);
     } catch (error) {
-      console.error('Error creating progress:', error);
+      console.error('Error handling answer:', error);
+      toast.error('An error occurred while processing your answer.');
     }
   };
 

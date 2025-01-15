@@ -11,14 +11,17 @@ type TaskCardProps = {
 const TaskCard: React.FC<TaskCardProps> = ({ task, onClick, isCompleted }) => {
   const difficultyClass = styles[task.difficulty];
 
-
   return (
-    <div className={`${styles.taskCard} ${isCompleted ? styles.completed : ''} ${difficultyClass}`} onClick={() => onClick(task.id)} >
+    <div
+      className={`${styles.taskCard} ${isCompleted ? styles.completed : ''} ${difficultyClass}`}
+      onClick={() => !isCompleted && onClick(task.id)} // Отключаем клик, если задача завершена
+    >
       <div className={styles.iconContainer}>
-        {/* Звезда */}
         <span className={styles.starIcon}>★</span>
       </div>
-      <button className={styles.startButton} disabled={isCompleted}>НАЧАТЬ</button>
+      <button className={styles.startButton} disabled={isCompleted}>
+        {isCompleted ? 'ПРОЙДЕНО' : 'НАЧАТЬ'}
+      </button>
     </div>
   );
 };

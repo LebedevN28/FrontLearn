@@ -20,12 +20,26 @@ const QuestionPage: React.FC = () => {
   const achievements = useAppSelector((state) => state.achievements.achievements);
   const userStats = useAppSelector((state) => state.user.stats);
 
+  //  const shuffleArray = (array: TaskT[]): TaskT[] => {
+  //   const shuffledArray = [...array]; 
+  //   for (let i = shuffledArray.length - 1; i > 0; i--) {
+  //     const j = Math.floor(Math.random() * (i + 1)); 
+  //     [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]; 
+  //   }
+  //   return shuffledArray;
+  // };
+
+
+
+  // const answers = shuffleArray(answersNotRandom);
+
+
   const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
   const [isAnswerSelected, setIsAnswerSelected] = useState<boolean>(false);
 
   useEffect(() => {
     if (task?.moduleId) {
-      dispatch(getTasksByModuleIdThunk(Number(task.moduleId))).catch(console.log);
+      dispatch(getTasksByModuleIdThunk({ moduleId: Number(task.moduleId), difficulty: '' })).catch(console.log);
     }
   }, [task, dispatch]);
 
