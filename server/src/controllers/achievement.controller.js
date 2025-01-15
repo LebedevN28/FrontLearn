@@ -3,9 +3,7 @@ const achievementService = require('../services/achievement.service');
 module.exports = {
   async getAllAchievements(req, res) {
     try {
-      const achievements = await achievementService.getAllAchievements();
-      console.log(achievements, 'achievements');
-      
+      const achievements = await achievementService.getAllAchievements();      
       res.status(200).json(achievements);
     } catch (error) {
       console.error(error);

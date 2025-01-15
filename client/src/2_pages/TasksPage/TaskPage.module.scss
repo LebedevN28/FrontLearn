@@ -1,0 +1,40 @@
+.taskPage {
+  padding: 20px;
+  text-align: center;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px; /* Увеличенное расстояние между фильтром и карточками */
+  gap: 10px; /* Расстояние между кнопками */
+}
+
+.filterButton {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #4caf50; /* Основной цвет кнопки */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: #388e3c; /* Темнее при наведении */
+    transform: scale(1.05); /* Лёгкое увеличение */
+  }
+}
+
+.active {
+  background-color: #2e7d32; /* Цвет активной кнопки */
+}
+
+.taskList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Увеличение минимальной ширины карточек */
+  gap: 30px; /* Увеличенное расстояние между карточками */
+  justify-items: center;
+}

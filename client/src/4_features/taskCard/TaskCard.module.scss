@@ -1,0 +1,83 @@
+// Переменные для повторно используемых значений
+$green: #4caf50; // Зелёный для лёгких задач
+$orange: #ffa726; // Оранжевый для средних задач
+$red: #f44336; // Красный для сложных задач
+$white: #fff; // Белый цвет для фона звезды и текста
+$box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); // Тень для элементов (карточки, звезды)
+$hover-scale: 1.05; // Коэффициент увеличения при наведении
+
+/* Общий стиль для карточки */
+.taskCard {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 8px $box-shadow;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform: translateY(-4px);
+  cursor: pointer;
+  z-index: 10;
+
+  &:hover {
+    transform: scale($hover-scale) translateY(-10px);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3); // Увеличиваем тень и её насыщенность
+  }
+
+}
+
+/* Стили для сложности */
+.easy {
+  background-color: $green;
+}
+
+.medium {
+  background-color: $orange;
+}
+
+.hard {
+  background-color: $red;
+}
+
+/* Контейнер для иконки звезды */
+.iconContainer {
+  position: absolute;
+  top: 27px; /* Смещаем контейнер ниже */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 48px;
+  background-color: $white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 20;
+}
+
+/* Стиль для звезды */
+.starIcon {
+  font-size: 20px; /* Размер звезды */
+  color: $green; /* Цвет звезды совпадает с цветом задачи */
+}
+
+/* Кнопка "НАЧАТЬ" */
+.startButton {
+  position: absolute;
+  top: -20px;
+  border: none;
+  background: none;
+  color: $green; // Кнопка всегда зелёного цвета
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  z-index: 30;
+
+  &:hover {
+    color: darken($white, 10%);
+  }
+}

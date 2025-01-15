@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useAppDispatch } from '../../6_shared/lib/hooks';
+import { useAppDispatch, useAppSelector } from '../../6_shared/lib/hooks';
 import { updateUserPointsThunk } from '../../5_entities/user/model/userThunks';
 import { checkAchievements } from '../../5_entities/userAchievement/lib/checkAchievements';
 import { saveUserAchievements } from '../../5_entities/userAchievement/model/userAchievementThunks';
@@ -7,6 +6,11 @@ import { updateStats } from '../../5_entities/user/model/userSlice';
 import { toast } from 'react-toastify';
 import type { AnswerType } from '../../5_entities/answer/model/answer.types';
 import { calculatePoints } from '../../6_shared/utils/pointsCalculator';
+import { addUnlockedAchievements } from '../../5_entities/userAchievement/model/userAchievementsSlice';
+import type { TaskT } from '../../5_entities/task/model/types';
+import type { UserStatsType } from '../../5_entities/userAchievement/model/userStats.types';
+import type { AchievementType } from '../../5_entities/achievement/model/achievement.types';
+import type { UserType } from '../../5_entities/user/model/user.types';
 
 export const useHandleAnswer = ({
   task,
@@ -14,52 +18,57 @@ export const useHandleAnswer = ({
   thisUser,
   achievements,
 }: {
-  task: any;
-  userStats: any;
-  thisUser: any;
-  achievements: any[];
+  task: TaskT | null;
+  userStats: UserStatsType;
+  thisUser: UserType | null;
+  achievements: AchievementType[];
 }) => {
   const dispatch = useAppDispatch();
+  const unlockedAchievementIds = useAppSelector(
+    (state) => state.userAchievements.unlockedAchievementsIds,
+  );
 
-  // Хранилище для уже разблокированных достижений
-  const [unlockedAchievementIds, setUnlockedAchievementIds] = useState<number[]>([]);
-
-  const handleAnswerClick = (answer: AnswerType) => {
+  const handleAnswerClick = async (answer: AnswerType) => {
     if (answer.isCorrect && thisUser && userStats) {
-      const points = task ? calculatePoints(task.difficulty) : 0;
-      const { id } = thisUser;
+      try {
+        const points = task ? calculatePoints(task.difficulty) : 0;
+        const { id: userId } = thisUser;
 
-      // Обновляем очки пользователя
-      dispatch(updateUserPointsThunk({ id, points }));
+        // Обновляем очки пользователя
+        await dispatch(updateUserPointsThunk({ id: userId, points }));
 
-      // Обновляем статистику пользователя
-      const updatedStats = {
-        totalAnswers: userStats.totalAnswers + 1,
-        level: Math.floor((userStats.totalAnswers + 1) / 10) + 1, // Логика пересчета уровня
-      };
-      dispatch(updateStats(updatedStats));
+        // Обновляем статистику пользователя
+        const updatedStats: UserStatsType = {
+          totalAnswers: userStats.totalAnswers + 1,
+          level: Math.floor((userStats.totalAnswers + 1) / 10) + 1,
+        };
+        await dispatch(updateStats(updatedStats));
 
-      // Проверяем достижения
-      const unlockedAchievements = checkAchievements(achievements, updatedStats).filter(
-        (achievement) => !unlockedAchievementIds.includes(achievement.id), // Исключаем уже разблокированные
-      );
-
-      // Показываем уведомления и сохраняем достижения
-      if (unlockedAchievements.length > 0) {
-        unlockedAchievements.forEach((achievement) => {
-          toast.success(`🎉 New Achievement Unlocked: ${achievement.title}`);
-        });
-
-        // Обновляем список разблокированных достижений
-        setUnlockedAchievementIds((prev) => [...prev, ...unlockedAchievements.map((a) => a.id)]);
-
-        // Сохраняем достижения
-        dispatch(
-          saveUserAchievements({
-            userId: id,
-            achievements: unlockedAchievements.map((a) => a.id),
-          }),
+        // Проверяем достижения
+        const newAchievements = checkAchievements(achievements, updatedStats).filter(
+          (achievement) => !unlockedAchievementIds.includes(achievement.id),
         );
+
+        if (newAchievements.length > 0) {
+          // Показываем уведомления
+          newAchievements.forEach((achievement) =>
+            toast.success(`🎉 New Achievement Unlocked: ${achievement.title}`),
+          );
+
+          // Сохраняем в глобальное состояние
+          dispatch(addUnlockedAchievements(newAchievements.map((a) => a.id)));
+
+          // Сохраняем достижения на сервере
+          await dispatch(
+            saveUserAchievements({
+              userId,
+              achievements: newAchievements.map((a) => a.id),
+            }),
+          );
+        }
+      } catch (error) {
+        console.error('Error handling answer:', error);
+        toast.error('An error occurred while processing your answer.');
       }
     }
   };
