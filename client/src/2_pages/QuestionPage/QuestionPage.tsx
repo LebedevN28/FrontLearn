@@ -20,43 +20,65 @@ const QuestionPage: React.FC = () => {
   const achievements = useAppSelector((state) => state.achievements.achievements);
   const userStats = useAppSelector((state) => state.user.stats);
 
+  //  const shuffleArray = (array: TaskT[]): TaskT[] => {
+  //   const shuffledArray = [...array]; 
+  //   for (let i = shuffledArray.length - 1; i > 0; i--) {
+  //     const j = Math.floor(Math.random() * (i + 1)); 
+  //     [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]; 
+  //   }
+  //   return shuffledArray;
+  // };
+
+
+
+  // const answers = shuffleArray(answersNotRandom);
+
+
   const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
+  const [isAnswerSelected, setIsAnswerSelected] = useState<boolean>(false);
 
   useEffect(() => {
     if (task?.moduleId) {
-      dispatch(getTasksByModuleIdThunk(Number(task.moduleId)));
+      dispatch(getTasksByModuleIdThunk({ moduleId: Number(task.moduleId), difficulty: '' })).catch(console.log);
     }
   }, [task, dispatch]);
 
   useEffect(() => {
     if (taskId) {
-      dispatch(getTaskByIdThunk(Number(taskId)));
-      dispatch(getAnswersByTask(Number(taskId)));
+      dispatch(getTaskByIdThunk(Number(taskId))).catch(console.log);
+      dispatch(getAnswersByTask(Number(taskId))).catch(console.log);
     }
   }, [dispatch, taskId]);
 
   const handleAnswerClick = useHandleAnswer({ task, userStats, thisUser, achievements });
   const handleNextTask = useHandleNavigation(thisModuleTasks, task);
+  const handleNext = async (): Promise<void> => {
+    await handleNextTask(); // Переходим на следующий вопрос
+    setSelectedAnswerId(null); // Сбрасываем выбранный ответ
+    setIsAnswerSelected(false); // Сбрасываем состояние отключения кнопок
+  };
 
   return (
     <Box className={styles.container}>
       <Box className={styles.questionsContainer}>
         <Typography variant="h4" gutterBottom>
-          {task?.title || 'Loading Task...'}
+          {task?.title ?? 'Loading Task...'}
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           <AnswerButtons
             answers={answers.filter((answer) => answer.taskId === Number(taskId))}
             selectedAnswerId={selectedAnswerId}
+            isDisabled={isAnswerSelected}
             handleAnswerClick={(answer) => {
               setSelectedAnswerId(answer.id);
+              setIsAnswerSelected(true); 
               handleAnswerClick(answer);
             }}
           />
           {selectedAnswerId && (
             <Button
               variant="contained"
-              onClick={handleNextTask}
+              onClick={handleNext}
               sx={{ marginTop: 2, textTransform: 'none', backgroundColor: 'secondary.main' }}
             >
               Следующий вопрос
@@ -65,11 +87,7 @@ const QuestionPage: React.FC = () => {
         </Box>
       </Box>
       <Box className={styles.imageContainer}>
-        <img
-          src="/imgs/questionheg.jpeg"
-          alt="Main Image"
-          className={styles.image}
-        />
+        <img src="/imgs/questionheg.jpeg" alt="Main Image" className={styles.image} />
       </Box>
     </Box>
   );
