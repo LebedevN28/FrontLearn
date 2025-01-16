@@ -55,7 +55,7 @@ export default function Header(): React.JSX.Element {
       <Navbar expand="lg" className={`py-3 ${styles.navbar}`}>
         <Navbar.Brand as={RouterLink} to="/" className={styles.navbarBrand}>
           <Image src="/imgs/logo.jpg" alt="Logo" className={styles.logo} />
-          <span className={styles.brandName}>FrontLearn</span>
+          {/* <span className={styles.brandName}>FrontLearn</span> */}
         </Navbar.Brand>
         <FrontLearnTitle />
         <div className={styles.progressBarContainer}>
