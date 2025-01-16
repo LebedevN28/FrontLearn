@@ -13,6 +13,8 @@ import { useHandleNavigation } from '../../4_features/hooks/useHandleNavigation'
 import { AnswerButtons } from '../../4_features/components/AnswerButtons';
 import styles from './QuestionPage.module.css'; // Импортируем стили как объект
 import ProgressBar from '../../4_features/ProgressBar/ProgressBar';
+import { TaskT } from '../../5_entities/task/model/types';
+import {UserType} from "../../5_entities/user/model/user.types";
 
 const QuestionPage: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
@@ -32,6 +34,7 @@ const QuestionPage: React.FC = () => {
   const progress = (userModuleProgress.length / thisModuleTasksAll.length) * 100;
   const isDone = userModuleProgress.some((t) => t.id === task?.id);
 
+
   useEffect(() => {
     if (task?.moduleId) {
       dispatch(getTasksByModuleIdThunk({ moduleId: Number(task.moduleId), difficulty: '' })).catch(
@@ -49,8 +52,14 @@ const QuestionPage: React.FC = () => {
       dispatch(getAnswersByTask(Number(taskId))).catch(console.log);
     }
   }, [dispatch, taskId]);
+  
 
-  const handleAnswerClick = useHandleAnswer({ task, userStats, thisUser, achievements });
+  const handleAnswerClick = useHandleAnswer({
+    task: task as TaskT, // Утверждаем, что task не null
+    userStats,
+    thisUser: thisUser as UserType, // Утверждаем, что thisUser не null
+    achievements,
+  });
   const handleNextTask = useHandleNavigation(thisModuleTasks, task);
   const handleNext = async (): Promise<void> => {
     await handleNextTask(); // Переходим на следующий вопрос

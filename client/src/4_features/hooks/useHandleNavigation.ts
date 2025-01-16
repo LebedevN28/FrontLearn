@@ -2,7 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import type { TaskT } from '../../5_entities/task/model/types';
 
-export const useHandleNavigation = (tasks: TaskT[], currentTask: TaskT | null): (() => Promise<void>) => {
+export const useHandleNavigation = (tasks: TaskT[], currentTask: TaskT | null): (() => void) => {
   const navigate = useNavigate();
 
   const handleNextTask = () => {

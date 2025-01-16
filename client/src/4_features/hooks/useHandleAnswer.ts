@@ -18,6 +18,8 @@ import {
   getUserProgressByTaskThunk,
 } from '../../5_entities/progress/model/progressThunks';
 
+
+
 export const useHandleAnswer = ({
   task,
   userStats,
@@ -35,6 +37,12 @@ export const useHandleAnswer = ({
   );
 
   const handleAnswerClick = async (answer: AnswerType): Promise<void> => {
+    // if (!thisUser || !task) {
+    //   console.error('Missing user or task data.');
+    //   toast.error('Unable to process the answer due to missing data.');
+    //   return;
+    // }
+
     const { id: userId } = thisUser;
     const { moduleId } = task;
 
@@ -48,8 +56,8 @@ export const useHandleAnswer = ({
         dispatch(updateUserPoints({ userId, points }));
         // Обновляем статистику пользователя
         const updatedStats: UserStatsType = {
-          totalAnswers: userStats.totalAnswers + 1,
-          level: Math.floor((userStats.totalAnswers + 1) / 10) + 1,
+          totalAnswers: (userStats?.totalAnswers || 0) + 1,
+          level: Math.floor(((userStats?.totalAnswers || 0) + 1) / 10) + 1,
         };
         await dispatch(updateStats(updatedStats));
 

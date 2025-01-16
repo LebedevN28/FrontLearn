@@ -10,4 +10,7 @@ export default defineConfig({
       '/images': 'http://localhost:3000',
     },
   },
+  build: {
+    outDir: '../server/dist',
+  },
 });

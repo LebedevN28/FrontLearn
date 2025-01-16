@@ -22,11 +22,13 @@ function TaskPage(): React.JSX.Element {
       setDifficulty('');
       return;
     }
+
     setDifficulty((prevDifficulty) => {
-      if (prevDifficulty.includes(level)) {
-        return prevDifficulty.filter((item) => item !== level);
+      // Если это строка, просто заменяем её
+      if (prevDifficulty === level) {
+        return ''; // Убираем фильтр, если он уже выбран
       }
-      return level;
+      return level; // Устанавливаем выбранный уровень
     });
   };
 
