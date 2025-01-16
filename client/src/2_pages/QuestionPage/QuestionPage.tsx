@@ -71,7 +71,7 @@ const QuestionPage: React.FC = () => {
     <>
       <div className={styles.progress}>
         <ProgressBar progress={progress} />
-        <p>Фаза: {task?.moduleId}</p>
+        <p style={{fontSize:'22px'}}>Фаза: {task?.moduleId}</p>
       </div>
       <Box className={styles.container}>
         <Box className={styles.questionsContainer}>

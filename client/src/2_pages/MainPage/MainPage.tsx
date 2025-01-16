@@ -24,7 +24,7 @@ export default function MainPage(): React.JSX.Element {
             <Button
               variant="contained"
               color="primary"
-              sx={{ width: '100%', marginBottom: '20px' }}
+              sx={{ width: '120%', marginBottom: '20px', fontSize: '18px' }}
               onClick={() => navigate('/auth/signup')}
             >
               Зарегистрироваться и начать
@@ -32,7 +32,7 @@ export default function MainPage(): React.JSX.Element {
             <Button
               variant="contained"
               color="secondary"
-              sx={{ width: '100%' }}
+              sx={{ width: '120%', fontSize: '18px' }}
               onClick={() => navigate('/auth/login')}
             >
               У меня уже есть аккаунт
@@ -42,7 +42,7 @@ export default function MainPage(): React.JSX.Element {
           <Button
             variant="contained"
             color="success"
-            sx={{ width: '100%' }}
+            sx={{ width: '120%', fontSize: '18px' }}
             onClick={() => navigate('/start')}
           >
             Начать игру
