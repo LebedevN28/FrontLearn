@@ -28,7 +28,7 @@ module.exports = {
       },
       level: {
         type: Sequelize.INTEGER,
-        defaultValue: 1,
+        defaultValue: 0,
       },
       points: {
         type: Sequelize.INTEGER,
