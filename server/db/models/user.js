@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'User',
       hooks: {
         beforeUpdate: (user) => {
-          user.level = user.recalculateLevel();
+          this.level = user.recalculateLevel();
         },
       },
     },
