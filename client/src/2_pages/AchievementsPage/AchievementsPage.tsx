@@ -15,6 +15,7 @@ const AchievementsPage: React.FC = () => {
     (state) => state.userAchievements.unlockedAchievementsIds,
   );
 
+
   // Получение userId из состояния Redux
   const userId = useAppSelector((state) => state.user.selectedUser?.id);
 

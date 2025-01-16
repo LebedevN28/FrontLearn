@@ -14,19 +14,19 @@ const achievementConditions = {
 
 module.exports = {
   async getUserAchievements(userId) {
-    try {
-      const achievements = await UserAchievement.findAll({
-        where: { userId },
-        include: [{ model: Achievement }], // Убедитесь, что модель `Achievement` связана правильно
-      });
+  try {
+    const achievements = await UserAchievement.findAll({
+      where: { userId },
+      include: [{ model: Achievement }], // Убедитесь, что модель `Achievement` связана правильно
+    });
 
-      console.log('Achievements fetched from DB:', achievements); // Логируем данные из базы
-      return achievements;
-    } catch (error) {
-      console.error('Error in getUserAchievements service:', error);
-      throw error;
-    }
-  },
+    console.log('Achievements fetched from DB:', achievements); // Логируем данные из базы
+    return achievements;
+  } catch (error) {
+    console.error('Error in getUserAchievements service:', error);
+    throw error;
+  }
+},
   async createUserAchievements(userId, achievementIds) {
     const records = achievementIds.map((achievementId) => ({
       userId,
