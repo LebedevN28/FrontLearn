@@ -53,18 +53,21 @@ const DailyTaskPage: React.FC = () => {
     }
   };
 
-  const handleAnswerClick = (answer: AnswerType): void => {
+  const handleAnswer = (answer: AnswerType): void => {
     setSelectedAnswerId(answer.id);
 
     if (thisUser) {
       if (answer.isCorrect) {
         const points = task ? calculatePoints(task.difficulty) : 0;
         setEarnedPoints(points);
-        setModalOpen(true);
-        const { id } = thisUser;
-        dispatch(updateUserPointsThunk({ id, points })).catch(console.log);
       } else {
         setEarnedPoints(0);
+      }
+      setModalOpen(true);
+
+      if (answer.isCorrect) {
+        const { id } = thisUser;
+        dispatch(updateUserPointsThunk({ id, points })).catch(console.log);
       }
     }
   };
@@ -86,13 +89,13 @@ const DailyTaskPage: React.FC = () => {
     return <Typography>Task not found</Typography>;
   }
 
-  const getButtonClass = (answer: Answer): string => {
-    if (selectedAnswerId === answer.id) {
-      return answer.isCorrect ? styles.correctAnswer : styles.incorrectAnswer;
-    }
-    return '';
-  };
-  
+  // const getButtonClass = (answer: any): string => {
+  //   if (selectedAnswerId === answer.id) {
+  //     return answer.isCorrect ? styles.correctAnswer : styles.incorrectAnswer;
+  //   }
+  //   return '';
+  // };
+
   return (
     <>
       <Box className={styles.container}>
@@ -105,7 +108,7 @@ const DailyTaskPage: React.FC = () => {
               <Button
                 key={answer.id}
                 variant="contained"
-                onClick={() => handleAnswerClick(answer)}
+                onClick={() => handleAnswer(answer)}
                 className={`${styles.answerButton} ${
                   selectedAnswerId === answer.id
                     ? answer.isCorrect
