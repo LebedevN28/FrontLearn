@@ -81,7 +81,7 @@ export default function RouterProvider(): React.JSX.Element {
           path="/achievements"
           element={
             <ProtectedRoute
-              isAllowed={status === AuthStatus.authenticated}
+              isAllowed={authData.status === AuthStatus.authenticated}
               redirectTo="/auth/login"
             >
               <AchievementsPage />
@@ -114,7 +114,7 @@ export default function RouterProvider(): React.JSX.Element {
           path="/daily"
           element={
             <ProtectedRoute
-              isAllowed={status === AuthStatus.authenticated}
+              isAllowed={authData.status === AuthStatus.authenticated}
               redirectTo="/auth/login"
             >
               <DailyTaskPage />
