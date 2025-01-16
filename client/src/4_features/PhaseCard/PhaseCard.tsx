@@ -12,7 +12,6 @@ export default function PhaseCard({ module }: PhaseCardProps): React.JSX.Element
 
   const handleModuleClick = () => {
     navigate(`/tasks/${module.id}`);
-    // console.log(`Module ${module.id} clicked`);
   };
 
   return (
