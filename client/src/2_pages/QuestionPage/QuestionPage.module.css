@@ -9,6 +9,10 @@
   margin: 0 auto;
 }
 
+.progress {
+  margin-left: 45px;
+}
+
 .questionsContainer {
   flex: 1;
   max-width: 60%;
@@ -45,8 +49,6 @@
   padding: 40px;
   display: flex;
   justify-content: space-between;
-  /* gap: 16px; */
-
   border: 2px solid #3f51b5;
   border-radius: 12px;
   background-color: #ffffff;
@@ -55,7 +57,6 @@
 }
 
 .nextButtonContainer {
-  /* width: 100%; Занимает всю ширину */
   text-align: center; /* Выравнивание по центру */
   margin-top: 20px; /* Отступ сверху */
   margin-bottom: 20px; /* Отступ снизу */
