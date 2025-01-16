@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '../../6_shared/lib/hooks';
 import { updateUserPointsThunk } from '../../5_entities/user/model/userThunks';
 import { checkAchievements } from '../../5_entities/userAchievement/lib/checkAchievements';
 import { saveUserAchievements } from '../../5_entities/userAchievement/model/userAchievementThunks';
-import { updateStats } from '../../5_entities/user/model/userSlice';
+import { updateStats, updateUserPoints } from '../../5_entities/user/model/userSlice';
 import { toast } from 'react-toastify';
 import type { AnswerType } from '../../5_entities/answer/model/answer.types';
 import { calculatePoints } from '../../6_shared/utils/pointsCalculator';
@@ -45,7 +45,7 @@ export const useHandleAnswer = ({
 
         // Обновляем очки пользователя
         await dispatch(updateUserPointsThunk({ id: userId, points }));
-
+        dispatch(updateUserPoints({ userId, points }));
         // Обновляем статистику пользователя
         const updatedStats: UserStatsType = {
           totalAnswers: userStats.totalAnswers + 1,

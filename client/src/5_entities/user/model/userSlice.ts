@@ -39,22 +39,33 @@ export const userSlice = createSlice({
     },
     updateUserPoints: (state, action: PayloadAction<{ userId: number; points: number }>) => {
       const { userId, points } = action.payload;
+
+      /* eslint-disable @typescript-eslint/no-unnecessary-condition */
       const user = state.users.find((u) => u.id === userId);
       if (user) {
-        user.points = points;
+        user.points = (user.points ?? 0) + points;
+        user.level = Math.floor((user.points ?? 0) / 100);
+      }
+      /* eslint-disable @typescript-eslint/no-unnecessary-condition */
+      if (state.selectedUser && state.selectedUser.id === userId) {
+        state.selectedUser.points = (state.selectedUser.points ?? 0) + points;
+        state.selectedUser.level = Math.floor((state.selectedUser.points ?? 0) / 100);
       }
     },
   },
   extraReducers(builder) {
     builder
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       .addCase(updateStatsThunk.pending, (state) => {
         state.status = 'loading';
         state.error = null;
       })
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       .addCase(updateStatsThunk.fulfilled, (state, action: PayloadAction<UserStatsType>) => {
         state.status = 'succeeded';
         state.stats = action.payload;
       })
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       .addCase(updateStatsThunk.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload as string;
