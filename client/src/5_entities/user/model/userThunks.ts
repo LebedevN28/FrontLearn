@@ -2,7 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import userService from '../api/userService';
 import type { UserType } from './user.types';
 import { z } from 'zod';
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
+import { UserStatsType } from '../../userAchievement/model/userStats.types';
+import axiosInstance from '../../../6_shared/api/axiosInstance';
 
 export const getAllUsersThunk = createAsyncThunk('users/getAllUsersThunk', () =>
   userService.getUsers(),
@@ -50,5 +52,21 @@ export const deleteUserThunk = createAsyncThunk(
   'users/deleteUserThunk',
   async (id: UserType['id']) => {
     await userService.deleteUser(id);
+  },
+);
+
+export const updateStatsThunk = createAsyncThunk(
+  'user/updateStats',
+  async (stats: Partial<UserStatsType>, { rejectWithValue }) => {
+    try {
+      // Отправляем запрос на сервер для обновления статистики
+      const response = await axiosInstance.put('/user/stats', stats); // Укажите правильный endpoint
+      return response.data; // Возвращаем обновленную статистику
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue(error.response.data?.message || 'Failed to update stats');
+      }
+      return rejectWithValue('An unknown error occurred');
+    }
   },
 );

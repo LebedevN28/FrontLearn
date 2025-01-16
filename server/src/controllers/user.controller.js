@@ -114,4 +114,24 @@ module.exports = {
       res.status(500).json({ message: 'Error deleting user' });
     }
   },
+  async updateUserStats(req, res) {
+    try {
+      const { id } = req.params; // ID пользователя из параметров маршрута
+      const stats = req.body; // Данные статистики из тела запроса
+
+      const updatedUser = await userService.updateUserStats(id, stats);
+
+      if (!updatedUser) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+      res.status(200).json({
+        totalAnswers: updatedUser.totalAnswers,
+        level: updatedUser.level,
+      });
+    } catch (error) {
+      console.error('Ошибка при обновлении статистики:', error);
+      res.status(500).json({ message: 'Failed to update user stats' });
+    }
+  },
 };

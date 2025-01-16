@@ -27,6 +27,11 @@ export function checkAchievements(
       return false;
     }
 
-    return condition(achievement.criteria, userStats); // Проверяем достижение
+    try {
+      return condition(achievement.criteria, userStats); // Проверяем достижение
+    } catch (error) {
+      console.error(`Error while checking achievement "${achievement.title}":`, error);
+      return false;
+    }
   });
 }

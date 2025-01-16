@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import type { UserType } from './user.types';
 import {
   getAllUsersThunk,
@@ -7,11 +7,12 @@ import {
   editAccountValuesThunk,
   uploadPhotoThunk,
   deleteUserThunk,
+  updateStatsThunk,
 } from './userThunks';
 import type { UserStatsType } from '../../userAchievement/model/userStats.types';
 
 type UserState = {
-  stats: UserStatsType; // Добавляем статистику
+  stats: UserStatsType;
   selectedUser: UserType | null;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
@@ -46,6 +47,18 @@ export const userSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(updateStatsThunk.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(updateStatsThunk.fulfilled, (state, action: PayloadAction<UserStatsType>) => {
+        state.status = 'succeeded';
+        state.stats = action.payload;
+      })
+      .addCase(updateStatsThunk.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload as string;
+      })
       .addCase(getAllUsersThunk.fulfilled, (state, action) => {
         state.users = action.payload;
       })
