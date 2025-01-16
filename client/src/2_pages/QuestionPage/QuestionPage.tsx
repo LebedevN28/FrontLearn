@@ -30,7 +30,7 @@ const QuestionPage: React.FC = () => {
   const [isAnswerSelected, setIsAnswerSelected] = useState<boolean>(false);
 
   const progress = (userModuleProgress.length / thisModuleTasksAll.length) * 100;
-  console.log(userModuleProgress.length, thisModuleTasksAll.length);
+  const isDone = userModuleProgress.some((t) => t.id === task?.id);
 
   useEffect(() => {
     if (task?.moduleId) {
@@ -60,8 +60,10 @@ const QuestionPage: React.FC = () => {
 
   return (
     <>
-      <ProgressBar progress={progress} />
-      <p>Фаза: {task?.moduleId}</p>
+      <div className={styles.progress}>
+        <ProgressBar progress={progress} />
+        <p>Фаза: {task?.moduleId}</p>
+      </div>
       <Box className={styles.container}>
         <Box className={styles.questionsContainer}>
           <Typography variant="h4" gutterBottom>
@@ -71,7 +73,7 @@ const QuestionPage: React.FC = () => {
             <AnswerButtons
               answers={answers.filter((answer) => answer.taskId === Number(taskId))}
               selectedAnswerId={selectedAnswerId}
-              isDisabled={isAnswerSelected}
+              isDisabled={isAnswerSelected || isDone}
               handleAnswerClick={(answer) => {
                 setSelectedAnswerId(answer.id);
                 setIsAnswerSelected(true);
@@ -84,7 +86,7 @@ const QuestionPage: React.FC = () => {
           <img src="/imgs/questionheg.jpeg" alt="Main Image" className={styles.image} />
         </Box>
       </Box>
-      {selectedAnswerId && (
+      {(isAnswerSelected || isDone) && (
         <Box className={styles.descContainer}>
           <Box>{task?.description}</Box>
           <Box className={styles.nextButtonContainer}>
