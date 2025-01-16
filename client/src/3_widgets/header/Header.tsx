@@ -21,7 +21,7 @@ export default function Header(): React.JSX.Element {
     if (data.status === AuthStatus.authenticated) {
       dispatch(getUserByIdThunk(data.user.id)).catch(console.error);
     }
-  }, [data.status, data.user.id, dispatch]);
+  }, [data, dispatch]);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);

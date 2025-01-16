@@ -34,16 +34,17 @@ function TaskPage(): React.JSX.Element {
     if (moduleId) {
       const moduleIdNumber = Number(moduleId);
 
-      dispatch(getTasksByModuleIdThunk({moduleId: moduleIdNumber, difficulty})).catch((error: unknown) => {
-        console.error('Error loading tasks:', error);
-      });
+      dispatch(getTasksByModuleIdThunk({ moduleId: moduleIdNumber, difficulty })).catch(
+        (error: unknown) => {
+          console.error('Error loading tasks:', error);
+        },
+      );
       const userId = user?.id;
       if (userId)
         dispatch(getUserProgressByModuleThunk({ userId, moduleId: moduleIdNumber })).catch(
           console.error,
         );
     }
-
   }, [moduleId, user?.id, difficulty, dispatch]);
 
   // Функция для проверки, решена ли задача
@@ -60,7 +61,7 @@ function TaskPage(): React.JSX.Element {
 
   return (
     <div>
-      <h1>Вопросы по {moduleId}-й Фазе</h1>
+      <h1 className={styles.title}>Вопросы по {moduleId}-й Фазе</h1>
 
       <div className={styles.checkboxContainer}>
         <label>
@@ -104,7 +105,12 @@ function TaskPage(): React.JSX.Element {
 
       <div className={styles.taskList}>
         {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} onClick={handleClick} isCompleted={isTaskCompleted(task.id)}/>
+          <TaskCard
+            key={task.id}
+            task={task}
+            onClick={handleClick}
+            isCompleted={isTaskCompleted(task.id)}
+          />
         ))}
       </div>
     </div>
