@@ -6,7 +6,6 @@ module.exports = {
     try {
       const { userId } = req.params; // Получаем ID пользователя из параметров
       const userAchievements = await userAchievementService.getUserAchievements(userId);
-      console.log('User Achievements from DB:', userAchievements); // Логируем данные из базы
 
       res.status(200).json(userAchievements);
     } catch (error) {
