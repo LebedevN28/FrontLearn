@@ -1,44 +1,41 @@
-
 .header {
-    width: 100%; /* Занимает всю ширину страницы */
-  }
-  
-  
-  .navbarBrand {
-    display: flex;
-    align-items: center; /* Выравнивание логотипа и текста по центру */
-    margin-left: 16px; /* Сдвигаем логотип вправо */
-  }
-  
-  .logo {
-    height: 50px; /* Уменьшенная высота логотипа */
-  }
-  
-  .userContainer {
-    display: flex;
-    align-items: center; /* Выравнивание никнейма и аватара по центру */
-    gap: 8px; /* Уменьшенное расстояние между никнеймом и аватаром */
-    margin-right: 16px; /* Сдвигаем контейнер левее */
-    
-  }
-  
-  .username {
-    color: #000000; /* Черный цвет текста */
-    font-weight: bold; /* Жирный шрифт */
-    margin: 0; /* Убираем отступы у текста */
-    font-size: 20px; /* Уменьшенный размер шрифта */
-  }
-  
-  .avatarButton {
-    padding: 0; /* Убираем отступы у кнопки */
-  }
-  
-  .avatar {
-    width: 40px; /* Уменьшенная ширина аватара */
-    height: 40px; /* Уменьшенная высота аватара */
-  }
+  width: 100%; /* Занимает всю ширину страницы */
+}
 
-  /* Стили для контейнера ProgressBar */
+.navbarBrand {
+  display: flex;
+  align-items: center; /* Выравнивание логотипа и текста по центру */
+  margin-left: 16px; /* Сдвигаем логотип вправо */
+}
+
+.logo {
+  height: 50px; /* Уменьшенная высота логотипа */
+}
+
+.userContainer {
+  display: flex;
+  align-items: center; /* Выравнивание никнейма и аватара по центру */
+  gap: 8px; /* Уменьшенное расстояние между никнеймом и аватаром */
+  margin-right: 16px; /* Сдвигаем контейнер левее */
+}
+
+.username {
+  color: #000000; /* Черный цвет текста */
+  font-weight: bold; /* Жирный шрифт */
+  margin: 0; /* Убираем отступы у текста */
+  font-size: 20px; /* Уменьшенный размер шрифта */
+}
+
+.avatarButton {
+  padding: 0; /* Убираем отступы у кнопки */
+}
+
+.avatar {
+  width: 40px; /* Уменьшенная ширина аватара */
+  height: 40px; /* Уменьшенная высота аватара */
+}
+
+/* Стили для контейнера ProgressBar */
 .progressBarContainer {
   flex-grow: 1; /* Занимает всё доступное пространство */
   display: flex;
@@ -47,4 +44,10 @@
   max-width: 1000px; /* Ограничиваем ширину */
   margin: 0 auto; /* Автоматические отступы по бокам для центрирования */
   margin-left: 400px;
+}
+.brandName {
+  font-size: 1.5rem; /* Adjust the font size as needed */
+  font-weight: bold; /* Make it bold */
+  color: #000; /* Choose the text color */
+  margin-left: 10px; /* Add space between the logo and the text */
 }
