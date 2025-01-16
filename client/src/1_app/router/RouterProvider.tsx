@@ -15,6 +15,7 @@ import LeaderboardPage from '../../2_pages/LeaderboardPage/LeaderboardPage';
 import { getTotalUserProgressThunk } from '../../5_entities/progress/model/progressThunks';
 import { getUserByIdThunk } from '../../5_entities/user/model/userThunks';
 import DailyTaskPage from '../../2_pages/DailyTaskPage/DailyTaskPage';
+import NotFoundPage from '../../2_pages/NotFoundPage/NotFoundPage';
 export default function RouterProvider(): React.JSX.Element {
   const authData = useAppSelector((store) => store.auth.data);
 
@@ -107,6 +108,7 @@ export default function RouterProvider(): React.JSX.Element {
           <Route path="/auth/signup" element={<SignupPage />} />
           <Route path="/auth/login" element={<LoginPage />} />
         </Route>
+      <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );
