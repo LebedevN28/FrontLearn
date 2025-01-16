@@ -28,7 +28,7 @@ module.exports = {
         email: 'bilberian@mail.ru',
         password: await bcrypt.hash('123', 10),
         level: 3,
-        points: 350,
+        points: 550,
         image: 'image-1736780107521-442064739.jpeg',
         createdAt: new Date(),
         updatedAt: new Date(),
