@@ -6,6 +6,8 @@ module.exports = {
     try {
       const { userId } = req.params; // Получаем ID пользователя из параметров
       const userAchievements = await userAchievementService.getUserAchievements(userId);
+      console.log('User Achievements from DB:', userAchievements); // Логируем данные из базы
+
       res.status(200).json(userAchievements);
     } catch (error) {
       console.error(error);
@@ -46,6 +48,19 @@ module.exports = {
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Error creating user achievements' });
+    }
+  },
+  async checkUserAchievements(req, res) {
+    try {
+      const { userId } = req.params;
+      const newAchievements = await userAchievementService.checkAndUpdateUserAchievements(
+        userId,
+      );
+
+      res.status(200).json(newAchievements);
+    } catch (error) {
+      console.error('Error checking user achievements:', error);
+      res.status(500).json({ message: 'Failed to check achievements.' });
     }
   },
 };

@@ -43,6 +43,12 @@ export default function SideBar(): React.JSX.Element {
           <FaTrophy className="sidebar-icon" /> 
           <span>Рейтинг</span>
         </RouterLink>
+       <Row className="sidebar-row">
+        <RouterLink to={`/achievements`} className="sidebar-btn">
+          <FaBoxOpen className="sidebar-icon" /> 
+          <span>Вопрос дня</span>
+        </RouterLink>
+      </Row>
       </Row>
     </Container>
   );

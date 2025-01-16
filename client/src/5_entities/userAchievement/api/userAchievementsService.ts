@@ -5,12 +5,18 @@ class UserAchievementsService {
   // Получить список достижений пользователя
   static async getUserAchievements(userId: number): Promise<AchievementType[]> {
     const response = await axiosInstance.get(`/user-achievements/${userId}`);
+    console.log('Server response for user achievements:', response.data); // Логируем ответ сервера
+
     return response.data;
   }
 
   // Сохранить разблокированные достижения
   static async saveUserAchievements(userId: number, achievements: number[]): Promise<void> {
     await axiosInstance.post(`/user-achievements/${userId}`, { achievements });
+  }
+  static async checkAndUpdateAchievements(userId: number): Promise<AchievementType[]> {
+    const response = await axiosInstance.get(`/user-achievements/check/${userId}`);
+    return response.data;
   }
 }
 

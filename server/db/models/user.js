@@ -3,11 +3,6 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate({ Progress, Task, UserAchievement }) {
       this.hasMany(Progress, { foreignKey: 'userId' });
       this.belongsToMany(Task, {
@@ -17,20 +12,38 @@ module.exports = (sequelize, DataTypes) => {
       });
       this.hasMany(UserAchievement, { foreignKey: 'userId' });
     }
+
+    // Метод для пересчета уровня
+    recalculateLevel() {
+      return Math.floor(this.points / 100);
+    }
   }
+
   User.init(
     {
       name: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
-      level: DataTypes.INTEGER,
-      points: DataTypes.INTEGER,
+      level: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1,
+      },
+      points: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
       image: DataTypes.STRING,
     },
     {
       sequelize,
       modelName: 'User',
+      hooks: {
+        beforeUpdate: (user) => {
+          user.level = user.recalculateLevel();
+        },
+      },
     },
   );
+
   return User;
 };
