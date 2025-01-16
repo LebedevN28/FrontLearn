@@ -13,6 +13,28 @@ const achievementConditions = {
 };
 
 module.exports = {
+  async getUserAchievements(userId) {
+    try {
+      const achievements = await UserAchievement.findAll({
+        where: { userId },
+        include: [{ model: Achievement }], // Убедитесь, что модель `Achievement` связана правильно
+      });
+
+      console.log('Achievements fetched from DB:', achievements); // Логируем данные из базы
+      return achievements;
+    } catch (error) {
+      console.error('Error in getUserAchievements service:', error);
+      throw error;
+    }
+  },
+  async createUserAchievements(userId, achievementIds) {
+    const records = achievementIds.map((achievementId) => ({
+      userId,
+      achievementId,
+    }));
+
+    return await UserAchievement.bulkCreate(records, { ignoreDuplicates: true });
+  },
   async checkAndUpdateUserAchievements(userId) {
     try {
       // Получаем достижения и статистику пользователя
@@ -21,6 +43,8 @@ module.exports = {
       const userAchievements = await UserAchievement.findAll({ where: { userId } });
 
       const unlockedAchievementIds = userAchievements.map((ua) => ua.achievementId);
+      console.log('Unlocked Achievement IDs:', unlockedAchievementIds);
+
       const newAchievements = allAchievements.filter((achievement) => {
         const condition = achievementConditions[achievement.type];
         if (!condition) {

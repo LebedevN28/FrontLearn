@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { saveUserAchievements, fetchUserAchievements } from './userAchievementThunks';
-import type { AchievementType } from '../../achievement/model/achievement.types';
 
 type UserAchievementsState = {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
@@ -34,8 +33,10 @@ const userAchievementsSlice = createSlice({
       })
       .addCase(fetchUserAchievements.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        console.log('Fetched unlocked achievements:', action.payload); // Логируем, что было загружено
+
         state.unlockedAchievementsIds = action.payload.map(
-          (achievement: AchievementType) => achievement.id,
+          (achievement) => achievement.achievementId,
         );
       })
       .addCase(fetchUserAchievements.rejected, (state, action) => {
@@ -50,6 +51,8 @@ const userAchievementsSlice = createSlice({
       })
       .addCase(saveUserAchievements.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        console.log('Saved unlocked achievements:', action.payload);
+        
         state.unlockedAchievementsIds = [
           ...new Set([...state.unlockedAchievementsIds, ...action.payload]),
         ]; // Добавляем новые достижения

@@ -5,6 +5,8 @@ class UserAchievementsService {
   // Получить список достижений пользователя
   static async getUserAchievements(userId: number): Promise<AchievementType[]> {
     const response = await axiosInstance.get(`/user-achievements/${userId}`);
+    console.log('Server response for user achievements:', response.data); // Логируем ответ сервера
+
     return response.data;
   }
 
