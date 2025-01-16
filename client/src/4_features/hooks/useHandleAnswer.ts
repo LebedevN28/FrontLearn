@@ -34,17 +34,17 @@ export const useHandleAnswer = ({
     (state) => state.userAchievements.unlockedAchievementsIds,
   );
 
-  // Хранилище для уже разблокированных достижений
-  // const [unlockedAchievementIds, setUnlockedAchievementIds] = useState<number[]>([]);
-
   const handleAnswerClick = async (answer: AnswerType): Promise<void> => {
-    const { id } = thisUser;
-    const {moduleId} = task;
-    if (answer.isCorrect) {
-      const points = calculatePoints(task.difficulty);
+    const { id: userId } = thisUser;
+    const { moduleId } = task;
 
-      // Обновляем очки пользователя
-      dispatch(updateUserPointsThunk({ id, points })).catch(console.log);
+    if (answer.isCorrect) {
+      try {
+        // Вычисляем очки за ответ
+        const points = calculatePoints(task.difficulty);
+
+        // Обновляем очки пользователя
+        await dispatch(updateUserPointsThunk({ id: userId, points }));
 
         // Обновляем статистику пользователя
         const updatedStats: UserStatsType = {
@@ -53,63 +53,53 @@ export const useHandleAnswer = ({
         };
         await dispatch(updateStats(updatedStats));
 
-        // Проверяем достижения
+        // Проверяем новые достижения
         const newAchievements = checkAchievements(achievements, updatedStats).filter(
           (achievement) => !unlockedAchievementIds.includes(achievement.id),
         );
 
         if (newAchievements.length > 0) {
-          // Показываем уведомления
+          // Уведомляем пользователя
           newAchievements.forEach((achievement) =>
             toast.success(`🎉 New Achievement Unlocked: ${achievement.title}`),
           );
 
-          // Сохраняем в глобальное состояние
+          // Добавляем достижения в глобальное состояние
           dispatch(addUnlockedAchievements(newAchievements.map((a) => a.id)));
 
           // Сохраняем достижения на сервере
           await dispatch(
             saveUserAchievements({
-              userId: id,
+              userId,
               achievements: newAchievements.map((a) => a.id),
             }),
           );
         }
-      } 
-      
+      } catch (error) {
+        console.error('Error updating points or achievements:', error);
+        toast.error('Failed to update user stats or achievements.');
+      }
+    }
+
     // Создаем прогресс для задачи
     try {
       await dispatch(
         createProgressThunk({
-          userId: id,
+          userId,
           taskId: task.id,
           gotCorrect: answer.isCorrect,
         }),
-      ).unwrap(); // unwrap() для обработки ошибок
+      );
 
-      // Обновляем общий прогресс пользователя
-      dispatch(getTotalUserProgressThunk(id)).catch(console.log);
-      dispatch(getUserProgressByModuleThunk( {userId: id, moduleId })).catch(console.log);
-      dispatch(getUserProgressByTaskThunk({ userId: id, taskId: task.id })).catch(console.log);
+      // Обновляем прогресс пользователя
+      await Promise.all([
+        dispatch(getTotalUserProgressThunk(userId)),
+        dispatch(getUserProgressByModuleThunk({ userId, moduleId })),
+        dispatch(getUserProgressByTaskThunk({ userId, taskId: task.id })),
+      ]);
     } catch (error) {
       console.error('Error creating progress:', error);
-    }
-    // Создаем прогресс для задачи
-    try {
-      await dispatch(
-        createProgressThunk({
-          userId: id,
-          taskId: task.id,
-          gotCorrect: answer.isCorrect,
-        }),
-      ).unwrap(); // unwrap() для обработки ошибок
-
-      // Обновляем общий прогресс пользователя
-      dispatch(getTotalUserProgressThunk(id)).catch(console.log);
-      dispatch(getUserProgressByTaskThunk({ userId: id, taskId: task.id })).catch(console.log);
-    } catch (error) {
-      console.error('Error handling answer:', error);
-      toast.error('An error occurred while processing your answer.');
+      toast.error('Failed to update progress.');
     }
   };
 

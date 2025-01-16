@@ -7,5 +7,6 @@ router.get('/:userId', userAchievementController.getUserAchievements);
 
 // Добавить достижения пользователю
 router.post('/:userId', userAchievementController.createUserAchievements);
+router.post('/check/:userId', userAchievementController.checkUserAchievements);
 
 module.exports = router;

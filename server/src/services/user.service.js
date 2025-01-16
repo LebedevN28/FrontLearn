@@ -49,4 +49,21 @@ module.exports = {
       throw error;
     }
   },
+  async updateUserStats(id, stats) {
+    try {
+      const user = await User.findByPk(id);
+      if (!user) {
+        return null; // Если пользователь не найден
+      }
+      // Обновляем статистику
+      user.totalAnswers = stats.totalAnswers ?? user.totalAnswers;
+      user.level = stats.level ?? user.level;
+      await user.save();
+
+      return user; // Возвращаем обновленного пользователя
+    } catch (error) {
+      console.error('Ошибка при обновлении статистики пользователя:', error);
+      throw error;
+    }
+  },
 };

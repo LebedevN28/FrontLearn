@@ -1,22 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { saveUserAchievements } from './userAchievementThunks';
-
-// Восстанавливаем данные из localStorage, если они есть
-const getInitialUnlockedAchievements = (): number[] => {
-  const storedAchievements = localStorage.getItem('unlockedAchievementsIds');
-  return storedAchievements ? JSON.parse(storedAchievements) : [];
-};
+import { saveUserAchievements, fetchUserAchievements } from './userAchievementThunks';
 
 type UserAchievementsState = {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
-  unlockedAchievementsIds: number[]; // Хранит ID разблокированных достижений
+  unlockedAchievementsIds: number[];
 };
 
 const initialState: UserAchievementsState = {
   status: 'idle',
   error: null,
-  unlockedAchievementsIds: getInitialUnlockedAchievements(),
+  unlockedAchievementsIds: [],
 };
 
 const userAchievementsSlice = createSlice({
@@ -28,26 +22,44 @@ const userAchievementsSlice = createSlice({
       state.unlockedAchievementsIds = [
         ...new Set([...state.unlockedAchievementsIds, ...action.payload]),
       ];
-
-      // Сохраняем в localStorage
-      localStorage.setItem(
-        'unlockedAchievementsIds',
-        JSON.stringify(state.unlockedAchievementsIds),
-      );
     },
   },
   extraReducers: (builder) => {
     builder
+      // Обработка получения достижений с сервера
+      .addCase(fetchUserAchievements.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(fetchUserAchievements.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        console.log('Fetched unlocked achievements:', action.payload); // Логируем, что было загружено
+
+        state.unlockedAchievementsIds = action.payload.map(
+          (achievement) => achievement.achievementId,
+        );
+      })
+      .addCase(fetchUserAchievements.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error?.message || 'Failed to fetch achievements';
+      })
+
+      // Обработка сохранения достижений
       .addCase(saveUserAchievements.pending, (state) => {
         state.status = 'loading';
         state.error = null;
       })
-      .addCase(saveUserAchievements.fulfilled, (state) => {
+      .addCase(saveUserAchievements.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        console.log('Saved unlocked achievements:', action.payload);
+        
+        state.unlockedAchievementsIds = [
+          ...new Set([...state.unlockedAchievementsIds, ...action.payload]),
+        ]; // Добавляем новые достижения
       })
       .addCase(saveUserAchievements.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error?.message || 'An unknown error occurred';
+        state.error = action.error?.message || 'Failed to save achievements';
       });
   },
 });
