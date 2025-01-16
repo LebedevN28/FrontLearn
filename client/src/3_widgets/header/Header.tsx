@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import styles from './Header.module.css'; 
 import { getUserByIdThunk } from '../../5_entities/user/model/userThunks';
+import FrontLearnTitle from '../Logo/FrontLearnTitle';
 
 
 export default function Header(): React.JSX.Element {
@@ -57,6 +58,7 @@ export default function Header(): React.JSX.Element {
         <Navbar.Brand as={RouterLink} to="/" className={styles.navbarBrand}>
           <Image src="/imgs/logo.jpg" alt="Logo" className={styles.logo} />
         </Navbar.Brand>
+        <FrontLearnTitle />
         <div className={styles.progressBarContainer}>
         </div>
 

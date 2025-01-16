@@ -26,7 +26,7 @@ const FallingLeaves: React.FC = () => {
       const size = Math.random() * 30 + 20; // Размер листа (от 20px до 50px)
       const delay = Math.random() * 5; // Задержка начала анимации
       const duration = Math.random() * 5 + 5; // Длительность анимации (от 5s до 10s)
-      const startX = Math.random() * 100; // Начальная позиция по X
+      const startX = Math.random() * -50; // Начальная позиция по X
 
       leaf.style.width = `${String(size)}px`;
       leaf.style.height = `${String(size)}px`;
