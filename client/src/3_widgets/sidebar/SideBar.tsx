@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { NavLink as RouterLink } from 'react-router';
-import { FaGlobe, FaBoxOpen, FaTrophy } from 'react-icons/fa'; 
+import { FaGlobe, FaBoxOpen, FaTrophy } from 'react-icons/fa';
 import './SideBar.css';
 
 export default function SideBar(): React.JSX.Element {
@@ -15,7 +15,7 @@ export default function SideBar(): React.JSX.Element {
         onMouseLeave={() => setIsHovered(false)}
       >
         <div className="sidebar-btn">
-          <FaGlobe className="sidebar-icon" /> 
+          <FaGlobe className="sidebar-icon" />
           <span>Обучение</span>
         </div>
 
@@ -34,22 +34,22 @@ export default function SideBar(): React.JSX.Element {
 
       <Row className="sidebar-row">
         <RouterLink to={`/daily`} className="sidebar-btn">
-          <FaBoxOpen className="sidebar-icon" /> 
+          <FaBoxOpen className="sidebar-icon" />
           <span>Вопрос дня</span>
         </RouterLink>
       </Row>
       <Row className="sidebar-row">
         <RouterLink to={`/leaderboard`} className="sidebar-btn">
-          <FaTrophy className="sidebar-icon" /> 
+          <FaTrophy className="sidebar-icon" />
           <span>Рейтинг</span>
         </RouterLink>
-       <Row className="sidebar-row">
-        <RouterLink to={`/achievements`} className="sidebar-btn">
-          <FaBoxOpen className="sidebar-icon" /> 
-          <span>Достижения</span>
-        </RouterLink>
       </Row>
-      </Row>
+        <Row className="sidebar-row">
+          <RouterLink to={`/achievements`} className="sidebar-btn">
+            <FaBoxOpen className="sidebar-icon" />
+            <span>Достижения</span>
+          </RouterLink>
+        </Row>
     </Container>
   );
 }
