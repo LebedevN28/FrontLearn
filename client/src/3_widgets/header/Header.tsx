@@ -8,23 +8,20 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
-import styles from './Header.module.css'; 
+import styles from './Header.module.css';
 import { getUserByIdThunk } from '../../5_entities/user/model/userThunks';
-
 
 export default function Header(): React.JSX.Element {
   const data = useAppSelector((store) => store.auth.data);
+  const user = useAppSelector((store) => store.user.selectedUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const user = useAppSelector((store) => store.user.selectedUser);
 
   useEffect(() => {
     if (data.status === AuthStatus.authenticated) {
       dispatch(getUserByIdThunk(data.user.id)).catch(console.error);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data.status, dispatch]);
+  }, [data, dispatch]);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -56,16 +53,17 @@ export default function Header(): React.JSX.Element {
       <Navbar expand="lg" className={`py-3 ${styles.navbar}`}>
         <Navbar.Brand as={RouterLink} to="/" className={styles.navbarBrand}>
           <Image src="/imgs/logo.jpg" alt="Logo" className={styles.logo} />
+          <span className={styles.brandName}>FrontLearn</span>
         </Navbar.Brand>
-        <div className={styles.progressBarContainer}>
-        </div>
+        <div className={styles.progressBarContainer}></div>
 
         <Nav className="ms-auto">
           {data.status === AuthStatus.authenticated ? (
             <div className={styles.userContainer}>
-              <span className={styles.username}>
-                {user?.name ?? data.user.name}
-              </span>
+              <span className={styles.username}>{user?.level ?? data.user.level} 📊</span>
+              <span className={styles.username}>{user?.points ?? data.user.points} 💎</span>
+              <span className={styles.username}>{user?.name ?? data.user.name}</span>
+
               <IconButton onClick={handleMenuOpen} className={styles.avatarButton}>
                 <Avatar
                   alt={data.user.name}

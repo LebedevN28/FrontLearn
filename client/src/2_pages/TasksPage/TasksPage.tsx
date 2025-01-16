@@ -63,7 +63,7 @@ function TaskPage(): React.JSX.Element {
 
   return (
     <div>
-      <h1>Вопросы по {moduleId}-й Фазе</h1>
+      <h1 className={styles.title}>Вопросы по {moduleId}-й Фазе</h1>
 
       <div className={styles.checkboxContainer}>
         <label>

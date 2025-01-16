@@ -10,7 +10,6 @@ export default function LeaderboardPage(): React.JSX.Element {
   const onlineUsers = useAppSelector((state) => state.userState.users);
 
   useEffect(() => {
-
     dispatch(getAllUsersThunk()).catch(console.log);
   }, [dispatch]);
 
