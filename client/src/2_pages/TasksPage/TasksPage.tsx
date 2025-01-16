@@ -22,11 +22,13 @@ function TaskPage(): React.JSX.Element {
       setDifficulty('');
       return;
     }
+
     setDifficulty((prevDifficulty) => {
-      if (prevDifficulty.includes(level)) {
-        return prevDifficulty.filter((item) => item !== level);
+      // Если это строка, просто заменяем её
+      if (prevDifficulty === level) {
+        return ''; // Убираем фильтр, если он уже выбран
       }
-      return level;
+      return level; // Устанавливаем выбранный уровень
     });
   };
 
@@ -34,16 +36,17 @@ function TaskPage(): React.JSX.Element {
     if (moduleId) {
       const moduleIdNumber = Number(moduleId);
 
-      dispatch(getTasksByModuleIdThunk({moduleId: moduleIdNumber, difficulty})).catch((error: unknown) => {
-        console.error('Error loading tasks:', error);
-      });
+      dispatch(getTasksByModuleIdThunk({ moduleId: moduleIdNumber, difficulty })).catch(
+        (error: unknown) => {
+          console.error('Error loading tasks:', error);
+        },
+      );
       const userId = user?.id;
       if (userId)
         dispatch(getUserProgressByModuleThunk({ userId, moduleId: moduleIdNumber })).catch(
           console.error,
         );
     }
-
   }, [moduleId, user?.id, difficulty, dispatch]);
 
   // Функция для проверки, решена ли задача
@@ -104,7 +107,12 @@ function TaskPage(): React.JSX.Element {
 
       <div className={styles.taskList}>
         {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} onClick={handleClick} isCompleted={isTaskCompleted(task.id)}/>
+          <TaskCard
+            key={task.id}
+            task={task}
+            onClick={handleClick}
+            isCompleted={isTaskCompleted(task.id)}
+          />
         ))}
       </div>
     </div>
