@@ -14,7 +14,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onClick, isCompleted }) => {
   return (
     <div
       className={`${styles.taskCard} ${isCompleted ? styles.completed : ''} ${difficultyClass}`}
-      onClick={() => !isCompleted && onClick(task.id)} // Отключаем клик, если задача завершена
+      onClick={() => onClick(task.id)} // Отключаем клик, если задача завершена
     >
       <div className={styles.iconContainer}>
         <span className={styles.starIcon}>★</span>
