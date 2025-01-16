@@ -41,7 +41,7 @@ export const AnswerButtons: React.FC<{
             color: 'white',
             '&:disabled': {
               backgroundColor: getDisabledButtonColor(isSelected, answer.isCorrect), // Цвет отключенной кнопки
-              color: isSelected ? 'white' : 'darkgrey', // Цвет текста
+              color: isSelected ? 'white' : 'lightgrey', // Цвет текста
             },
           }}
         >

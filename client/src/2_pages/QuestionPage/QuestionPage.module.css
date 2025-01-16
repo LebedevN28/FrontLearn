@@ -7,7 +7,10 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  margin-bottom: 110px; /* Отступ вниз для всего контейнера */
+}
+
+.progress {
+  margin-left: 45px;
 }
 
 .questionsContainer {
@@ -40,10 +43,29 @@
   border-radius: 8px;
 }
 
+.descContainer {
+  max-width: 80%;
+  margin-left: 40px;
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid #3f51b5;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Отступ вниз для контейнера с вопросами */
+}
+
+.nextButtonContainer {
+  text-align: center; /* Выравнивание по центру */
+  margin-top: 20px; /* Отступ сверху */
+  margin-bottom: 20px; /* Отступ снизу */
+}
 .nextButton {
   text-transform: none;
   background-color: #58009b !important;
   color: white;
+  font-size: 18px !important;
   margin-top: 16px;
   margin-bottom: 20px; /* Отступ вниз для кнопки */
 }
