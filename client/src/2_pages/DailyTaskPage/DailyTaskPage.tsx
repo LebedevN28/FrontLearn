@@ -13,6 +13,7 @@ import { updateUserPointsThunk } from '../../5_entities/user/model/userThunks';
 import CongratModal from '../../3_widgets/CongratModal/CongratModal';
 import type { AnswerType } from '../../5_entities/answer/model/answer.types';
 import styles from './DailyTaskPage.module.css';
+import { updateUserPoints } from '../../5_entities/user/model/userSlice';
 
 const DailyTaskPage: React.FC = () => {
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ const DailyTaskPage: React.FC = () => {
 
   const filteredAnswers = answers.filter((answer) => answer.taskId === taskId);
 
+  // Функция для вычисления очков в зависимости от сложности задачи
   const calculatePoints = (difficulty: string): number => {
     switch (difficulty) {
       case 'easy':
@@ -52,22 +54,24 @@ const DailyTaskPage: React.FC = () => {
         return 30;
     }
   };
-
-  const handleAnswer = (answer: AnswerType): void => {
+  const handleAnswer = async (answer: AnswerType): Promise<void> => {
     setSelectedAnswerId(answer.id);
 
     if (thisUser) {
-      if (answer.isCorrect) {
-        const points = task ? calculatePoints(task.difficulty) : 0;
-        setEarnedPoints(points);
-      } else {
-        setEarnedPoints(0);
-      }
-      setModalOpen(true);
+      try {
+        if (answer.isCorrect) {
+          const points = task ? calculatePoints(task.difficulty) : 0;
+          setEarnedPoints(points);
+          const { id } = thisUser;
 
-      if (answer.isCorrect) {
-        const { id } = thisUser;
-        dispatch(updateUserPointsThunk({ id, points })).catch(console.log);
+          await dispatch(updateUserPointsThunk({ id, points }));
+          dispatch(updateUserPoints({ userId: id, points }));
+        } else {
+          setEarnedPoints(0);
+        }
+        setModalOpen(true);
+      } catch (e) {
+        console.error('Ошибка при обновлении очков:', e);
       }
     }
   };
@@ -88,13 +92,6 @@ const DailyTaskPage: React.FC = () => {
   if (!task) {
     return <Typography>Task not found</Typography>;
   }
-
-  // const getButtonClass = (answer: any): string => {
-  //   if (selectedAnswerId === answer.id) {
-  //     return answer.isCorrect ? styles.correctAnswer : styles.incorrectAnswer;
-  //   }
-  //   return '';
-  // };
 
   return (
     <>
@@ -126,6 +123,7 @@ const DailyTaskPage: React.FC = () => {
           <img src="/imgs/questionheg.jpeg" alt="Main Image" className={styles.image} />
         </Box>
       </Box>
+
       <CongratModal open={isModalOpen} onClose={handleCloseModal} points={earnedPoints} />
     </>
   );

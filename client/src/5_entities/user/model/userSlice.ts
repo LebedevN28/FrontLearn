@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import type { UserType } from './user.types';
 import {
   getAllUsersThunk,
@@ -11,7 +11,7 @@ import {
 import type { UserStatsType } from '../../userAchievement/model/userStats.types';
 
 type UserState = {
-  stats: UserStatsType; // Добавляем статистику
+  stats: UserStatsType;
   selectedUser: UserType | null;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
