@@ -29,8 +29,8 @@
 }
 
 .sidebar-btn:hover {
-  background-color: #7c7878; /* Черный цвет при наведении */
-  color: #ffffff; /* Белый текст при наведении */
+  background-color: #000000; /* Черный цвет при наведении */
+
 }
 
 .sidebar-btn:hover .sidebar-icon {
@@ -39,7 +39,7 @@
 
 .sidebar-icon {
   font-size: 1.4rem; /* Размер иконок */
-  color: #5c5a5a; /* Цвет иконок */
+  color: #000000; /* Цвет иконок */
   transition: color 0.3s ease; /* Плавный переход для иконок */
 }
 
@@ -65,7 +65,7 @@
   min-width: 105%;
   background-color: #fcfdf5;
   text-align: left;
-  color: #5c5a5a;
+  color: #000000;
   padding: 10px 20px;
   font-size: 1.2rem;
   font-weight: bold;

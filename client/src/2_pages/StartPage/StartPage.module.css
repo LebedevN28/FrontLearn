@@ -4,14 +4,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh; /* Минимальная высота, чтобы контент занимал весь экран */
-  text-align: center; /* Центрируем текст */
+  min-height: 100vh;
+  text-align: center;
+  position: relative;
+  z-index: 1; /* Контент выше листьев */
 }
 
 /* Заголовок */
 .title {
   font-size: 2rem;
-  margin-bottom: 20px; /* Отступ снизу */
+  margin-bottom: 20px;
 }
 
 /* Контейнер для карточек */
@@ -23,7 +25,9 @@
   align-items: center;
   overflow-x: auto;
   padding: 16px;
-  margin-bottom: 20px; /* Отступ снизу */
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 2; /* Карточки выше листьев */
 }
 
 /* Стили для скроллбара */
@@ -44,10 +48,11 @@
   background: #f1f1f1;
 }
 
+/* Картинка */
 .image {
-  max-width: 100%; 
-  height: auto; 
-  border-radius: 8px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
   
