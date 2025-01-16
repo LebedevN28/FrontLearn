@@ -11,6 +11,7 @@ const progressRouter = require('./routes/progress.router');
 const achievementRouter = require('./routes/achievement.router');
 const userAchievementRouter = require('./routes/userAchievement.router');
 const app = express();
+const path = require('path');
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -26,6 +27,9 @@ app.use('/api/progress', progressRouter);
 app.use('/api/achievements', achievementRouter);
 // app.use('/api/users/:userId/achievements', userAchievementRouter);
 app.use('/api/user-achievements', userAchievementRouter);
-
+app.use(express.static(path.join(__dirname, '..', 'dist')));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
+});
 
 module.exports = app;
