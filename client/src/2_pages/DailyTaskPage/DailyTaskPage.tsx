@@ -12,6 +12,7 @@ import { getTaskByIdThunk } from '../../5_entities/task/model/taskThunk';
 import { updateUserPointsThunk } from '../../5_entities/user/model/userThunks';
 import CongratModal from '../../3_widgets/CongratModal/CongratModal';
 import type { AnswerType } from '../../5_entities/answer/model/answer.types';
+import styles from './DailyTaskPage.module.css';
 
 const DailyTaskPage: React.FC = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const DailyTaskPage: React.FC = () => {
   const error = useAppSelector(selectError);
   const task = useAppSelector((state) => state.tasks.selectedTask);
   const thisUser = useAppSelector((state) => state.user.selectedUser);
-  // const user = useAppSelector((state) => state.user.selectedUser);
+
   useEffect(() => {
     const randomTaskId = Math.floor(Math.random() * 81) + 1;
     setTaskId(randomTaskId);
@@ -63,15 +64,14 @@ const DailyTaskPage: React.FC = () => {
         const { id } = thisUser;
         dispatch(updateUserPointsThunk({ id, points })).catch(console.log);
       } else {
-        setModalOpen(true);
-        setEarnedPoints(0); // Нет заработанных очков
+        setEarnedPoints(0);
       }
     }
   };
 
   const handleCloseModal = (): void => {
     setModalOpen(false);
-    navigate('/');
+    void navigate('/');
   };
 
   if (status === 'loading') {
@@ -86,35 +86,45 @@ const DailyTaskPage: React.FC = () => {
     return <Typography>Task not found</Typography>;
   }
 
+  const getButtonClass = (answer: Answer): string => {
+    if (selectedAnswerId === answer.id) {
+      return answer.isCorrect ? styles.correctAnswer : styles.incorrectAnswer;
+    }
+    return '';
+  };
+  
   return (
-    <Box sx={{ padding: 3 }}>
-      <Typography variant="h4" gutterBottom>
-        {task.title}
-      </Typography>
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        {filteredAnswers.map((answer) => (
-          <Button
-            key={answer.id}
-            variant="contained"
-            onClick={() => handleAnswerClick(answer)}
-            sx={{
-              textTransform: 'none',
-              backgroundColor:
-                selectedAnswerId === answer.id
-                  ? answer.isCorrect
-                    ? 'green'
-                    : 'red'
-                  : 'primary.main',
-              color: 'white',
-            }}
-          >
-            {answer.content}
-          </Button>
-        ))}
+    <>
+      <Box className={styles.container}>
+        <Box className={styles.questionsContainer}>
+          <Typography variant="h4" gutterBottom>
+            {task.title}
+          </Typography>
+          <Box className={styles.answersContainer}>
+            {filteredAnswers.map((answer) => (
+              <Button
+                key={answer.id}
+                variant="contained"
+                onClick={() => handleAnswerClick(answer)}
+                className={`${styles.answerButton} ${
+                  selectedAnswerId === answer.id
+                    ? answer.isCorrect
+                      ? styles.correctAnswer
+                      : styles.incorrectAnswer
+                    : ''
+                }`}
+              >
+                {answer.content}
+              </Button>
+            ))}
+          </Box>
+        </Box>
+        <Box className={styles.imageContainer}>
+          <img src="/imgs/questionheg.jpeg" alt="Main Image" className={styles.image} />
+        </Box>
       </Box>
-
       <CongratModal open={isModalOpen} onClose={handleCloseModal} points={earnedPoints} />
-    </Box>
+    </>
   );
 };
 

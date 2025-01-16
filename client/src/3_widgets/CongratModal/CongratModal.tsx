@@ -27,7 +27,7 @@ const CongratModal: React.FC<CongratModalProps> = ({ open, onClose, points }) =>
         {points > 0 ? 'Ура!' : 'Увы!'}
       </Typography>
       <Typography gutterBottom>
-        {points > 0 ? `Правильный ответ! + ${String(points)} очков!` : 'Ответ неправильный 🤷!'}
+        {points > 0 ? `Правильный ответ! + ${String(points)} 💎` : 'Ответ неправильный 🤷!'}
       </Typography>
       <Button variant="contained" onClick={onClose} sx={{ mt: 2 }}>
         Закрыть
