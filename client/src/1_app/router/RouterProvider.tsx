@@ -12,6 +12,8 @@ import ProfilePage from '../../2_pages/ProfilePage/ProfilePage';
 import StartPage from '../../2_pages/StartPage/StartPage';
 import TasksPage from '../../2_pages/TasksPage/TasksPage';
 import LeaderboardPage from '../../2_pages/LeaderboardPage/LeaderboardPage';
+import AchievementsPage from '../../2_pages/AchievementsPage/AchievementsPage';
+
 import { getTotalUserProgressThunk } from '../../5_entities/progress/model/progressThunks';
 import { getUserByIdThunk } from '../../5_entities/user/model/userThunks';
 import DailyTaskPage from '../../2_pages/DailyTaskPage/DailyTaskPage';
@@ -73,6 +75,28 @@ export default function RouterProvider(): React.JSX.Element {
               redirectTo="/auth/login"
             >
               <TasksPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/achievements"
+          element={
+            <ProtectedRoute
+              isAllowed={authData.status === AuthStatus.authenticated}
+              redirectTo="/auth/login"
+            >
+              <AchievementsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/achievements"
+          element={
+            <ProtectedRoute
+              isAllowed={authData.status === AuthStatus.authenticated}
+              redirectTo="/auth/login"
+            >
+              <AchievementsPage />
             </ProtectedRoute>
           }
         />

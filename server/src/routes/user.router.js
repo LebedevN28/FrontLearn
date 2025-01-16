@@ -11,12 +11,11 @@ userRouter
   .patch(verifyAccessToken, userController.updateUserAccount)
   .delete(verifyAccessToken, userController.deleteUser);
 
-userRouter
-.route('/:id/points')
-.patch(verifyAccessToken, userController.updateUserPoints)
+userRouter.route('/:id/points').patch(verifyAccessToken, userController.updateUserPoints);
 
 userRouter
   .route('/:id/image')
   .patch(verifyAccessToken, upload.single('image'), userController.updateUserPhoto);
+userRouter.patch('/:id/stats', verifyAccessToken, userController.updateUserStats);
 
 module.exports = userRouter;
