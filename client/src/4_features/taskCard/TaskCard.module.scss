@@ -16,7 +16,9 @@ $hover-scale: 1.05; // Коэффициент увеличения при нав
   align-items: center;
   justify-content: center;
   box-shadow: 0 6px 8px $box-shadow;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   transform: translateY(-4px);
   cursor: pointer;
   z-index: 10;
@@ -29,14 +31,11 @@ $hover-scale: 1.05; // Коэффициент увеличения при нав
   &.completed {
     background-color: #706e6e !important; /* Серый фон */
     opacity: 0.7;
-    cursor: not-allowed;
 
     button {
-      cursor: not-allowed;
       opacity: 0.6;
     }
   }
-
 }
 
 /* Стили для сложности */
