@@ -1,80 +1,58 @@
-/* Контейнер для страницы с лидерами */
-.container {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
-
-/* Заголовок страницы */
-.title {
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1f2937; /* Темный текст */
-  margin-bottom: 16px;
-}
-
-/* Подзаголовок */
-.subtitle {
-  text-align: center;
-  color: #4b5563; /* Серый текст */
-  margin-bottom: 20px;
-}
-
-/* Основной контейнер карточек */
-.card-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 4px;
-}
-
-/* Стили для карточки пользователя */
-.card {
+.leaderboardPage {
   display: flex;
   align-items: center;
-  padding: 8px 16px;
-  border-radius: 12px;
-  transition: background-color 0.3s ease;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень для карточки */
-  cursor: pointer;
+  justify-content: space-between;
+  min-height: 90vh;
+  padding: 20px;
+  background-color: #ffffff;
 }
 
-/* Карточка при наведении */
-.card:hover {
-  background-color: #f3f4f6; /* Светло-серый цвет */
-  cursor: pointer;
-}
-
-/* Индекс пользователя (порядковый номер) */
-.index {
-  margin-right: 16px;
-  font-weight: bold;
-  color: #65a30d; /* Лаймовый цвет */
-  cursor: pointer;
-}
-
-/* Контейнер для аватара */
-.avatar {
-  margin-left: 12px;
-  margin-right: 24px;
-  height: 48px;
-  width: 48px;
-  border-radius: 50%;
-  border: 2px solid #22c55e;
-  /* background-color: #22c55e; */
-  cursor: pointer;
+.imageContainer {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Обрезаем части картинки, которые выходят за круг */
-  object-fit: cover;
 }
 
-/* Для изображения внутри аватара */
-.avatar img {
-  width: 100%; /* Растягиваем изображение на всю ширину контейнера */
-  height: 100%; /* Растягиваем изображение на всю высоту контейнера */
-  object-fit: cover; /* Обеспечивает, чтобы изображение полностью заполнило контейнер, сохраняя пропорции */
+.imageContainer img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
+
+.cardContainer {
+  flex: 1;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+  margin-left: 20px;
+}
+
+/* Стили для разделения между карточками */
+.cardContainer > *:not(:last-child) {
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 16px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .leaderboardPage {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .imageContainer,
+  .cardContainer {
+    flex: none;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
+
+  .imageContainer img {
+    max-width: 80%;
+  }
+}
+
