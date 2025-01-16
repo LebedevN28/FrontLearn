@@ -1,32 +1,55 @@
 .leaderboardPage {
-  display: flex;
-  align-items: center;
+  display: flex; /* Горизонтальное выравнивание элементов */
+  align-items: center; /* Выравнивание элементов по верху */
   justify-content: space-between;
-  min-height: 90vh;
+  min-height: 88vh;
   padding: 20px;
   background-color: #ffffff;
+  overflow: hidden;
 }
 
 .imageContainer {
-  flex: 1;
+  flex: 0 1 35%; /* Картинка будет занимать 35% ширины */
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-right: 20px; /* Отступ справа */
 }
 
 .imageContainer img {
-  max-width: 100%;
-  height: auto;
+  max-width: 100%; /* Картинка не выйдет за пределы контейнера */
+  max-height: 300px; /* Ограничение высоты для картинки */
+  height: auto; /* Поддержка пропорций */
+  width: auto; /* Поддержка пропорций */
   border-radius: 8px;
 }
 
+.rightContainer {
+  flex: 1; /* Рейтинг будет занимать оставшееся пространство */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.pageTitle {
+  text-align: right;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 20px; /* Отступ сверху */
+  margin-bottom: 20px; /* Отступ снизу */
+  margin-left: 1px;
+}
+
 .cardContainer {
-  flex: 1;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 12px;
   backdrop-filter: blur(5px);
-  margin-left: 20px;
+  width: 100%;
+  max-height: 500px;
+  overflow-y: auto; /* Вертикальный скролл, если содержимое не помещается */
 }
 
 /* Стили для разделения между карточками */
@@ -44,7 +67,7 @@
   }
 
   .imageContainer,
-  .cardContainer {
+  .rightContainer {
     flex: none;
     width: 100%;
     margin-left: 0;
@@ -53,6 +76,10 @@
 
   .imageContainer img {
     max-width: 80%;
+    max-height: 200px;
+  }
+
+  .pageTitle {
+    text-align: center; /* Центрируем заголовок на мобильных */
   }
 }
-

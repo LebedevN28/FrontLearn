@@ -17,19 +17,26 @@ export default function LeaderboardPage(): React.JSX.Element {
 
   return (
     <div className={styles.leaderboardPage}>
+      {/* Контейнер для картинки слева */}
       <div className={styles.imageContainer}>
         <img src="/imgs/leader.jpeg" alt="Leaderboard Background" />
       </div>
-      <div className={styles.cardContainer}>
-        <h1 className="text-2xl font-bold text-center text-gray-800">Рейтинг игроков</h1>
-        {sortedUsers.map((user, index) => (
-          <LeaderCard
-            key={user.id}
-            user={user}
-            index={index}
-            isOnline={onlineUsers.some((onlineUser) => onlineUser.id === user.id)}
-          />
-        ))}
+      
+      {/* Контейнер справа для заголовка и карточек */}
+      <div className={styles.rightContainer}>
+        <h1 className={styles.pageTitle}>Рейтинг игроков</h1>
+        
+        {/* Контейнер для карточек рейтинга */}
+        <div className={styles.cardContainer}>
+          {sortedUsers.map((user, index) => (
+            <LeaderCard
+              key={user.id}
+              user={user}
+              index={index}
+              isOnline={onlineUsers.some((onlineUser) => onlineUser.id === user.id)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
