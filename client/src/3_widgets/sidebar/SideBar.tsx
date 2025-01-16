@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
-import { NavLink as RouterLink } from 'react-router';
-import { FaGlobe, FaBoxOpen, FaTrophy } from 'react-icons/fa';
+import { NavLink as RouterLink } from 'react-router-dom'; // Исправьте импорт
+import { FaGlobe, FaBoxOpen, FaTrophy, FaMedal } from 'react-icons/fa'; // Добавьте FaMedal
 import './SideBar.css';
 
 export default function SideBar(): React.JSX.Element {
@@ -44,12 +44,12 @@ export default function SideBar(): React.JSX.Element {
           <span>Рейтинг</span>
         </RouterLink>
       </Row>
-        <Row className="sidebar-row">
-          <RouterLink to={`/achievements`} className="sidebar-btn">
-            <FaBoxOpen className="sidebar-icon" />
-            <span>Достижения</span>
-          </RouterLink>
-        </Row>
+      <Row className="sidebar-row">
+        <RouterLink to={`/achievements`} className="sidebar-btn">
+          <FaMedal className="sidebar-icon" /> {/* Используем FaMedal */}
+          <span>Достижения</span>
+        </RouterLink>
+      </Row>
     </Container>
   );
 }

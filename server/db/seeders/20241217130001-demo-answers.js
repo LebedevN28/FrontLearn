@@ -5,15 +5,7 @@ module.exports = {
     await queryInterface.bulkInsert('Answers', [
       // Ответы для задачи 1
       {
-        id: 1,
-        taskId: 1,
-        content: 'Переменная — это контейнер для хранения данных.',
-        isCorrect: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        id: 2,
+        id: 3,
         taskId: 1,
         content: 'Переменная — это метод объекта.',
         isCorrect: false,
@@ -21,7 +13,15 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 3,
+        id: 2,
+        taskId: 1,
+        content: 'Переменная — это контейнер для хранения данных.',
+        isCorrect: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: 1,
         taskId: 1,
         content: 'Переменная — это событие в DOM.',
         isCorrect: false,
@@ -31,7 +31,7 @@ module.exports = {
 
       // Вопрос 2
       {
-        id: 4,
+        id: 5,
         taskId: 2,
         content: 'Number, String, Boolean, Null, Undefined, Symbol, Object.',
         isCorrect: true,
@@ -39,7 +39,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 5,
+        id: 6,
         taskId: 2,
         content: 'Array, Function, Promise.',
         isCorrect: false,
@@ -47,7 +47,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 6,
+        id: 4,
         taskId: 2,
         content: 'DOM, Event, Node.',
         isCorrect: false,
@@ -56,14 +56,6 @@ module.exports = {
       },
 
       // Вопрос 3
-      {
-        id: 7,
-        taskId: 3,
-        content: 'undefined обозначает, что значение переменной не было задано.',
-        isCorrect: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
       {
         id: 8,
         taskId: 3,
@@ -80,10 +72,18 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: 7,
+        taskId: 3,
+        content: 'undefined обозначает, что значение переменной не было задано.',
+        isCorrect: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
 
       // Вопрос 4
       {
-        id: 10,
+        id: 11,
         taskId: 4,
         content: 'Замыкание позволяет функции запоминать своё лексическое окружение.',
         isCorrect: true,
@@ -91,7 +91,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 11,
+        id: 10,
         taskId: 4,
         content: 'Замыкание создаёт новый объект в памяти.',
         isCorrect: false,
@@ -109,7 +109,7 @@ module.exports = {
 
       // Вопрос 5
       {
-        id: 13,
+        id: 15,
         taskId: 5,
         content: 'Функции высшего порядка принимают другие функции как аргументы.',
         isCorrect: true,
@@ -125,7 +125,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 15,
+        id: 13,
         taskId: 5,
         content: 'Функции высшего порядка работают только с массивами.',
         isCorrect: false,
@@ -135,7 +135,7 @@ module.exports = {
 
       // Вопрос 6
       {
-        id: 16,
+        id: 17,
         taskId: 6,
         content:
           '`var` имеет функциональную область видимости, а `let` и `const` — блочную.',
@@ -144,7 +144,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 17,
+        id: 16,
         taskId: 6,
         content: '`var`, `let` и `const` имеют одинаковую область видимости.',
         isCorrect: false,
@@ -162,7 +162,7 @@ module.exports = {
 
       // Вопрос 7
       {
-        id: 19,
+        id: 21,
         taskId: 7,
         content:
           'Каррирование — это процесс преобразования функции с несколькими аргументами в цепочку функций.',
@@ -171,7 +171,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 20,
+        id: 19,
         taskId: 7,
         content: 'Каррирование — это метод работы с массивами.',
         isCorrect: false,
@@ -179,7 +179,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 21,
+        id: 20,
         taskId: 7,
         content: 'Каррирование — это процесс клонирования объектов.',
         isCorrect: false,
@@ -224,7 +224,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 26,
+        id: 27,
         taskId: 9,
         content: 'Прототипное наследование создаёт глубокую копию объектов.',
         isCorrect: false,
@@ -232,7 +232,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 27,
+        id: 26,
         taskId: 9,
         content: 'Прототипное наследование работает только с массивами.',
         isCorrect: false,
@@ -240,7 +240,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 28,
+        id: 30,
         taskId: 10,
         content: 'JSX — это синтаксический сахар для написания элементов React.',
         isCorrect: true,
@@ -256,7 +256,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 30,
+        id: 28,
         taskId: 10,
         content: 'JSX — это плагин для Babel.',
         isCorrect: false,
@@ -266,7 +266,7 @@ module.exports = {
 
       // Вопрос 11
       {
-        id: 31,
+        id: 33,
         taskId: 11,
         content: 'Компоненты — это функции, которые возвращают элементы React.',
         isCorrect: true,
@@ -274,7 +274,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 32,
+        id: 31,
         taskId: 11,
         content: 'Компоненты — это методы для работы с состоянием.',
         isCorrect: false,
@@ -282,7 +282,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 33,
+        id: 32,
         taskId: 11,
         content: 'Компоненты — это части HTML, созданные React.',
         isCorrect: false,
@@ -292,7 +292,7 @@ module.exports = {
 
       // Вопрос 12
       {
-        id: 34,
+        id: 35,
         taskId: 12,
         content: 'Props позволяют передавать данные в компоненты.',
         isCorrect: true,
@@ -300,7 +300,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 35,
+        id: 34,
         taskId: 12,
         content: 'Props используются для управления состоянием компонентов.',
         isCorrect: false,
@@ -318,7 +318,7 @@ module.exports = {
 
       // Вопрос 13
       {
-        id: 37,
+        id: 39,
         taskId: 13,
         content:
           '`useState` возвращает массив с текущим значением и функцией обновления.',
@@ -335,7 +335,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 39,
+        id: 37,
         taskId: 13,
         content: '`useState` работает только в классовых компонентах.',
         isCorrect: false,
@@ -371,7 +371,7 @@ module.exports = {
 
       // Вопрос 15
       {
-        id: 43,
+        id: 44,
         taskId: 15,
         content: 'События передаются как функции в атрибутах, например, `onClick`.',
         isCorrect: true,
@@ -379,7 +379,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 44,
+        id: 43,
         taskId: 15,
         content: 'События обрабатываются только внутри useEffect.',
         isCorrect: false,
@@ -397,7 +397,7 @@ module.exports = {
 
       // Вопрос 16
       {
-        id: 46,
+        id: 48,
         taskId: 16,
         content: 'Виртуальный DOM минимизирует изменения в реальном DOM.',
         isCorrect: true,
@@ -405,7 +405,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 47,
+        id: 46,
         taskId: 16,
         content: 'Виртуальный DOM создаёт прямое отображение в реальном DOM.',
         isCorrect: false,
@@ -413,7 +413,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 48,
+        id: 47,
         taskId: 16,
         content: 'Виртуальный DOM работает только с хуками.',
         isCorrect: false,
@@ -423,7 +423,7 @@ module.exports = {
 
       // Вопрос 17
       {
-        id: 49,
+        id: 51,
         taskId: 17,
         content: 'Context API используется для передачи данных между компонентами.',
         isCorrect: true,
@@ -439,7 +439,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 51,
+        id: 49,
         taskId: 17,
         content: 'Context API используется для работы с сервером.',
         isCorrect: false,
@@ -458,7 +458,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 53,
+        id: 54,
         taskId: 18,
         content: 'Фрагменты используются только для стилизации компонентов.',
         isCorrect: false,
@@ -466,7 +466,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 54,
+        id: 53,
         taskId: 18,
         content: 'Фрагменты позволяют работать с событиями.',
         isCorrect: false,
@@ -474,7 +474,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 55,
+        id: 57,
         taskId: 19,
         content: 'Redux — это библиотека для управления состоянием приложения.',
         isCorrect: true,
@@ -490,7 +490,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 57,
+        id: 55,
         taskId: 19,
         content: 'Redux используется для стилизации компонентов.',
         isCorrect: false,
@@ -500,7 +500,7 @@ module.exports = {
 
       // Вопрос 20
       {
-        id: 58,
+        id: 59,
         taskId: 20,
         content: 'Store хранит состояние приложения.',
         isCorrect: true,
@@ -508,7 +508,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 59,
+        id: 58,
         taskId: 20,
         content: 'Store управляет событиями DOM.',
         isCorrect: false,
@@ -526,7 +526,7 @@ module.exports = {
 
       // Вопрос 21
       {
-        id: 61,
+        id: 63,
         taskId: 21,
         content: 'Action — это объект, описывающий, что нужно изменить в состоянии.',
         isCorrect: true,
@@ -542,7 +542,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 63,
+        id: 61,
         taskId: 21,
         content: 'Action используется для вызова API.',
         isCorrect: false,
@@ -552,7 +552,7 @@ module.exports = {
 
       // Вопрос 22
       {
-        id: 64,
+        id: 66,
         taskId: 22,
         content: 'Reducer — это чистая функция, принимающая состояние и Action.',
         isCorrect: true,
@@ -568,7 +568,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 66,
+        id: 64,
         taskId: 22,
         content: 'Reducer используется для стилизации компонентов.',
         isCorrect: false,
@@ -578,7 +578,7 @@ module.exports = {
 
       // Вопрос 23
       {
-        id: 67,
+        id: 68,
         taskId: 23,
         content: 'Redux подключается к React через Provider.',
         isCorrect: true,
@@ -586,7 +586,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 68,
+        id: 67,
         taskId: 23,
         content: 'Redux автоматически интегрируется с React.',
         isCorrect: false,
@@ -604,7 +604,7 @@ module.exports = {
 
       // Вопрос 24
       {
-        id: 70,
+        id: 72,
         taskId: 24,
         content: 'Middleware перехватывают Actions перед их обработкой Reducer-ами.',
         isCorrect: true,
@@ -620,7 +620,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 72,
+        id: 70,
         taskId: 24,
         content: 'Middleware используются только для асинхронных операций.',
         isCorrect: false,
@@ -656,7 +656,7 @@ module.exports = {
 
       // Вопрос 26
       {
-        id: 76,
+        id: 78,
         taskId: 26,
         content: 'Асинхронные действия обрабатываются через Middleware.',
         isCorrect: true,
@@ -672,7 +672,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 78,
+        id: 76,
         taskId: 26,
         content: 'Асинхронные действия работают только с Redux Toolkit.',
         isCorrect: false,
@@ -682,7 +682,7 @@ module.exports = {
 
       // Вопрос 27
       {
-        id: 79,
+        id: 80,
         taskId: 27,
         content: 'Redux Toolkit предоставляет упрощённый API для работы с Redux.',
         isCorrect: true,
@@ -690,7 +690,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 80,
+        id: 79,
         taskId: 27,
         content: 'Redux Toolkit заменяет React полностью.',
         isCorrect: false,
@@ -706,7 +706,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 82,
+        id: 84,
         taskId: 28,
         content: '"use strict" включает строгий режим выполнения кода.',
         isCorrect: true,
@@ -722,7 +722,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 84,
+        id: 82,
         taskId: 28,
         content: '"use strict" ускоряет выполнение JavaScript-кода.',
         isCorrect: false,
@@ -732,7 +732,7 @@ module.exports = {
 
       // Вопрос 29
       {
-        id: 85,
+        id: 86,
         taskId: 29,
         content: 'Массив создаётся с помощью `[]`.',
         isCorrect: true,
@@ -740,7 +740,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 86,
+        id: 85,
         taskId: 29,
         content: 'Массив создаётся с помощью `{}`.',
         isCorrect: false,
@@ -758,7 +758,7 @@ module.exports = {
 
       // Вопрос 30
       {
-        id: 88,
+        id: 90,
         taskId: 30,
         content:
           'typeof null возвращает "object" из-за особенностей ранней реализации JavaScript.',
@@ -775,7 +775,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 90,
+        id: 88,
         taskId: 30,
         content: 'typeof null возвращает "undefined".',
         isCorrect: false,
@@ -811,7 +811,7 @@ module.exports = {
 
       // Вопрос 32
       {
-        id: 94,
+        id: 95,
         taskId: 32,
         content: 'Деструктуризация позволяет извлекать значения из объектов и массивов.',
         isCorrect: true,
@@ -819,7 +819,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 95,
+        id: 94,
         taskId: 32,
         content: 'Деструктуризация изменяет исходный объект.',
         isCorrect: false,
@@ -837,7 +837,7 @@ module.exports = {
 
       // Вопрос 33
       {
-        id: 97,
+        id: 98,
         taskId: 33,
         content: 'Array.map создаёт новый массив, применяя функцию к каждому элементу.',
         isCorrect: true,
@@ -845,7 +845,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 98,
+        id: 97,
         taskId: 33,
         content: 'Array.map изменяет исходный массив.',
         isCorrect: false,
@@ -863,7 +863,7 @@ module.exports = {
 
       // Вопрос 34
       {
-        id: 100,
+        id: 102,
         taskId: 34,
         content: 'Proxy позволяет перехватывать операции над объектами.',
         isCorrect: true,
@@ -879,7 +879,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 102,
+        id: 100,
         taskId: 34,
         content: 'Proxy ускоряет выполнение функций.',
         isCorrect: false,
@@ -889,7 +889,7 @@ module.exports = {
 
       // Вопрос 35
       {
-        id: 103,
+        id: 104,
         taskId: 35,
         content: 'Генераторы возвращают объект с методом next().',
         isCorrect: true,
@@ -897,7 +897,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 104,
+        id: 103,
         taskId: 35,
         content: 'Генераторы работают только с массивами.',
         isCorrect: false,
@@ -915,7 +915,7 @@ module.exports = {
 
       // Вопрос 36
       {
-        id: 106,
+        id: 108,
         taskId: 36,
         content: 'В стрелочных функциях "this" наследуется из внешнего контекста.',
         isCorrect: true,
@@ -931,15 +931,17 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 108,
+        id: 106,
         taskId: 36,
         content: 'В стрелочных функциях "this" определяется в момент вызова.',
         isCorrect: false,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      // Вопрос 37
+
       {
-        id: 109,
+        id: 111,
         taskId: 37,
         content:
           'React.Fragment позволяет рендерить несколько элементов без дополнительного узла в DOM.',
@@ -956,7 +958,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 111,
+        id: 109,
         taskId: 37,
         content: 'React.Fragment добавляет новые атрибуты к элементам.',
         isCorrect: false,
@@ -966,7 +968,7 @@ module.exports = {
 
       // Вопрос 38
       {
-        id: 112,
+        id: 114,
         taskId: 38,
         content: 'Атрибут "key" помогает React эффективно обновлять список элементов.',
         isCorrect: true,
@@ -982,7 +984,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 114,
+        id: 112,
         taskId: 38,
         content: 'Атрибут "key" определяет стиль элементов.',
         isCorrect: false,
@@ -992,7 +994,7 @@ module.exports = {
 
       // Вопрос 39
       {
-        id: 115,
+        id: 116,
         taskId: 39,
         content:
           'Обработчики событий в React передаются как функции, например, onClick={() => {}}.',
@@ -1001,7 +1003,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 116,
+        id: 115,
         taskId: 39,
         content: 'Обработчики событий в React создаются автоматически.',
         isCorrect: false,
@@ -1045,7 +1047,7 @@ module.exports = {
 
       // Вопрос 41
       {
-        id: 121,
+        id: 122,
         taskId: 41,
         content: 'React.memo предотвращает ненужный ререндер компонентов.',
         isCorrect: true,
@@ -1053,7 +1055,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 122,
+        id: 121,
         taskId: 41,
         content: 'React.memo используется для создания мемоизированных значений.',
         isCorrect: false,
@@ -1071,7 +1073,7 @@ module.exports = {
 
       // Вопрос 42
       {
-        id: 124,
+        id: 126,
         taskId: 42,
         content: 'StrictMode позволяет находить потенциальные проблемы в приложении.',
         isCorrect: true,
@@ -1087,7 +1089,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 126,
+        id: 124,
         taskId: 42,
         content: 'StrictMode предотвращает ошибки в коде.',
         isCorrect: false,
@@ -1123,7 +1125,7 @@ module.exports = {
 
       // Вопрос 44
       {
-        id: 130,
+        id: 131,
         taskId: 44,
         content: 'Hydration — это процесс синхронизации HTML и React.',
         isCorrect: true,
@@ -1131,7 +1133,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 131,
+        id: 130,
         taskId: 44,
         content: 'Hydration обновляет состояние компонентов.',
         isCorrect: false,
@@ -1149,7 +1151,7 @@ module.exports = {
 
       // Вопрос 45
       {
-        id: 133,
+        id: 134,
         taskId: 45,
         content:
           'Concurrent Mode улучшает пользовательский опыт за счёт асинхронного рендеринга.',
@@ -1158,7 +1160,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 134,
+        id: 133,
         taskId: 45,
         content: 'Concurrent Mode предотвращает ошибки в компонентах.',
         isCorrect: false,
@@ -1176,7 +1178,7 @@ module.exports = {
 
       // Вопрос 46
       {
-        id: 136,
+        id: 137,
         taskId: 46,
         content: 'Redux DevTools позволяют отслеживать изменения состояния.',
         isCorrect: true,
@@ -1184,7 +1186,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 137,
+        id: 136,
         taskId: 46,
         content: 'Redux DevTools автоматизируют рендеринг компонентов.',
         isCorrect: false,
@@ -1199,8 +1201,9 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      // Вопрос 47
       {
-        id: 139,
+        id: 141,
         taskId: 47,
         content: 'Состояние в Redux обновляется через Reducer на основе Action.',
         isCorrect: true,
@@ -1216,7 +1219,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 141,
+        id: 139,
         taskId: 47,
         content: 'Состояние в Redux обновляется через события DOM.',
         isCorrect: false,
@@ -1252,7 +1255,7 @@ module.exports = {
 
       // Вопрос 49
       {
-        id: 145,
+        id: 147,
         taskId: 49,
         content: 'Redux Toolkit упрощает создание Slice и Thunks.',
         isCorrect: true,
@@ -1268,7 +1271,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 147,
+        id: 145,
         taskId: 49,
         content: 'Redux Toolkit требует использования классовых компонентов.',
         isCorrect: false,
@@ -1278,7 +1281,7 @@ module.exports = {
 
       // Вопрос 50
       {
-        id: 148,
+        id: 150,
         taskId: 50,
         content: 'Slice — это набор Reducer и Actions для конкретного состояния.',
         isCorrect: true,
@@ -1294,7 +1297,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 150,
+        id: 148,
         taskId: 50,
         content: 'Slice автоматически обновляет состояние DOM.',
         isCorrect: false,
@@ -1304,7 +1307,7 @@ module.exports = {
 
       // Вопрос 51
       {
-        id: 151,
+        id: 152,
         taskId: 51,
         content: '`createAsyncThunk` позволяет создавать асинхронные Thunks.',
         isCorrect: true,
@@ -1312,7 +1315,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 152,
+        id: 151,
         taskId: 51,
         content: '`createAsyncThunk` создаёт синхронные действия.',
         isCorrect: false,
@@ -1330,7 +1333,7 @@ module.exports = {
 
       // Вопрос 52
       {
-        id: 154,
+        id: 156,
         taskId: 52,
         content: 'reselect позволяет создавать мемоизированные Selectors.',
         isCorrect: true,
@@ -1346,7 +1349,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 156,
+        id: 154,
         taskId: 52,
         content: 'reselect работает только с хуками React.',
         isCorrect: false,
@@ -1356,7 +1359,7 @@ module.exports = {
 
       // Вопрос 53
       {
-        id: 157,
+        id: 159,
         taskId: 53,
         content:
           'Кастомные Middleware создаются как функции, принимающие `store` и `next`.',
@@ -1373,7 +1376,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 159,
+        id: 157,
         taskId: 53,
         content: 'Кастомные Middleware используются для работы с DOM.',
         isCorrect: false,
@@ -1383,7 +1386,7 @@ module.exports = {
 
       // Вопрос 54
       {
-        id: 160,
+        id: 161,
         taskId: 54,
         content:
           'Производительность Redux можно оптимизировать с помощью мемоизации Selectors.',
@@ -1392,7 +1395,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 161,
+        id: 160,
         taskId: 54,
         content:
           'Производительность Redux оптимизируется автоматическим обновлением Store.',
@@ -1435,6 +1438,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      // Вопрос 56
       {
         id: 166,
         taskId: 56,
@@ -1462,7 +1466,7 @@ module.exports = {
 
       // Вопрос 57
       {
-        id: 169,
+        id: 170,
         taskId: 57,
         content: 'Объект создаётся с помощью {}.',
         isCorrect: true,
@@ -1470,7 +1474,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 170,
+        id: 169,
         taskId: 57,
         content: 'Объект создаётся с помощью [].',
         isCorrect: false,
@@ -1488,7 +1492,7 @@ module.exports = {
 
       // Вопрос 58
       {
-        id: 172,
+        id: 173,
         taskId: 58,
         content: '"for...of" позволяет перебирать итеративные объекты.',
         isCorrect: true,
@@ -1496,7 +1500,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 173,
+        id: 172,
         taskId: 58,
         content: '"for...of" используется для создания объектов.',
         isCorrect: false,
@@ -1514,7 +1518,7 @@ module.exports = {
 
       // Вопрос 59
       {
-        id: 175,
+        id: 176,
         taskId: 59,
         content: 'Промисы позволяют обрабатывать асинхронные операции.',
         isCorrect: true,
@@ -1522,7 +1526,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 176,
+        id: 175,
         taskId: 59,
         content: 'Промисы используются для создания событий.',
         isCorrect: false,
@@ -1540,7 +1544,7 @@ module.exports = {
 
       // Вопрос 60
       {
-        id: 178,
+        id: 180,
         taskId: 60,
         content: 'async/await упрощает работу с асинхронными функциями.',
         isCorrect: true,
@@ -1556,7 +1560,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 180,
+        id: 178,
         taskId: 60,
         content: 'async/await создаёт синхронные операции.',
         isCorrect: false,
@@ -1566,7 +1570,7 @@ module.exports = {
 
       // Вопрос 61
       {
-        id: 181,
+        id: 182,
         taskId: 61,
         content: 'Модульная система позволяет экспортировать и импортировать функции.',
         isCorrect: true,
@@ -1574,7 +1578,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 182,
+        id: 181,
         taskId: 61,
         content: 'Модульная система создаёт копии объектов.',
         isCorrect: false,
@@ -1618,7 +1622,7 @@ module.exports = {
 
       // Вопрос 63
       {
-        id: 187,
+        id: 189,
         taskId: 63,
         content: 'Symbol создаёт уникальные идентификаторы.',
         isCorrect: true,
@@ -1634,7 +1638,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 189,
+        id: 187,
         taskId: 63,
         content: 'Symbol добавляет новые методы к объектам.',
         isCorrect: false,
@@ -1644,7 +1648,7 @@ module.exports = {
 
       // Вопрос 64
       {
-        id: 190,
+        id: 191,
         taskId: 64,
         content: 'React-компоненты создаются с помощью функций или классов.',
         isCorrect: true,
@@ -1652,7 +1656,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 191,
+        id: 190,
         taskId: 64,
         content: 'React-компоненты создаются только через классы.',
         isCorrect: false,
@@ -1670,7 +1674,7 @@ module.exports = {
 
       // Вопрос 65
       {
-        id: 193,
+        id: 194,
         taskId: 65,
         content: 'State — это объект, хранящий динамические данные компонента.',
         isCorrect: true,
@@ -1678,7 +1682,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 194,
+        id: 193,
         taskId: 65,
         content: 'State используется для работы с DOM.',
         isCorrect: false,
@@ -1696,7 +1700,7 @@ module.exports = {
 
       // Вопрос 66
       {
-        id: 196,
+        id: 198,
         taskId: 66,
         content: 'Списки в React рендерятся с помощью метода map().',
         isCorrect: true,
@@ -1712,13 +1716,14 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 198,
+        id: 196,
         taskId: 66,
         content: 'Списки в React рендерятся автоматически.',
         isCorrect: false,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      // Вопрос 67
       {
         id: 199,
         taskId: 67,
@@ -1747,7 +1752,7 @@ module.exports = {
 
       // Вопрос 68
       {
-        id: 202,
+        id: 203,
         taskId: 68,
         content:
           'HOC (Higher Order Component) — это функция, принимающая компонент и возвращающая новый компонент.',
@@ -1756,7 +1761,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 203,
+        id: 202,
         taskId: 68,
         content: 'HOC — это хук для управления состоянием.',
         isCorrect: false,
@@ -1774,7 +1779,7 @@ module.exports = {
 
       // Вопрос 69
       {
-        id: 205,
+        id: 207,
         taskId: 69,
         content:
           'State в React обновляется через вызов setState или функции из useState.',
@@ -1791,7 +1796,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 207,
+        id: 205,
         taskId: 69,
         content: 'State обновляется только в классовых компонентах.',
         isCorrect: false,
@@ -1801,7 +1806,7 @@ module.exports = {
 
       // Вопрос 70
       {
-        id: 208,
+        id: 210,
         taskId: 70,
         content: 'React Reconciliation отвечает за сравнение и обновление DOM-дерева.',
         isCorrect: true,
@@ -1817,7 +1822,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 210,
+        id: 208,
         taskId: 70,
         content: 'React Reconciliation автоматически создаёт хуки.',
         isCorrect: false,
@@ -1853,7 +1858,7 @@ module.exports = {
 
       // Вопрос 72
       {
-        id: 214,
+        id: 215,
         taskId: 72,
         content: 'Suspense позволяет реализовать ленивую загрузку компонентов.',
         isCorrect: true,
@@ -1861,7 +1866,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 215,
+        id: 214,
         taskId: 72,
         content: 'Suspense обновляет DOM напрямую.',
         isCorrect: false,
@@ -1879,7 +1884,7 @@ module.exports = {
 
       // Вопрос 73
       {
-        id: 217,
+        id: 218,
         taskId: 73,
         content: 'Action Creator создаёт Actions для Redux.',
         isCorrect: true,
@@ -1887,7 +1892,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 218,
+        id: 217,
         taskId: 73,
         content: 'Action Creator управляет состоянием Redux.',
         isCorrect: false,
@@ -1931,7 +1936,7 @@ module.exports = {
 
       // Вопрос 75
       {
-        id: 223,
+        id: 225,
         taskId: 75,
         content: 'На изменения Store можно подписаться с помощью функции subscribe.',
         isCorrect: true,
@@ -1947,7 +1952,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 225,
+        id: 223,
         taskId: 75,
         content: 'Store автоматически уведомляет все компоненты.',
         isCorrect: false,
@@ -1957,7 +1962,7 @@ module.exports = {
 
       // Вопрос 76
       {
-        id: 226,
+        id: 227,
         taskId: 76,
         content: 'DevTools можно включить через middleware Redux Toolkit.',
         isCorrect: true,
@@ -1965,7 +1970,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 227,
+        id: 226,
         taskId: 76,
         content: 'DevTools автоматически подключаются к React.',
         isCorrect: false,
@@ -2009,7 +2014,7 @@ module.exports = {
 
       // Вопрос 78
       {
-        id: 232,
+        id: 234,
         taskId: 78,
         content: 'combineReducers объединяет несколько Reducer-ов в один.',
         isCorrect: true,
@@ -2025,7 +2030,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 234,
+        id: 232,
         taskId: 78,
         content: 'combineReducers используется только для асинхронных операций.',
         isCorrect: false,
@@ -2035,7 +2040,7 @@ module.exports = {
 
       // Вопрос 79
       {
-        id: 235,
+        id: 237,
         taskId: 79,
         content: 'Динамические Reducer-ы добавляются через store.replaceReducer().',
         isCorrect: true,
@@ -2051,15 +2056,17 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 237,
+        id: 235,
         taskId: 79,
         content: 'Динамические Reducer-ы создаются автоматически.',
         isCorrect: false,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+
+      // ВОпрос 80
       {
-        id: 238,
+        id: 239,
         taskId: 80,
         content: 'Redux Saga обрабатывает сайд-эффекты с помощью генераторов.',
         isCorrect: true,
@@ -2067,7 +2074,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 239,
+        id: 238,
         taskId: 80,
         content: 'Redux Saga обновляет DOM напрямую.',
         isCorrect: false,
@@ -2085,7 +2092,7 @@ module.exports = {
 
       // Вопрос 81
       {
-        id: 241,
+        id: 243,
         taskId: 81,
         content: 'Undo/Redo реализуется через хранение истории изменений состояния.',
         isCorrect: true,
@@ -2101,7 +2108,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 243,
+        id: 241,
         taskId: 81,
         content: 'Undo/Redo работает только с React-компонентами.',
         isCorrect: false,

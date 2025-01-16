@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../../6_shared/lib/hooks';
 import { signupThunk } from '../../../4_features/auth/model/authThunks';
 import { signupFormSchema } from '../../../5_entities/user/model/user.schema';
 import styles from './SignupPage.module.css';
+// import FallingLeaves from '../../../4_features/FallingLeaves/FallingLeaves';
 
 export default function SignupPage(): React.JSX.Element {
   const dispatch = useAppDispatch();
@@ -23,6 +24,7 @@ export default function SignupPage(): React.JSX.Element {
 
   return (
     <Container className={styles.container}>
+      {/* <FallingLeaves /> */}
       <Row className="justify-content-md-center">
         <Col md={8} className={styles.formContainer}>
           <h2>Регистрация</h2>
