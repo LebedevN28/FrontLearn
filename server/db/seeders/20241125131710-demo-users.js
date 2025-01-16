@@ -8,7 +8,7 @@ module.exports = {
       {
         name: 'Nikita',
         email: 'nikita@mail.ru',
-        password: await bcrypt.hash('123', 10),
+        password: await bcrypt.hash('qwertY1@', 10),
         level: 2,
         points: 220,
         createdAt: new Date(),
@@ -17,7 +17,7 @@ module.exports = {
       {
         name: 'Bob',
         email: 'bob@example.com',
-        password: await bcrypt.hash('123', 10),
+        password: await bcrypt.hash('qwertY1@', 10),
         level: 3,
         points: 380,
         createdAt: new Date(),
@@ -26,7 +26,7 @@ module.exports = {
       {
         name: 'Anya',
         email: 'bilberian@mail.ru',
-        password: await bcrypt.hash('123', 10),
+        password: await bcrypt.hash('qwertY1@', 10),
         level: 5,
         points: 550,
         image: 'image-1736780107521-442064739.jpeg',
@@ -36,7 +36,7 @@ module.exports = {
       {
         name: 'Igor',
         email: 'mortek90@mail.ru',
-        password: await bcrypt.hash('123', 10),
+        password: await bcrypt.hash('qwertY1@', 10),
         level: 3,
         points: 310,
         image: 'image-Igor.jpeg',
@@ -46,7 +46,7 @@ module.exports = {
       {
         name: 'Sasha',
         email: 'sasha@mail.ru',
-        password: await bcrypt.hash('123', 10),
+        password: await bcrypt.hash('qwertY1@', 10),
         level: 4,
         points: 450,
         createdAt: new Date(),

@@ -49,10 +49,12 @@
   padding: 40px;
   display: flex;
   justify-content: space-between;
+  gap: 10px;
   border: 2px solid #3f51b5;
   border-radius: 12px;
   background-color: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 22px;
   margin-bottom: 20px; /* Отступ вниз для контейнера с вопросами */
 }
 
