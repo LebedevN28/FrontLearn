@@ -38,7 +38,7 @@ export default function LeaderCard({ user, index, isOnline }: LeaderCardProps): 
         {isOnline && <span className={styles.onlineMarker}>в сети</span>}
       </p>
 
-      <p className={styles.points}>{user.points} XP</p>
+      <p className={styles.points}>{user.points} 💎</p>
     </div>
   );
 }
