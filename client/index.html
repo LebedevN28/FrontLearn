@@ -3,7 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/imgs/hog.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="FrontLearn" />
+    <meta name="apple-mobile-web-app-title" content="FrontLearn App" />
+    <meta name="msapplication-starturl" content="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <link rel="icon" type="png" sizes="192x192" href="/icon512_maskable.png" />
+    <link rel="apple-touch-icon" type="png" sizes="512x512" href="/icon512_rounded.png" />
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/sw.js').then(
+            function (registration) {
+              // Registration was successful
+              console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            },
+            function (err) {
+              // registration failed :(
+              console.log('ServiceWorker registration failed: ', err);
+            },
+          );
+        });
+      }
+    </script>
+
     <title>FrontLearn</title>
   </head>
   <body>
