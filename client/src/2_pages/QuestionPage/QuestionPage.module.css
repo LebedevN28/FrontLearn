@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.progress {
+  margin-left: 45px;
+}
+
+.questionsContainer {
+  flex: 1;
+  max-width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 30px;
+  border: 2px solid #3f51b5;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Отступ вниз для контейнера с вопросами */
+}
+
+.imageContainer {
+  flex: 1;
+  max-width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto; /* Сдвигаем картинку вправо */
+  margin-bottom: 20px; /* Отступ вниз для картинки */
+}
+
+.imageContainer img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.descContainer {
+  max-width: 80%;
+  margin-left: 40px;
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid #3f51b5;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Отступ вниз для контейнера с вопросами */
+}
+
+.nextButtonContainer {
+  text-align: center; /* Выравнивание по центру */
+  margin-top: 20px; /* Отступ сверху */
+  margin-bottom: 20px; /* Отступ снизу */
+}
+.nextButton {
+  text-transform: none;
+  background-color: #58009b !important;
+  color: white;
+  font-size: 18px !important;
+  margin-top: 16px;
+  margin-bottom: 20px; /* Отступ вниз для кнопки */
+}

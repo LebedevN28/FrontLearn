@@ -1,0 +1,41 @@
+.container {
+  min-height: 90vh; /* Минимальная высота на весь экран */
+  display: flex;
+  justify-content: center; /* Центрируем по горизонтали */
+  align-items: flex-start; /* Поднимаем форму выше (к началу контейнера) */
+  padding-top: 0%; /* Добавляем отступ сверху */
+  position: relative; /* Для позиционирования фонового изображения */
+}
+
+.backgroundImage {
+  position: absolute; /* Абсолютное позиционирование */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ширина на весь контейнер */
+  height: 100%; /* Высота на весь контейнер */
+  object-fit: cover; /* Растягиваем изображение на весь контейнер */
+  z-index: 1; /* Помещаем изображение позади формы */
+}
+
+.formContainer {
+  position: relative; /* Для позиционирования формы */
+  z-index: 2; /* Поднимаем форму над изображением */
+  background-color: rgba(96, 182, 56, 0.9) !important; /* Полупрозрачный зеленый фон для формы */
+  padding: 2rem !important; /* Внутренние отступы */
+  border-radius: 10px !important; /* Закругленные углы */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important; /* Тень для формы */
+  width: 100% !important; /* Ширина формы */
+  max-width: 400px !important; /* Максимальная ширина формы */
+}
+
+.buttonSubmit {
+  margin-top: 1rem !important;
+  background-color: #6a1b9a !important;
+  border-color: #6a1b9a !important;
+  color: white !important;
+}
+
+.buttonSubmit:hover {
+  background-color: #7c4dff !important;
+  border-color: #7c4dff !important;
+}

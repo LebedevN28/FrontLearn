@@ -1,0 +1,24 @@
+.title {
+    font-size: 2rem; /* Большой размер шрифта */
+    font-weight: bold; /* Жирный шрифт */
+    color: #2ecc71; /* Зеленый цвет */
+    text-align: center; /* Центрируем текст */
+    font-family: 'Arial', sans-serif; /* Красивый шрифт */
+    text-transform: uppercase; /* Все буквы заглавные */
+    letter-spacing: 4px; /* Расстояние между буквами */
+    margin: 0; /* Убираем отступы */
+    padding: 20px; /* Добавляем отступы */
+    background: linear-gradient(to right, #2ecc71, #4a5e53); /* Градиентный фон */
+    -webkit-background-clip: text; /* Применяем градиент к тексту */
+    -webkit-text-fill-color: transparent; /* Делаем текст прозрачным */
+    animation: glow 2s infinite alternate; /* Анимация свечения */
+  }
+  
+  /* @keyframes glow {
+    0% {
+      text-shadow: 0 0 5px #2ecc71, 0 0 10px #2ecc71, 0 0 20px #2ecc71;
+    }
+    100% {
+      text-shadow: 0 0 10px #2ecc71, 0 0 20px #2ecc71, 0 0 30px #2ecc71;
+    }
+  } */
