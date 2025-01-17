@@ -2,7 +2,7 @@
   display: flex; /* Горизонтальное выравнивание элементов */
   align-items: center; /* Выравнивание элементов по верху */
   justify-content: space-between;
-  min-height: 88vh;
+  min-height: 80vh;
   padding: 20px;
   background-color: #ffffff;
   overflow: hidden;

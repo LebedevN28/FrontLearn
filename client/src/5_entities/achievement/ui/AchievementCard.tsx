@@ -12,16 +12,34 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ achievement, unlocked
     <Card
       sx={{
         padding: 2,
-        backgroundColor: unlocked ? 'primary.light' : 'grey.300',
-        color: unlocked ? 'primary.contrastText' : 'text.secondary',
+        borderRadius: 2,
         marginBottom: 2,
+        backgroundColor: unlocked ? '#4caf50' : '#e0e0e0',
+        color: unlocked ? '#ffffff' : '#9e9e9e',
+        transition: 'transform 0.3s, box-shadow 0.3s',
+        boxShadow: unlocked ? '0 4px 8px rgba(0, 0, 0, 0.2)' : 'none',
+        '&:hover': {
+          transform: 'translateY(-4px)',
+          boxShadow: '0 6px 12px rgba(0, 0, 0, 0.3)',
+        },
       }}
     >
-      <Typography variant="h6">{achievement.title}</Typography>
-      <Typography variant="body2">{achievement.description}</Typography>
-      <Box sx={{ marginTop: 1, display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="caption">Points: {achievement.points}</Typography>
-        <Typography variant="caption">{unlocked ? 'Unlocked' : 'Locked'}</Typography>
+      <Typography variant="h6" sx={{ marginBottom: 1 }}>
+        {achievement.title}
+      </Typography>
+      <Typography variant="body2" sx={{ marginBottom: 2 }}>
+        {achievement.description}
+      </Typography>
+      <Box
+        sx={{
+          marginTop: 1,
+          display: 'flex',
+          justifyContent: 'space-between',
+          fontSize: '0.75rem',
+        }}
+      >
+        <Typography>Points: {achievement.points}</Typography>
+        <Typography>{unlocked ? 'Unlocked' : 'Locked'}</Typography>
       </Box>
     </Card>
   );

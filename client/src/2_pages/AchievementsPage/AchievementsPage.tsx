@@ -15,7 +15,6 @@ const AchievementsPage: React.FC = () => {
     (state) => state.userAchievements.unlockedAchievementsIds,
   );
 
-
   // Получение userId из состояния Redux
   const userId = useAppSelector((state) => state.user.selectedUser?.id);
 
@@ -55,10 +54,9 @@ const AchievementsPage: React.FC = () => {
       </Box>
     );
   }
-
   return (
     <Box sx={{ padding: 3 }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom sx={{ marginBottom: 3 }}>
         Your Achievements
       </Typography>
       {achievements && achievements.length > 0 ? (
