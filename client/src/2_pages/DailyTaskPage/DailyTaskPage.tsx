@@ -107,6 +107,7 @@ const DailyTaskPage: React.FC = () => {
                 variant="contained"
                 onClick={() => handleAnswer(answer)}
                 className={`${styles.answerButton} ${
+                  // eslint-disable-next-line no-nested-ternary
                   selectedAnswerId === answer.id
                     ? answer.isCorrect
                       ? styles.correctAnswer

@@ -39,3 +39,10 @@
   background-color: #7c4dff !important;
   border-color: #7c4dff !important;
 }
+
+.errorMessage {
+  color: rgb(255, 255, 255); /* Цвет текста */
+  margin-top: 10px; /* Отступ сверху */
+  text-align: center; /* Выравнивание по центру */
+  font-size: 14px; /* Размер текста */
+}

@@ -18,8 +18,6 @@ import {
   getUserProgressByTaskThunk,
 } from '../../5_entities/progress/model/progressThunks';
 
-
-
 export const useHandleAnswer = ({
   task,
   userStats,
@@ -69,7 +67,7 @@ export const useHandleAnswer = ({
         if (newAchievements.length > 0) {
           // Уведомляем пользователя
           newAchievements.forEach((achievement) =>
-            toast.success(`🎉 New Achievement Unlocked: ${achievement.title}`),
+            toast.success(`🎉 Ура, ачивка!: ${achievement.title}`),
           );
 
           // Добавляем достижения в глобальное состояние

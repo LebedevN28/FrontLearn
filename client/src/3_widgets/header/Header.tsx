@@ -10,6 +10,8 @@ import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import styles from './Header.module.css';
 import { getUserByIdThunk } from '../../5_entities/user/model/userThunks';
+import FrontLearnTitle from '../Logo/FrontLearnTitle';
+
 
 export default function Header(): React.JSX.Element {
   const data = useAppSelector((store) => store.auth.data);
@@ -53,9 +55,11 @@ export default function Header(): React.JSX.Element {
       <Navbar expand="lg" className={`py-3 ${styles.navbar}`}>
         <Navbar.Brand as={RouterLink} to="/" className={styles.navbarBrand}>
           <Image src="/imgs/logo.jpg" alt="Logo" className={styles.logo} />
-          <span className={styles.brandName}>FrontLearn</span>
+          {/* <span className={styles.brandName}>FrontLearn</span> */}
         </Navbar.Brand>
-        <div className={styles.progressBarContainer}></div>
+        <FrontLearnTitle />
+        <div className={styles.progressBarContainer}>
+        </div>
 
         <Nav className="ms-auto">
           {data.status === AuthStatus.authenticated ? (

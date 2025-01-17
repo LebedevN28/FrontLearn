@@ -6,6 +6,7 @@ import styles from './MainPage.module.css';
 // import hegImage from '../../../../public/images/heg2.jpeg';
 import { useAppSelector } from '../../6_shared/lib/hooks';
 
+
 export default function MainPage(): React.JSX.Element {
   const navigate = useNavigate();
   const data = useAppSelector((store) => store.auth.data);
@@ -13,6 +14,7 @@ export default function MainPage(): React.JSX.Element {
   return (
     <div className={styles['main-container']}>
       <div className={styles['image-container']}>
+
         <img src="/imgs/heg2.jpeg" alt="Main Image" className={styles['main-image']} />
       </div>
 
@@ -22,7 +24,7 @@ export default function MainPage(): React.JSX.Element {
             <Button
               variant="contained"
               color="primary"
-              sx={{ width: '100%', marginBottom: '20px' }}
+              sx={{ width: '120%', marginBottom: '20px', fontSize: '18px' }}
               onClick={() => navigate('/auth/signup')}
             >
               Зарегистрироваться и начать
@@ -30,7 +32,7 @@ export default function MainPage(): React.JSX.Element {
             <Button
               variant="contained"
               color="secondary"
-              sx={{ width: '100%' }}
+              sx={{ width: '120%', fontSize: '18px' }}
               onClick={() => navigate('/auth/login')}
             >
               У меня уже есть аккаунт
@@ -40,7 +42,7 @@ export default function MainPage(): React.JSX.Element {
           <Button
             variant="contained"
             color="success"
-            sx={{ width: '100%' }}
+            sx={{ width: '120%', fontSize: '18px' }}
             onClick={() => navigate('/start')}
           >
             Начать игру

@@ -77,7 +77,7 @@ function TaskPage(): React.JSX.Element {
             }
             onChange={() => handleCheckboxChange('all')}
           />
-          All
+          Все
         </label>
         <label>
           <input
@@ -85,7 +85,7 @@ function TaskPage(): React.JSX.Element {
             checked={difficulty.includes('easy')}
             onChange={() => handleCheckboxChange('easy')}
           />
-          Easy
+          Легкие
         </label>
         <label>
           <input
@@ -93,7 +93,7 @@ function TaskPage(): React.JSX.Element {
             checked={difficulty.includes('medium')}
             onChange={() => handleCheckboxChange('medium')}
           />
-          Medium
+          Средние
         </label>
         <label>
           <input
@@ -101,7 +101,7 @@ function TaskPage(): React.JSX.Element {
             checked={difficulty.includes('hard')}
             onChange={() => handleCheckboxChange('hard')}
           />
-          Hard
+          Сложные
         </label>
       </div>
 

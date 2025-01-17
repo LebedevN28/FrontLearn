@@ -37,6 +37,7 @@ export const AnswerButtons: React.FC<{
           disabled={isDisabled} // Отключаем все кнопки, если ответ выбран
           sx={{
             textTransform: 'none',
+            fontSize: '20px',
             backgroundColor: getButtonColor(isSelected, answer.isCorrect), // Цвет кнопки
             color: 'white',
             '&:disabled': {
