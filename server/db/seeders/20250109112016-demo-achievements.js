@@ -6,30 +6,30 @@ module.exports = {
       // Уровневые достижения
       {
         id: 1,
-        title: 'Level 3 Achiever',
-        description: 'Reach level 3.',
+        title: 'Достижение 3 уровня ',
+        description: 'Вы достигли 3-го уровня. Теперь магия на уровне! 🧙‍♂️',
         type: 'level',
-        criteria: '3', // Упрощенный критерий
+        criteria: '3',
         points: 10,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: 2,
-        title: 'Level 5 Achiever',
-        description: 'Reach level 5.',
+        title: 'Достижение 5 уровня ',
+        description: 'Вы достигли 5-го уровня. Пять — это уже много! ✨',
         type: 'level',
-        criteria: '5', // Упрощенный критерий
+        criteria: '5',
         points: 20,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: 3,
-        title: 'Level 10 Master',
-        description: 'Reach level 10.',
+        title: 'Мастер 10 уровня ',
+        description: 'Вы достигли 10-го уровня. Вау, вы мастер! 🙌',
         type: 'level',
-        criteria: '10', // Упрощенный критерий
+        criteria: '10',
         points: 30,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -38,41 +38,42 @@ module.exports = {
       // Ответы на вопросы
       {
         id: 4,
-        title: 'First Answer',
-        description: 'Answer your first question.',
+        title: 'Первый ответ',
+        description: 'Ответили на первый вопрос. Как первый поцелуй, только полезно! 💋',
         type: 'answers',
-        criteria: '1', // Упрощенный критерий
+        criteria: '1',
         points: 5,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: 5,
-        title: '10 Answers Pro',
-        description: 'Answer 10 questions.',
+        title: 'Профи из 10 ответов',
+        description: 'Ответили на 10 вопросов. Теперь вы — эксперт! 🧠',
         type: 'answers',
-        criteria: '10', // Упрощенный критерий
+        criteria: '10',
         points: 15,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: 6,
-        title: '100 Answers Guru',
-        description: 'Answer 100 questions.',
+        title: 'Гуру из 100 ответов',
+        description: 'Ответили на 100 вопросов. Настоящий мудрец! 🧘‍♂️',
         type: 'answers',
-        criteria: '100', // Упрощенный критерий
+        criteria: '100',
         points: 50,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+
       // Общий прогресс
       {
         id: 10,
-        title: 'Dedication',
-        description: 'Answer 500 questions.',
+        title: 'Преданность делу',
+        description: 'Ответили на 500 вопросов. Герой среди вопросов! 🏅',
         type: 'answers',
-        criteria: '500', // Упрощенный критерий
+        criteria: '500',
         points: 100,
         createdAt: new Date(),
         updatedAt: new Date(),
