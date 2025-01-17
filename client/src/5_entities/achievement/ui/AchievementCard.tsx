@@ -39,7 +39,7 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ achievement, unlocked
         }}
       >
         <Typography>Points: {achievement.points}</Typography>
-        <Typography>{unlocked ? 'Unlocked' : 'Locked'}</Typography>
+        <Typography>{unlocked ? 'Достигнуто' : 'Не достигнуто '}</Typography>
       </Box>
     </Card>
   );
