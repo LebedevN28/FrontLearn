@@ -1,0 +1,32 @@
+{
+  "name": "FrontLearn App",
+  "short_name": "FrontLearn",
+  "description": "My awesome FrontLearn App!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop.png",
+      "type": "image/png",
+      "sizes": "1398x882",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screenshots/mobile.png",
+      "type": "image/png",
+      "sizes": "447x767",
+      "form_factor": "narrow"
+    }
+  ],
+  "icons": [
+    {
+      "purpose": "maskable",
+      "sizes": "512x512",
+      "src": "/icon512_maskable.png",
+      "type": "image/png"
+    },
+    { "purpose": "any", "sizes": "512x512", "src": "icon512_rounded.png", "type": "image/png" }
+  ]
+}

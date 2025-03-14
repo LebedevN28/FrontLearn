@@ -1,4 +1,5 @@
 'use strict';
+
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Achievement extends Model {
@@ -11,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       title: DataTypes.STRING,
       description: DataTypes.TEXT,
       type: DataTypes.ENUM('level', 'questions', 'module', 'custom'),
-      criteria: DataTypes.JSON,
+      criteria: DataTypes.STRING,
       points: DataTypes.INTEGER,
     },
     {

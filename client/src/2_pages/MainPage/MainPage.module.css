@@ -1,0 +1,51 @@
+/* Основной контейнер */
+.main-container {
+  display: flex;
+  justify-content: center; /* Центрирование по горизонтали */
+  align-items: center; /* Центрирование по вертикали */
+  height: 100vh; /* На всю высоту экрана */
+  gap: 50px; /* Расстояние между картинкой и кнопками */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Контейнер для картинки */
+.image-container {
+  flex: 1; /* Занимает доступное пространство */
+  display: flex;
+  justify-content: flex-end; /* Картинка прижимается к правому краю контейнера */
+  max-width: 40%; /* Ограничиваем ширину */
+}
+
+/* Картинка */
+.main-image {
+  max-width: 100%; /* Чтобы картинка не выходила за пределы контейнера */
+  min-width: 300px;
+  height: auto; /* Сохраняет пропорции */
+  border-radius: 10px; /* Скругление углов */
+}
+
+/* Контейнер для кнопок */
+.buttons-container {
+  flex: 1; /* Занимает доступное пространство */
+  display: flex;
+  flex-direction: column; /* Кнопки располагаются вертикально */
+  gap: 20px; /* Расстояние между кнопками */
+  max-width: 300px; /* Ширина контейнера для кнопок */
+}
+
+/* Стили для кнопок */
+.main-button {
+  padding: 15px 30px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff; /* Синий цвет */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.main-button:hover {
+  background-color: #0056b3; /* Темно-синий при наведении */
+}

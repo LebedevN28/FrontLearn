@@ -1,11 +1,16 @@
-const express = require('express');
-const router = express.Router();
+const { Router } = require('express');
+const progressRouter = Router();
 const progressController = require('../controllers/progress.controller');
 
-router.get('/', progressController.getAllProgress);
-router.get('/:id', progressController.getProgressById);
-router.post('/', progressController.createProgress);
-router.put('/:id', progressController.updateProgress);
-router.delete('/:id', progressController.deleteProgress);
+progressRouter
+  .route('/total/:userId')
+  .get(progressController.getTotalProgress)
+  .post(progressController.createProgress);
 
-module.exports = router;
+progressRouter
+  .route('/module/:userId/:moduleId')
+  .get(progressController.getModuleProgress);
+
+progressRouter.route('/task/:userId/:taskId').get(progressController.getTaskProgress);
+
+module.exports = progressRouter;

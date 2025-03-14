@@ -5,15 +5,22 @@ module.exports = {
     await queryInterface.bulkInsert('Modules', [
       {
         id: 1,
-        title: 'React Basics',
-        description: 'Introduction to React fundamentals.',
+        title: 'Фаза 1',
+        description: 'Основные концепции JavaScript для начинающих.',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: 2,
-        title: 'Advanced Redux',
-        description: 'Deep dive into Redux Toolkit and middleware.',
+        title: 'Фаза 2',
+        description: 'Изучение основных принципов работы с React.',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: 3,
+        title: ' Фаза 3',
+        description: 'Как использовать Redux для управления состоянием.',
         createdAt: new Date(),
         updatedAt: new Date(),
       },

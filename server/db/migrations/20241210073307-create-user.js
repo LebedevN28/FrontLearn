@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Users', {
@@ -21,9 +22,13 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      image: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       level: {
         type: Sequelize.INTEGER,
-        defaultValue: 1,
+        defaultValue: 0,
       },
       points: {
         type: Sequelize.INTEGER,

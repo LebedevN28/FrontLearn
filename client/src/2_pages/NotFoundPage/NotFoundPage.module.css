@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh; /* Занимает всю высоту экрана */
+  padding: 20px;
+}
+
+.image {
+  max-width: 100%; /* Изображение не превышает ширину контейнера */
+  height: auto; /* Сохраняет пропорции */
+  max-height: 400px; /* Ограничение высоты изображения */
+  margin-bottom: 20px; /* Отступ снизу */
+}
+
+.title {
+  font-size: 2rem; /* Размер заголовка */
+  color: #343a40; /* Цвет текста */
+  margin: 0; /* Убираем отступы */
+}

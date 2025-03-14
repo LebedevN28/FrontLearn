@@ -1,6 +1,6 @@
-import { z } from 'zod';
-import { authResponseSchema } from './auth.schema';
-import { UserType } from '../../../5_entities/user/model/user.types';
+import type { z } from 'zod';
+import type { authResponseSchema } from './auth.schema';
+import type { UserType } from '../../../5_entities/user/model/user.types';
 
 export enum AuthStatus {
   fetching = 'fetching',

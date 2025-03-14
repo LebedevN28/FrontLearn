@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
-import { NavLink as RouterLink } from 'react-router-dom';
+import { Container, Row } from 'react-bootstrap';
+import { NavLink as RouterLink } from 'react-router-dom'; // Исправьте импорт
+import { FaGlobe, FaBoxOpen, FaTrophy, FaMedal } from 'react-icons/fa'; // Добавьте FaMedal
 import './SideBar.css';
 
 export default function SideBar(): React.JSX.Element {
@@ -13,23 +14,41 @@ export default function SideBar(): React.JSX.Element {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <Col>Обучение</Col>
+        <div className="sidebar-btn">
+          <FaGlobe className="sidebar-icon" />
+          <span>Обучение</span>
+        </div>
 
         <div className={`sidebar-row__hover-bar ${isHovered ? 'visible' : ''}`}>
-          <RouterLink to={`/phase/1`} className="sidebar-row__hoverbar-btn">
+          <RouterLink to={`/tasks/1`} className="sidebar-row__hoverbar-btn">
             Фаза 1
           </RouterLink>
-          <RouterLink to={`/phase/2`} className="sidebar-row__hoverbar-btn">
+          <RouterLink to={`/tasks/2`} className="sidebar-row__hoverbar-btn">
             Фаза 2
           </RouterLink>
-          <RouterLink to={`/phase/3`} className="sidebar-row__hoverbar-btn">
+          <RouterLink to={`/tasks/3`} className="sidebar-row__hoverbar-btn">
             Фаза 3
           </RouterLink>
         </div>
       </Row>
 
       <Row className="sidebar-row">
-        <Col>Задания</Col>
+        <RouterLink to={`/daily`} className="sidebar-btn">
+          <FaBoxOpen className="sidebar-icon" />
+          <span>Вопрос дня</span>
+        </RouterLink>
+      </Row>
+      <Row className="sidebar-row">
+        <RouterLink to={`/leaderboard`} className="sidebar-btn">
+          <FaTrophy className="sidebar-icon" />
+          <span>Рейтинг</span>
+        </RouterLink>
+      </Row>
+      <Row className="sidebar-row">
+        <RouterLink to={`/achievements`} className="sidebar-btn">
+          <FaMedal className="sidebar-icon" /> {/* Используем FaMedal */}
+          <span>Достижения</span>
+        </RouterLink>
       </Row>
     </Container>
   );

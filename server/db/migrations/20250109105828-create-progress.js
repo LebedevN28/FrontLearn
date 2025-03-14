@@ -27,27 +27,23 @@ module.exports = {
         },
         onDelete: 'CASCADE',
       },
-      status: {
-        type: Sequelize.ENUM('not_started', 'in_progress', 'completed'),
-        defaultValue: 'not_started',
-      },
-      score: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
+      gotCorrect: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
       },
       completedAt: {
         type: Sequelize.DATE,
         allowNull: true,
       },
       createdAt: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('NOW()'),
         allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
       updatedAt: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('NOW()'),
         allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
     });
   },

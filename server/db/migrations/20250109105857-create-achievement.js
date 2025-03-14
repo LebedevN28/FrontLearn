@@ -14,19 +14,20 @@ module.exports = {
         allowNull: false,
       },
       description: {
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING,
         allowNull: true,
       },
       type: {
-        type: Sequelize.ENUM('level', 'questions', 'module', 'custom'),
+        type: Sequelize.ENUM('level', 'answers'), // Убрали 'modules'
         allowNull: false,
       },
       criteria: {
-        type: Sequelize.JSON,
-        allowNull: true,
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       points: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         defaultValue: 0,
       },
       createdAt: {

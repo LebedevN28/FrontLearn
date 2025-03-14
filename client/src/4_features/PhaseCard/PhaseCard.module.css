@@ -1,0 +1,31 @@
+.phase-card {
+  width: 120px;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.phase-card:hover {
+  transform: scale(1.05);
+}
+
+.phase-card:active {
+  transform: scale(0.95);
+}
+
+.phase-card-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.phase-card-title {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #212529;
+}

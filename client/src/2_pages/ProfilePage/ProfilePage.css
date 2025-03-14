@@ -1,0 +1,151 @@
+.profile-page {
+  min-height: 100vh;
+  padding: 20px;
+  background-image: url('/imgs/profile2.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-page__heading {
+  color: rgb(15, 3, 3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.profile-page__container {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-page__info-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.profile-page__info {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  flex: 1;
+}
+
+.profile-page__info:first-child {
+  margin-right: 10px;
+}
+
+.profile-page__info:last-child {
+  margin-left: 10px;
+}
+
+.profile-page__photo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-page__photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid white;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.profile-page__input {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.profile-page__values-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.profile-page__value {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+}
+
+.profile-page__value label {
+  font-weight: bold;
+}
+
+.profile-page__value span {
+  text-align: right;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+.profile-page__value-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.profile-page__value-edit label {
+  font-weight: bold;
+}
+
+.profile-page__value-edit input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.profile-page__button-container {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.profile-page__button {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+}
+
+.profile-page__button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.profile-page__button.cancel {
+  background-color: #dc3545;
+}
+
