@@ -12,7 +12,7 @@ function connection(ws, request, user) {
         payload: userConnections.map((c) => c.user),
       };
       userConnection.ws.send(JSON.stringify(action));
-      
+             
     });
   }
   ws.on('close', () => {
